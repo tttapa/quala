@@ -23,7 +23,7 @@ cmake -Bbuild -S. \
     -DCMAKE_INSTALL_PREFIX="$prefix" \
     -DCMAKE_BUILD_TYPE=Release
 # Build
-cmake --build build -j
+cmake --build build -j1
 # Install
 cmake --install build
 
