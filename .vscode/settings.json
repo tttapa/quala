@@ -59,4 +59,5 @@
         "ρ": true,
         "σ": true,
     },
+    "latex-workshop.latex.autoBuild.run": "never",
 }

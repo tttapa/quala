@@ -30,7 +30,7 @@ setup(
     author_email="",
     url="https://github.com/kul-optec/quala",
     project_urls={
-        "Documentation": "https://kul-optec.github.io/quala",
+        "Documentation": "https://tttapa.github.io/quala",
         "Source": "https://github.com/kul-optec/quala",
         "Bug Tracker": "https://github.com/kul-optec/quala/issues",
     },
