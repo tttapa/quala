@@ -1,0 +1,62 @@
+{
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "clangd.semanticHighlighting": true,
+    "files.associations": {
+        "*.dox": "cpp",
+        "*.ipp": "cpp",
+        "*.tcc": "cpp",
+    },
+    "cSpell.words": [
+        "alpaqa",
+        "BFGS",
+        "crmat",
+        "crvec",
+        "cwise",
+        "Eigen",
+        "grad",
+        "idvec",
+        "ipopt",
+        "lbfgs",
+        "Lipschitz",
+        "p",
+        "panoc",
+        "quala",
+        "r",
+        "rmat",
+        "rvec",
+        "slbfgs",
+        "structuredpanoc",
+        "Σ_max",
+        "ψₖ",
+        "ψₖᵀpₖ",
+        "ψₖᵀrₖ"
+    ],
+    "python.pythonPath": "py-venv/bin/python",
+    "python.formatting.provider": "yapf",
+    "editor.rulers": [
+        80
+    ],
+    "[html]": {
+        "editor.rulers": [
+            120
+        ]
+    },
+    "[latex]": {
+        "editor.rulers": [
+            120
+        ]
+    },
+    "git.ignoreLimitWarning": true,
+    "cmake.configureOnOpen": false,
+    "cmake.buildEnvironment": {
+        "LD_LIBRARY_PATH": "${workspaceFolder}/py-venv/lib"
+    },
+    "cmake.configureSettings": {
+        "WITH_PYTHON_BINDINGS": "ON"
+    },
+    "editor.unicodeHighlight.allowedCharacters": {
+        "γ": true,
+        "ρ": true,
+        "σ": true,
+    },
+}

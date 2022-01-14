@@ -1,0 +1,117 @@
+name: Python Wheel (Linux)
+
+on:
+  push:
+  release:
+    types: ['released', 'prereleased']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: tttapa/alpaqa-build-python-gcc:${{ matrix.python-version }}-11
+    strategy:
+      matrix:
+        python-version: ['3.7', '3.8', '3.9', '3.10']
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Cache Virtual Environment
+      id: cache-venv
+      uses: actions/cache@v2
+      with:
+        path: "/tmp/py-venv"
+        key: ${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('scripts/ci/install-dependencies-wheel.sh') }}-${{ hashFiles('requirements.txt') }}-${{ hashFiles('scripts/requirements-wheel.txt') }}-${{ hashFiles('scripts/ci/install-patchelf.sh') }}-
+    - name: Install Python Dependencies 
+      if: steps.cache-venv.outputs.cache-hit != 'true'
+      run: |
+        python3 -m venv /tmp/py-venv
+        . /tmp/py-venv/bin/activate
+        python -m pip install -r requirements.txt -r scripts/requirements-wheel.txt
+        bash scripts/ci/install-dependencies-wheel.sh
+        bash scripts/ci/install-patchelf.sh
+      env:
+        CXXFLAGS: "-march=skylake -static-libstdc++ -static-libgcc"
+        LDFLAGS: "-static-libstdc++ -static-libgcc"
+        CFLAGS: "-march=skylake -static-libgcc"
+        FC: gfortran
+    - name: Build
+      run: |
+        . /tmp/py-venv/bin/activate
+        python -m build
+        LD_LIBRARY_PATH=$VIRTUAL_ENV/lib \
+          auditwheel repair --plat manylinux_2_27_x86_64 \
+          dist/quala-*.whl
+      env:
+        CXXFLAGS: "-march=skylake -static-libstdc++ -static-libgcc"
+        LDFLAGS: "-static-libstdc++ -static-libgcc"
+        CFLAGS: "-march=skylake -static-libgcc"
+        FC: gfortran
+    - name: Upload Wheel
+      uses: actions/upload-artifact@v2
+      with:
+        name: quala-whl-${{ matrix.python-version }}
+        path: wheelhouse/quala-*manylinux*.whl
+    - name: Upload source
+      uses: actions/upload-artifact@v2
+      with:
+        name: quala-src-${{ matrix.python-version }}
+        path: dist/quala-*.tar.gz
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    container: python:${{ matrix.python-version }}-bullseye
+    strategy:
+      matrix:
+        python-version: ['3.7', '3.8', '3.9', '3.10']
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/download-artifact@v2
+      with:
+        name: quala-whl-${{ matrix.python-version }}
+        path: wheelhouse
+    - name: 'Install quala'
+      run: pip install --find-links=wheelhouse quala
+    - name: 'Run tests'
+      run: python src/quala/test.py
+
+  release:
+    if: ${{ github.event.action == 'released' || github.event.action == 'prereleased' }}
+    needs: test
+    runs-on: ubuntu-latest
+    container: python:${{ matrix.python-version }}-bullseye
+    strategy:
+      matrix:
+        python-version: ['3.7', '3.8', '3.9', '3.10']
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/download-artifact@v2
+      with:
+        name: quala-whl-${{ matrix.python-version }}
+        path: wheelhouse
+    
+    - name: 'Install quala'
+      run: pip install --find-links=wheelhouse quala
+    - name: 'Check quala version'
+      if: ${{ matrix.python-version != '3.7' }}
+      run: |
+        [ "${{ github.event.release.tag_name }}" == "$(python -c 'from importlib.metadata import version as v; print(v("quala"))')" ]
+      shell: bash
+    - name: 'Install Twine'
+      run: pip install twine
+    - name: 'Upload Wheel to PyPi'
+      run: python -m twine upload wheelhouse/quala-*.whl
+      env:
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.PyPI }}
+    - uses: actions/download-artifact@v2
+      if: ${{ matrix.python-version == '3.9' }}
+      with:
+        name: quala-src-${{ matrix.python-version }}
+        path: dist
+    - name: 'Upload source to PyPi'
+      if: ${{ matrix.python-version == '3.9' }}
+      run: python -m twine upload dist/quala-*.tar.gz
+      env:
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.PyPI }}
