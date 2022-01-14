@@ -8,3 +8,4 @@ scikit-build
 ninja
 cmake
 mypy
+pybind11-stubgen

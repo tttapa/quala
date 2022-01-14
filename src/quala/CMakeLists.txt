@@ -52,11 +52,12 @@ if (QUALA_PYBIND11_RESULT EQUAL 0)
             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/..
             USES_TERMINAL)
         add_custom_command(TARGET _quala POST_BUILD
-            COMMAND 
-                ${STUBGEN_EXE} 
-                    -m quala._quala
-                    -o ${STUBS_DIR}
-            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/..
+            COMMAND ${Python3_EXECUTABLE} -m pybind11_stubgen
+                    _quala
+                    --ignore-invalid=defaultarg
+                    --no-setup-py
+                    -o ${CMAKE_CURRENT_BINARY_DIR}
+            WORKING_DIRECTORY $<TARGET_FILE_DIR:_quala>
             USES_TERMINAL)
     endif()
 
@@ -64,8 +65,10 @@ if (QUALA_PYBIND11_RESULT EQUAL 0)
         install(TARGETS _quala
                 DESTINATION .)
         if (QUALA_GEN_STUB)
+            install(FILES ${CMAKE_CURRENT_BINARY_DIR}/_quala-stubs/__init__.pyi
+                RENAME _quala.pyi
+                DESTINATION .)
             install(FILES   ${STUBS_DIR}/quala/__init__.pyi
-                            ${STUBS_DIR}/quala/_quala.pyi
                 DESTINATION .)
         endif()
     endif()
