@@ -262,8 +262,8 @@ TEST(Anderson, matrix) {
     b << 9, 19;
     xₖ = -b;
 
-    auto g = [&](quala::crvec x) { return A * x - b; };
-    auto r = [&](quala::crvec x) { return g(x) - x; };
+    auto g = [&](quala::crvec x) -> quala::vec { return A * x - b; };
+    auto r = [&](quala::crvec x) -> quala::vec { return g(x) - x; };
 
     std::cout << "A: \n" << A << std::endl;
     std::cout << "A⁻¹: \n" << A.inverse() << std::endl;
