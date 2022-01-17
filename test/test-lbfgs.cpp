@@ -23,7 +23,7 @@ TEST(LBFGS, quadratic) {
     x << 10, -5;
     auto r                = grad_f(x);
     unsigned update_count = 0;
-    for (size_t i = 0; i < 20; ++i) {
+    for (size_t i = 0; i < 10; ++i) {
         { // Print L-BFGS inverse Hessian estimate
             std::cout << std::endl << i << std::endl;
             std::cout << "x:    " << x.transpose() << std::endl;
@@ -77,7 +77,7 @@ TEST(BFGS, matrix) {
     quala::vec rₖ = A * xₖ - b;
     std::vector<quala::real_t> res;
     unsigned update_count = 0;
-    for (size_t i = 0; i < 20; ++i) {
+    for (size_t i = 0; i < 10; ++i) {
         { // Print BFGS estimate
             std::cout << "\nIter: " << i << std::endl;
             std::cout << "x:    " << xₖ.transpose() << std::endl;
