@@ -114,6 +114,9 @@ template <>
 inline const kwargs_to_struct_table_t<quala::LBFGSParams>
     kwargs_to_struct_table<quala::LBFGSParams>{
         {"memory", &quala::LBFGSParams::memory},
+        {"min_div_fac", &quala::LBFGSParams::min_div_fac},
+        {"min_abs_s", &quala::LBFGSParams::min_abs_s},
+        {"force_pos_def", &quala::LBFGSParams::force_pos_def},
         {"cbfgs", &quala::LBFGSParams::cbfgs},
     };
 

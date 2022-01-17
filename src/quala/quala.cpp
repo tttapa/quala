@@ -52,7 +52,8 @@ PYBIND11_MODULE(QUALA_MODULE_NAME, m) {
         .def(py::init(&kwargs_to_struct<quala::LBFGSParams::CBFGSParams>))
         .def("to_dict", &struct_to_dict<quala::LBFGSParams::CBFGSParams>)
         .def_readwrite("α", &quala::LBFGSParams::CBFGSParams::α)
-        .def_readwrite("ϵ", &quala::LBFGSParams::CBFGSParams::ϵ);
+        .def_readwrite("ϵ", &quala::LBFGSParams::CBFGSParams::ϵ)
+        .def("__bool__", &quala::LBFGSParams::CBFGSParams::operator bool);
 
     py::class_<quala::LBFGSParams>(
         m, "LBFGSParams", "C++ documentation: :cpp:class:`quala::LBFGSParams`")
@@ -60,6 +61,9 @@ PYBIND11_MODULE(QUALA_MODULE_NAME, m) {
         .def(py::init(&kwargs_to_struct<quala::LBFGSParams>))
         .def("to_dict", &struct_to_dict<quala::LBFGSParams>)
         .def_readwrite("memory", &quala::LBFGSParams::memory)
+        .def_readwrite("min_div_fac", &quala::LBFGSParams::min_div_fac)
+        .def_readwrite("min_abs_s", &quala::LBFGSParams::min_abs_s)
+        .def_readwrite("force_pos_def", &quala::LBFGSParams::force_pos_def)
         .def_readwrite("cbfgs", &quala::LBFGSParams::cbfgs);
 
     auto lbfgs = py::class_<quala::LBFGS>(
