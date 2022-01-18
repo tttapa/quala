@@ -14,7 +14,7 @@ sudo apt install build-essential cmake git
 ### Clone the repository
 
 ```sh
-git clone git@github.com:kul-optec/quala.git
+git clone git@github.com:tttapa/quala.git
 ```
 For the purposes of these instructions, we'll refer to the quala repository 
 as the environment variable `QUALA_ROOT`, for example:
