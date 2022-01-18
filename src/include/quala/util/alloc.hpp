@@ -39,7 +39,7 @@ class vec_allocator {
   public:
     vec_allocator(size_t num_vec, Eigen::Index n)
         : num_vec(num_vec), n(n), storage(num_vec * n, NaN) {
-        for (auto it = storage.begin(); it < storage.end(); it += n)
+        for (auto it = storage.begin(); it != storage.end(); it += n)
             stack.push(&*it);
     }
 
@@ -62,11 +62,11 @@ class vec_allocator {
             alloc->free(v);
         }
         alloc_raii_wrapper(const alloc_raii_wrapper &) = delete;
-        alloc_raii_wrapper(alloc_raii_wrapper &&o)
+        alloc_raii_wrapper(alloc_raii_wrapper &&o) noexcept 
             : v{std::exchange(o.v, {nullptr, 0})}, //
               alloc{std::exchange(o.alloc, nullptr)} {}
         alloc_raii_wrapper &operator=(const alloc_raii_wrapper &) = delete;
-        alloc_raii_wrapper &operator=(alloc_raii_wrapper &&o) {
+        alloc_raii_wrapper &operator=(alloc_raii_wrapper &&o) noexcept {
             this->v     = std::exchange(o.v, {nullptr, 0});
             this->alloc = std::exchange(o.alloc, nullptr);
             return *this;
@@ -93,8 +93,9 @@ class vec_allocator {
 
     void free(rvec v) {
         auto dptr = v.data();
-        assert(dptr >= &*storage.begin());
-        assert(dptr <= &*storage.end() - n);
+        assert(storage.size() > 0);
+        assert(dptr >= &storage.begin()[0]);
+        assert(dptr <= &storage.end()[-n]);
         assert(std::find(stack.begin(), stack.end(), dptr) == stack.end() &&
                "double free");
         stack.push(dptr);
