@@ -42,7 +42,7 @@ if (QUALA_PYBIND11_RESULT EQUAL 0)
     option(QUALA_GEN_STUB "Generate Python stub files (.pyi) for the quala module." On)
 
     if (QUALA_GEN_STUB)
-        find_program(STUBGEN_EXE stubgen REQUIRED)
+        find_program(STUBGEN_EXE stubgen REQUIRED PATH_SUFFIXES Scripts)
         set(STUBS_DIR ${CMAKE_CURRENT_BINARY_DIR}/stubs)
         add_custom_command(TARGET _quala POST_BUILD 
             COMMAND
@@ -50,13 +50,15 @@ if (QUALA_PYBIND11_RESULT EQUAL 0)
                     -m quala
                     -o ${STUBS_DIR}
             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/..
+            BYPRODUCTS ${STUBS_DIR}/quala/__init__.pyi
             USES_TERMINAL)
         add_custom_command(TARGET _quala POST_BUILD
             COMMAND ${Python3_EXECUTABLE} -m pybind11_stubgen
                     _quala
                     --ignore-invalid=defaultarg
                     --no-setup-py
-                    -o ${CMAKE_CURRENT_BINARY_DIR}
+                    -o ${STUBS_DIR}
+            BYPRODUCTS ${STUBS_DIR}/_quala-stubs/__init__.pyi
             WORKING_DIRECTORY $<TARGET_FILE_DIR:_quala>
             USES_TERMINAL)
     endif()
@@ -65,10 +67,10 @@ if (QUALA_PYBIND11_RESULT EQUAL 0)
         install(TARGETS _quala
                 DESTINATION .)
         if (QUALA_GEN_STUB)
-            install(FILES ${CMAKE_CURRENT_BINARY_DIR}/_quala-stubs/__init__.pyi
+            install(FILES ${STUBS_DIR}/_quala-stubs/__init__.pyi
                 RENAME _quala.pyi
                 DESTINATION .)
-            install(FILES   ${STUBS_DIR}/quala/__init__.pyi
+            install(FILES ${STUBS_DIR}/quala/__init__.pyi
                 DESTINATION .)
         endif()
     endif()
