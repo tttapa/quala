@@ -5,9 +5,9 @@ if (WIN32)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W3 /utf-8 /Dnot=!")
 
     # Build-type specific flags
-    set(CMAKE_CXX_FLAGS_DEBUG "/DDEBUG \
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /DDEBUG \
         /DEIGEN_INITIALIZE_MATRICES_BY_NAN")
-    set(CMAKE_C_FLAGS_DEBUG   "/DDEBUG")
+    set(CMAKE_C_FLAGS_DEBUG   "${CMAKE_C_FLAGS_DEBUG} /DDEBUG")
     set(CMAKE_DEBUG_POSTFIX "-debug")
 
 else()
@@ -22,9 +22,9 @@ else()
         -Wall -Wextra -Werror -pedantic -pedantic-errors -fdiagnostics-show-option")
 
     # Build-type specific flags
-    set(CMAKE_CXX_FLAGS_DEBUG "-ggdb3 -O0 -DDEBUG \
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -ggdb3 -O0 \
         -DEIGEN_INITIALIZE_MATRICES_BY_NAN")
-    set(CMAKE_C_FLAGS_DEBUG   "-ggdb3 -O0 -DDEBUG")
+    set(CMAKE_C_FLAGS_DEBUG   "${CMAKE_C_FLAGS_DEBUG} -ggdb3 -O0")
     set(CMAKE_DEBUG_POSTFIX "-debug")
 
     set(CMAKE_CXX_FLAGS_ASAN "-g3 -O0 \
