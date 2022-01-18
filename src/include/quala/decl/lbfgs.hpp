@@ -10,9 +10,9 @@ struct LBFGSParams {
     /// Length of the history to keep.
     length_t memory = 10;
     /// Reject update if @f$ y^\top s \le \text{min_div_fac} \cdot s^\top s @f$.
-    float min_div_fac = 1e-10;
+    real_t min_div_fac = 1e-10;
     /// Reject update if @f$ s^\top s \le \text{min_abs_s} @f$.
-    float min_abs_s = 1e-32;
+    real_t min_abs_s = 1e-32;
     /// Cautious BFGS update.
     /// @see @ref cbfgs
     struct CBFGSParams {

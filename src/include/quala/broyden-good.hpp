@@ -43,7 +43,7 @@ struct BroydenGoodParams {
     /// Length of the history to keep.
     length_t memory = 10;
     /// Reject update if @f$ s^\top Hy \le \text{min_div_fac} @f$.
-    float min_div_abs = 1e-32;
+    real_t min_div_abs = 1e-32;
     /// If set to true, the inverse Jacobian estimate should remain definite.
     bool force_pos_def = false;
     /// If set to true, the buffer is cleared after @p memory iterations. If
