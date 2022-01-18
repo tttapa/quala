@@ -73,20 +73,18 @@ inline bool LBFGS::apply(rvec q, real_t γ) {
         γ            = 1 / (ρ(new_idx) * yᵀy);
     }
 
-    auto update1 = [&](index_t i) {
+    foreach_rev([&](index_t i) {
         α(i) = ρ(i) * s(i).dot(q);
         q -= α(i) * y(i);
-    };
-    foreach_rev(update1); // m-1 → 0
+    });
 
     // r ← H₀ q
     q *= γ;
 
-    auto update2 = [&](index_t i) {
+    foreach_fwd([&](index_t i) {
         real_t β = ρ(i) * y(i).dot(q);
         q -= (β - α(i)) * s(i);
-    };
-    foreach_fwd(update2); // 0 → m-1
+    });
 
     return true;
 }
@@ -139,7 +137,7 @@ bool LBFGS::apply(rvec q, real_t γ, const IndexVec &J) {
         }
     };
 
-    auto update1 = [&](index_t i) {
+    foreach_rev([&](index_t i) {
         // Recompute ρ, it depends on the index set J. Note that even if ρ was
         // positive for the full vectors s and y, that's not necessarily the
         // case for the smaller vectors s(J) and y(J).
@@ -160,8 +158,7 @@ bool LBFGS::apply(rvec q, real_t γ, const IndexVec &J) {
             real_t yᵀy = dotJ(y(i), y(i));
             γ          = 1 / (ρ(i) * yᵀy);
         }
-    };
-    foreach_rev(update1); // m-1 → 0
+    });
 
     // If all ρ == 0, fail
     if (γ < 0)
@@ -170,13 +167,12 @@ bool LBFGS::apply(rvec q, real_t γ, const IndexVec &J) {
     // r ← H₀ q
     scalJ(γ, q); // q *= γ
 
-    auto update2 = [&](index_t i) {
+    foreach_fwd([&](index_t i) {
         if (std::isnan(ρ(i)))
             return;
         real_t β = ρ(i) * dotJ(y(i), q); // βᵢ = ρᵢ〈yᵢ, q〉
         axmyJ(β - α(i), s(i), q);        // q -= (βᵢ - αᵢ) sᵢ
-    };
-    foreach_fwd(update2); // 0 → m-1
+    });
 
     return true;
 }
@@ -188,7 +184,7 @@ inline void LBFGS::reset() {
 
 inline void LBFGS::resize(length_t n) {
     if (params.memory < 1)
-        throw std::invalid_argument("LBFGSParams::memory must be >= 1");
+        throw std::invalid_argument("LBFGS::Params::memory must be >= 1");
     sto.resize(n, params.memory);
     reset();
 }

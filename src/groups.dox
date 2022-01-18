@@ -1,0 +1,4 @@
+/**
+ * @defgroup    accelerators-grp Accelerators
+ * @brief   A complete list of the accelerators implemented by this library.
+ */

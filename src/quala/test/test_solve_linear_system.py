@@ -6,10 +6,13 @@ A = np.array([[20, -10], [-10, 30]], dtype=np.float64)
 b = np.array([10, 20], dtype=np.float64)
 n = A.shape[1]
 
+ε = 1e-15
+
+
 def test_anderson():
     x = b.copy()
     aa = qa.AndersonAccel({'memory': n}, n)
-    res_aa : List[float] = []
+    res_aa: List[float] = []
     for i in range(1 + n + 2):
         r = A @ x - b
         g = r + x
@@ -24,13 +27,17 @@ def test_anderson():
         else:
             x = aa.compute(g, r)
 
-    assert np.allclose(x, [1, 1], rtol=1e-15, atol=1e-15)
+    print(f"i: final")
+    print(f"x:    {x}")
+    print(f"r:    {r}")
+    assert np.allclose(x, [1, 1], rtol=ε, atol=ε)
+
 
 def test_lbfgs():
     x = b.copy()
     r = A @ x - b
     lbfgs = qa.LBFGS({'memory': 2 * n}, n)
-    res_lbfgs : List[float] = []
+    res_lbfgs: List[float] = []
     for i in range(1 + 2 * n + 2):
         res_lbfgs.append(np.linalg.norm(r))
         print(f"i: {i}")
@@ -44,5 +51,31 @@ def test_lbfgs():
         x = x_new
         r = r_new
 
-    assert np.allclose(x, [1, 1], rtol=1e-15, atol=1e-15)
+    print(f"i: final")
+    print(f"x:    {x}")
+    print(f"r:    {r}")
+    assert np.allclose(x, [1, 1], rtol=ε, atol=ε)
 
+
+def test_broyden_good():
+    x = b.copy()
+    r = A @ x - b
+    broyden = qa.BroydenGood({'memory': 3 * n}, n)
+    res_broyden: List[float] = []
+    for i in range(1 + 2 * n + 2):
+        res_broyden.append(np.linalg.norm(r))
+        print(f"i: {i}")
+        print(f"x:    {x}")
+        print(f"r:    {r}")
+        q = r.copy()
+        broyden.apply(q)
+        x_new = x - q
+        r_new = A @ x_new - b
+        broyden.update(x, x_new, r, r_new)
+        x = x_new
+        r = r_new
+
+    print(f"i: final")
+    print(f"x:    {x}")
+    print(f"r:    {r}")
+    assert np.allclose(x, [1, 1], rtol=ε, atol=ε)

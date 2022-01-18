@@ -134,3 +134,14 @@ inline const kwargs_to_struct_table_t<quala::AndersonAccelParams>
     kwargs_to_struct_table<quala::AndersonAccelParams>{
         {"memory", &quala::AndersonAccelParams::memory},
     };
+
+#include <quala/broyden-good.hpp>
+
+template <>
+inline const kwargs_to_struct_table_t<quala::BroydenGoodParams>
+    kwargs_to_struct_table<quala::BroydenGoodParams>{
+        {"memory", &quala::BroydenGoodParams::memory},
+        {"min_div_abs", &quala::BroydenGoodParams::min_div_abs},
+        {"force_pos_def", &quala::BroydenGoodParams::force_pos_def},
+        {"restarted", &quala::BroydenGoodParams::restarted},
+    };

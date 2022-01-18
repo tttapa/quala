@@ -12,7 +12,7 @@ struct LBFGSParams {
     /// Reject update if @f$ y^\top s \le \text{min_div_fac} \cdot s^\top s @f$.
     float min_div_fac = 1e-10;
     /// Reject update if @f$ s^\top s \le \text{min_abs_s} @f$.
-    float min_abs_s = 1e-20;
+    float min_abs_s = 1e-32;
     /// Cautious BFGS update.
     /// @see @ref cbfgs
     struct CBFGSParams {
@@ -68,6 +68,7 @@ struct LBFGSStorage {
 };
 
 /// Limited memory Broyden–Fletcher–Goldfarb–Shanno (L-BFGS) algorithm
+/// @ingroup accelerators-grp
 class LBFGS {
   public:
     using Params = LBFGSParams;
@@ -128,6 +129,9 @@ class LBFGS {
     index_t succ(index_t i) const { return i + 1 < history() ? i + 1 : 0; }
     /// Get the previous index in the circular buffer of s and y vectors.
     index_t pred(index_t i) const { return i > 0 ? i - 1 : history() - 1; }
+    /// Get the number of previous s and y vectors currently stored in the
+    /// buffer.
+    length_t current_history() const { return full ? history() : idx; }
 
     auto s(index_t i) { return sto.s(i); }
     auto s(index_t i) const { return sto.s(i); }

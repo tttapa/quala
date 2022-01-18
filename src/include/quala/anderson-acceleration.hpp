@@ -17,6 +17,8 @@ struct AndersonAccelParams {
 /// Anderson Acceleration.
 ///
 /// @todo   Condition estimation of the QR factorization.
+///
+/// @ingroup accelerators-grp
 class AndersonAccel {
   public:
     using Params = AndersonAccelParams;
@@ -86,6 +88,10 @@ class AndersonAccel {
 
     /// Get the problem dimension.
     length_t n() const { return qr.n(); }
+    /// Get the maximum number of stored columns.
+    length_t history() const { return qr.m(); }
+    /// Get the number of columns currently stored in the buffer.
+    length_t current_history() const { return qr.current_history(); }
 
     /// Get the parameters.
     const Params &get_params() const { return params; }
