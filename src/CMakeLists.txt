@@ -5,6 +5,7 @@ add_library(quala-obj OBJECT
     "src/lbfgs.cpp"
 
     "include/quala/anderson-acceleration.hpp"
+    "include/quala/broyden-good.hpp"
     "include/quala/lbfgs.hpp"
     "include/quala/decl/lbfgs.hpp"
     "include/quala/decl/lbfgs-fwd.hpp"

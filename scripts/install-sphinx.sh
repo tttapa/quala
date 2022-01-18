@@ -12,7 +12,7 @@ pushd /tmp
 [ -d sphinx ] || \
     git clone https://github.com/tttapa/sphinx --branch 4.x --depth 1
 pushd sphinx
-python setup.py install
+pip install .
 popd
 
 popd

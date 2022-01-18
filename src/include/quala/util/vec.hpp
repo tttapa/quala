@@ -23,8 +23,9 @@ using rmat = Eigen::Ref<mat>;
 /// Default type for immutable references to matrices.
 using crmat = Eigen::Ref<const mat>;
 
-/// Default type for vector indices (and sizes).
+/// Default type for vector indices.
 using index_t = Eigen::Index;
+/// Default type for vector sizes.
 using length_t = index_t;
 
 /// Type for a vector of indices.
@@ -33,6 +34,10 @@ using idvec = Eigen::Matrix<index_t, Eigen::Dynamic, 1>;
 using ridvec = Eigen::Ref<idvec>;
 /// Immutable reference to vector indices.
 using cridvec = Eigen::Ref<const idvec>;
+
+/// Generic type for vector and matrix arguments.
+template <class Derived>
+using anymat = Eigen::MatrixBase<Derived>;
 
 /// @f$ \infty @f$
 constexpr real_t inf = std::numeric_limits<real_t>::infinity();

@@ -6,47 +6,45 @@
 
 namespace quala {
 
-inline bool LBFGS::update_valid(LBFGSParams params, real_t yᵀs, real_t sᵀs,
-                                real_t pᵀp) {
-    // Smallest number we want to divide by without overflow
-    const real_t min_divisor = std::sqrt(std::numeric_limits<real_t>::min());
-
+inline bool LBFGS::update_valid(const LBFGSParams &params, real_t yᵀs,
+                                real_t sᵀs, real_t pᵀp) {
     // Check if this L-BFGS update is accepted
+    if (sᵀs <= params.min_abs_s)
+        return false;
     if (not std::isfinite(yᵀs))
         return false;
-    if (yᵀs < min_divisor)
-        return false;
-    if (sᵀs < min_divisor)
+    real_t a_yᵀs = params.force_pos_def ? yᵀs : std::abs(yᵀs);
+    if (a_yᵀs <= params.min_div_fac * sᵀs)
         return false;
 
     // CBFGS condition: https://epubs.siam.org/doi/10.1137/S1052623499354242
-    real_t α = params.cbfgs.α;
-    real_t ϵ = params.cbfgs.ϵ;
-    // Condition: yᵀs / sᵀs >= ϵ ‖p‖^α
-    bool cbfgs_cond = yᵀs >= sᵀs * ϵ * std::pow(pᵀp, α / 2);
-    if (not cbfgs_cond)
-        return false;
+    if (params.cbfgs) {
+        const real_t α = params.cbfgs.α;
+        const real_t ϵ = params.cbfgs.ϵ;
+        // Condition: yᵀs / sᵀs >= ϵ ‖p‖^α
+        bool cbfgs_cond = a_yᵀs >= sᵀs * ϵ * std::pow(pᵀp, α / 2);
+        if (not cbfgs_cond)
+            return false;
+    }
 
     return true;
 }
 
-inline bool LBFGS::update(crvec xₖ, crvec xₖ₊₁, crvec pₖ, crvec pₖ₊₁, Sign sign,
-                          bool forced) {
-    const auto s = xₖ₊₁ - xₖ;
-    const auto y = sign == Sign::Positive ? pₖ₊₁ - pₖ : pₖ - pₖ₊₁;
-    real_t yᵀs   = y.dot(s);
-    real_t ρ     = 1 / yᵀs;
+template <class VecS, class VecY>
+inline bool LBFGS::update_sy(const anymat<VecS> &s, const anymat<VecY> &y,
+                             real_t pₖ₊₁ᵀpₖ₊₁, bool forced) {
+    real_t yᵀs = y.dot(s);
+    real_t ρ   = 1 / yᵀs;
     if (not forced) {
         real_t sᵀs = s.squaredNorm();
-        real_t pᵀp = params.cbfgs.ϵ > 0 ? pₖ₊₁.squaredNorm() : 0;
-        if (not update_valid(params, yᵀs, sᵀs, pᵀp))
+        if (not update_valid(params, yᵀs, sᵀs, pₖ₊₁ᵀpₖ₊₁))
             return false;
     }
 
     // Store the new s and y vectors
-    this->s(idx) = s;
-    this->y(idx) = y;
-    this->ρ(idx) = ρ;
+    sto.s(idx) = s;
+    sto.y(idx) = y;
+    sto.ρ(idx) = ρ;
 
     // Increment the index in the circular buffer
     idx = succ(idx);
@@ -55,61 +53,62 @@ inline bool LBFGS::update(crvec xₖ, crvec xₖ₊₁, crvec pₖ, crvec pₖ�
     return true;
 }
 
-template <class Vec>
-bool LBFGS::apply(Vec &&q, real_t γ) {
+inline bool LBFGS::update(crvec xₖ, crvec xₖ₊₁, crvec pₖ, crvec pₖ₊₁, Sign sign,
+                          bool forced) {
+    const auto s = xₖ₊₁ - xₖ;
+    const auto y = (sign == Sign::Positive) ? pₖ₊₁ - pₖ : pₖ - pₖ₊₁;
+    real_t pₖ₊₁ᵀpₖ₊₁ = params.cbfgs ? pₖ₊₁.squaredNorm() : 0;
+    return update_sy(s, y, pₖ₊₁ᵀpₖ₊₁, forced);
+}
+
+inline bool LBFGS::apply(rvec q, real_t γ) {
     // Only apply if we have previous vectors s and y
     if (idx == 0 && not full)
         return false;
 
     // If the step size is negative, compute it as sᵀy/yᵀy
     if (γ < 0) {
-        auto new_idx = idx > 0 ? idx - 1 : history() - 1;
+        auto new_idx = pred(idx);
         real_t yᵀy   = y(new_idx).squaredNorm();
         γ            = 1 / (ρ(new_idx) * yᵀy);
     }
 
-    auto update1 = [&](index_t i) {
-        α(i) = ρ(i) * (s(i).dot(q));
+    foreach_rev([&](index_t i) {
+        α(i) = ρ(i) * s(i).dot(q);
         q -= α(i) * y(i);
-    };
-    if (idx)
-        for (index_t i = idx; i-- > 0;)
-            update1(i);
-    if (full)
-        for (index_t i = history(); i-- > idx;)
-            update1(i);
+    });
 
     // r ← H₀ q
     q *= γ;
 
-    auto update2 = [&](index_t i) {
-        real_t β = ρ(i) * (y(i).dot(q));
-        q += (α(i) - β) * s(i);
-    };
-    if (full)
-        for (index_t i = idx; i < history(); ++i)
-            update2(i);
-    for (index_t i = 0; i < idx; ++i)
-        update2(i);
+    foreach_fwd([&](index_t i) {
+        real_t β = ρ(i) * y(i).dot(q);
+        q -= (β - α(i)) * s(i);
+    });
 
     return true;
 }
 
-template <class Vec, class IndexVec>
-bool LBFGS::apply(Vec &&q, real_t γ, const IndexVec &J) {
+template <class IndexVec>
+bool LBFGS::apply(rvec q, real_t γ, const IndexVec &J) {
     // Only apply if we have previous vectors s and y
     if (idx == 0 && not full)
         return false;
-    using Index = typename std::remove_reference_t<Vec>::Index;
-    bool fullJ  = q.size() == Index(J.size());
+    const bool fullJ = q.size() == static_cast<index_t>(J.size());
+
+    if (params.cbfgs)
+        throw std::invalid_argument("CBFGS check not supported when using "
+                                    "masked version of LBFGS::apply()");
 
     // Eigen 3.3.9 doesn't yet support indexing using a vector of indices
-    // so we'll have to do it manually
+    // so we'll have to do it manually.
     // TODO: Abstract this away in an expression template / nullary expression?
     //       Or wait for Eigen update?
+    // Update: Eigen 3.4's indexing seems significantly slower, so the manual
+    //         for loops stay for now.
 
     // Dot product of two vectors, adding only the indices in set J
-    auto dotJ = [&J, fullJ](const auto &a, const auto &b) {
+    const auto dotJ = [&J, fullJ](const auto &a, const auto &b) {
         if (fullJ) {
             return a.dot(b);
         } else {
@@ -119,63 +118,61 @@ bool LBFGS::apply(Vec &&q, real_t γ, const IndexVec &J) {
             return acc;
         }
     };
+    // y -= a x, scaling and subtracting only the indices in set J
+    const auto axmyJ = [&J, fullJ](real_t a, const auto &x, auto &y) {
+        if (fullJ) {
+            y -= a * x;
+        } else {
+            for (auto j : J)
+                y(j) -= a * x(j);
+        }
+    };
+    // x *= a, scaling only the indices in set J
+    const auto scalJ = [&J, fullJ](real_t a, auto &x) {
+        if (fullJ) {
+            x *= a;
+        } else {
+            for (auto j : J)
+                x(j) *= a;
+        }
+    };
 
-    auto update1 = [&](index_t i) {
+    foreach_rev([&](index_t i) {
         // Recompute ρ, it depends on the index set J. Note that even if ρ was
         // positive for the full vectors s and y, that's not necessarily the
         // case for the smaller vectors s(J) and y(J).
-        if (not fullJ)
-            ρ(i) = 1. / dotJ(s(i), y(i));
-
-        if (ρ(i) <= 0) // Reject negative ρ to ensure positive definiteness
+        real_t yᵀs = dotJ(s(i), y(i));
+        real_t sᵀs = dotJ(s(i), s(i));
+        ρ(i)       = 1 / yᵀs;
+        // Check if we should include this pair of vectors
+        if (not update_valid(params, yᵀs, sᵀs, 0)) {
+            ρ(i) = NaN;
             return;
+        }
 
-        α(i) = ρ(i) * dotJ(s(i), q);
-        if (fullJ)
-            q -= α(i) * y(i);
-        else
-            for (auto j : J)
-                q(j) -= α(i) * y(i)(j);
+        α(i) = ρ(i) * dotJ(s(i), q); // αᵢ = ρᵢ〈sᵢ, q〉
+        axmyJ(α(i), y(i), q);        // q -= αᵢ yᵢ
 
         if (γ < 0) {
-            // Compute step size based on most recent yᵀs/yᵀy > 0
+            // Compute step size based on most recent valid yᵀs/yᵀy
             real_t yᵀy = dotJ(y(i), y(i));
-            γ          = 1. / (ρ(i) * yᵀy);
+            γ          = 1 / (ρ(i) * yᵀy);
         }
-    };
-    if (idx)
-        for (index_t i = idx; i-- > 0;)
-            update1(i);
-    if (full)
-        for (index_t i = history(); i-- > idx;)
-            update1(i);
+    });
 
-    // If all ρ <= 0, fail
+    // If all ρ == 0, fail
     if (γ < 0)
         return false;
 
     // r ← H₀ q
-    if (fullJ)
-        q *= γ;
-    else
-        for (auto j : J)
-            q(j) *= γ;
+    scalJ(γ, q); // q *= γ
 
-    auto update2 = [&](index_t i) {
-        if (ρ(i) <= 0)
+    foreach_fwd([&](index_t i) {
+        if (std::isnan(ρ(i)))
             return;
-        real_t β = ρ(i) * dotJ(y(i), q);
-        if (fullJ)
-            q += (α(i) - β) * s(i);
-        else
-            for (auto j : J)
-                q(j) += (α(i) - β) * s(i)(j);
-    };
-    if (full)
-        for (index_t i = idx; i < history(); ++i)
-            update2(i);
-    for (index_t i = 0; i < idx; ++i)
-        update2(i);
+        real_t β = ρ(i) * dotJ(y(i), q); // βᵢ = ρᵢ〈yᵢ, q〉
+        axmyJ(β - α(i), s(i), q);        // q -= (βᵢ - αᵢ) sᵢ
+    });
 
     return true;
 }
@@ -187,21 +184,25 @@ inline void LBFGS::reset() {
 
 inline void LBFGS::resize(length_t n) {
     if (params.memory < 1)
-        throw std::invalid_argument("LBFGSParams::memory must be > 1");
-    sto.resize(n + 1, params.memory * 2);
+        throw std::invalid_argument("LBFGS::Params::memory must be >= 1");
+    sto.resize(n, params.memory);
     reset();
+}
+
+inline void LBFGSStorage::resize(length_t n, length_t history) {
+    sto.resize(n + 1, history * 2);
 }
 
 inline void LBFGS::scale_y(real_t factor) {
     if (full) {
         for (index_t i = 0; i < history(); ++i) {
             y(i) *= factor;
-            ρ(i) *= 1. / factor;
+            ρ(i) *= 1 / factor;
         }
     } else {
         for (index_t i = 0; i < idx; ++i) {
             y(i) *= factor;
-            ρ(i) *= 1. / factor;
+            ρ(i) *= 1 / factor;
         }
     }
 }

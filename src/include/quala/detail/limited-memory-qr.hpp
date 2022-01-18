@@ -237,6 +237,8 @@ class LimitedMemoryQR {
     index_t ring_next(index_t i) const { return r_succ(i); }
     /// Get the previous index in the circular buffer.
     index_t ring_prev(index_t i) const { return r_pred(i); }
+    /// Get the number of columns currently stored in the buffer.
+    length_t current_history() const { return q_idx; }
 
     /// Get iterators in the circular buffer.
     CircularRange<index_t> ring_iter() const {

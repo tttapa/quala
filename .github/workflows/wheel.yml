@@ -71,9 +71,11 @@ jobs:
         name: quala-whl-${{ matrix.python-version }}
         path: wheelhouse
     - name: 'Install quala'
-      run: pip install --find-links=wheelhouse quala
+      run: |
+        python -m pip install --find-links=wheelhouse quala
+        python -m pip install pytest
     - name: 'Run tests'
-      run: python src/quala/test.py
+      run: python -m pytest
 
   release:
     if: ${{ github.event.action == 'released' || github.event.action == 'prereleased' }}
