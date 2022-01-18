@@ -3,7 +3,7 @@ setuptools>=42
 wheel
 build
 auditwheel
-pybind11~=2.7.1
+pybind11~=2.9.0
 scikit-build
 ninja
 cmake
