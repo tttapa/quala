@@ -144,4 +144,6 @@ inline const kwargs_to_struct_table_t<quala::BroydenGoodParams>
         {"min_div_abs", &quala::BroydenGoodParams::min_div_abs},
         {"force_pos_def", &quala::BroydenGoodParams::force_pos_def},
         {"restarted", &quala::BroydenGoodParams::restarted},
+        {"powell_damping_factor",
+         &quala::BroydenGoodParams::powell_damping_factor},
     };

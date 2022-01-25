@@ -102,7 +102,7 @@ class LBFGS {
     /// Apply the inverse Hessian approximation to the given vector q.
     /// Initial inverse Hessian approximation is set to @f$ H_0 = \gamma I @f$.
     /// If @p γ is negative, @f$ H_0 = \frac{s^\top y}{y^\top y} I @f$.
-    bool apply(rvec q, real_t γ);
+    bool apply(rvec q, real_t γ = -1);
 
     /// Apply the inverse Hessian approximation to the given vector q, applying
     /// only the columns and rows of the Hessian in the index set J.

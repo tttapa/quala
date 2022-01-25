@@ -229,7 +229,9 @@ PYBIND11_MODULE(QUALA_MODULE_NAME, m) {
         .def_readwrite("min_div_abs", &quala::BroydenGoodParams::min_div_abs)
         .def_readwrite("force_pos_def",
                        &quala::BroydenGoodParams::force_pos_def)
-        .def_readwrite("restarted", &quala::BroydenGoodParams::restarted);
+        .def_readwrite("restarted", &quala::BroydenGoodParams::restarted)
+        .def_readwrite("powell_damping_factor",
+                       &quala::BroydenGoodParams::powell_damping_factor);
 
     py::class_<quala::BroydenGood>(
         m, "BroydenGood", "C++ documentation: :cpp:class:`quala::BroydenGood`")
@@ -275,12 +277,12 @@ PYBIND11_MODULE(QUALA_MODULE_NAME, m) {
             "sk"_a, "yk"_a, "forced"_a = false)
         .def(
             "apply",
-            [](quala::BroydenGood &self, quala::rvec q) {
+            [](quala::BroydenGood &self, quala::rvec q, quala::real_t γ) {
                 if (q.size() != self.n())
                     throw std::invalid_argument("q dimension mismatch");
-                return self.apply(q);
+                return self.apply(q, γ);
             },
-            "q")
+            "q"_a, "γ"_a = -1)
         .def("reset", &quala::BroydenGood::reset)
         .def("current_history", &quala::BroydenGood::current_history)
         .def_property_readonly("params", &quala::BroydenGood::get_params);
