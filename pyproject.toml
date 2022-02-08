@@ -1,12 +1,56 @@
 [build-system]
-requires = [
-    "setuptools>=42",
-    "wheel",
-    "pybind11~=2.7.1",
-    "ninja",
-    "cmake",
-    "scikit-build",
-    "mypy",
-]
+requires = ["py-build-cmake", "pybind11~=2.9.0", "mypy", "pybind11-stubgen"]
+build-backend = "py_build_cmake.build"
 
-build-backend = "setuptools.build_meta"
+[project]
+name = "quala"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { "file" = "LICENSE" }
+authors = [{ "name" = "Pieter P", "email" = "pieter.p.dev@outlook.com" }]
+keywords = ["optimization"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
+    "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: Microsoft :: Windows",
+]
+dependencies = ["numpy"]
+dynamic = ["version", "description"]
+
+[project.urls]
+"Documentation" = "https://tttapa.github.io/quala"
+"Source" = "https://github.com/tttapa/quala"
+"Bug Tracker" = "https://github.com/tttapa/quala/issues"
+
+[tool.py-build-cmake.module]
+directory = "python-src"
+
+[tool.py-build-cmake.sdist]
+include = ["src/CMakeLists.txt", "src/cmake", "src/include", "src/python", "src/src"]
+exclude = []
+
+[tool.py-build-cmake.cmake]
+build_type = "Release"
+source_path = "src" # Containing CMakeLists.txt
+build_args = ["-j"]
+install_components = ["python_modules"]
+env = {}
+
+[tool.py-build-cmake.cmake.options]
+"CMAKE_POSITION_INDEPENDENT_CODE:BOOL" = "On"
+"QUALA_WITH_PYTHON_BINDINGS:BOOL" = "On"
+"QUALA_WITH_PY_STUBS:BOOL" = "On"
+
+[tool.py-build-cmake.stubgen]
+args = ["-v"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = ["src/python/test"]

@@ -1,50 +1,28 @@
 cmake_minimum_required(VERSION 3.17)
+project(quala-dev LANGUAGES CXX)
 
-project(quala VERSION 0.0.1 LANGUAGES C CXX)
-
-if (DEFINED VERIFY_VERSION)
-    if (NOT "${VERIFY_VERSION}" MATCHES "^${PROJECT_VERSION}.*")
-        message(FATAL_ERROR "Version number does not match "
-                             "(${VERIFY_VERSION} - ${PROJECT_VERSION}).")
-    endif()
-endif()
-
-if (NOT WIN32)
-    include(CheckLanguage)
-    check_language(Fortran)
-    if (CMAKE_Fortran_COMPILER)
-        enable_language(Fortran)
-    endif()
-endif()
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
-
-if (DEFINED ENV{VIRTUAL_ENV})
-    list(APPEND CMAKE_PREFIX_PATH "$ENV{VIRTUAL_ENV}")
-elseif (EXISTS "${CMAKE_CURRENT_LIST_DIR}/py-venv")
-    list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_LIST_DIR}/py-venv")
-endif()
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake)
-
-# Import file with some custom compiler warnings and debug/sanitizer flags 
-include(cmake/GlobalCompilerOptions.cmake)
+# Import file with some custom compiler warnings
+include(cmake/GlobalCompilerWarnings.cmake)
 
 # ----
 
-# Google Test
-find_package(GTest REQUIRED NO_CMAKE_SYSTEM_PATH)
-include(GoogleTest)
-enable_testing()
-
-# Eigen
-find_package(Eigen3 REQUIRED)
-
-# ----
-
+# Source code
 add_subdirectory(src)
-if (NOT SKBUILD)
+
+# Unit tests
+option(QUALA_WITH_TESTS
+    "Compile the unit tests" On) 
+if (QUALA_WITH_TESTS)
+    find_package(GTest REQUIRED CONFIG)
+    include(GoogleTest)
+    enable_testing()
     add_subdirectory(test)
+endif()
+
+# Examples
+option(QUALA_WITH_EXAMPLES
+    "Compile the examples" On)
+if (QUALA_WITH_EXAMPLES)
     add_subdirectory(examples)
 endif()
 
@@ -73,16 +51,24 @@ add_custom_target(documentation)
 add_dependencies(documentation documentation-doxygen documentation-sphinx)
 
 # Add coverage target
-if (CMAKE_BUILD_TYPE STREQUAL "Coverage")
-    add_custom_target(coverage 
+option(QUALA_WITH_COVERAGE
+    "Generate coverage information." Off)
+if (QUALA_WITH_COVERAGE)
+    add_custom_target(coverage
         ${CMAKE_CURRENT_LIST_DIR}/scripts/coverage.sh
         ${CMAKE_CXX_COMPILER_ID}
         ${CMAKE_CXX_COMPILER_VERSION}
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --coverage -fno-inline")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -fno-inline")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
+    set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE On)
+    add_dependencies(coverage quala::tests)
 endif()
 
 # ----
 
+# Packaging
 include(InstallRequiredSystemLibraries)
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
 set(CPACK_PACKAGE_VERSION_MAJOR "${quala_VERSION_MAJOR}")
