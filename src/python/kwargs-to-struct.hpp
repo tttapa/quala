@@ -15,8 +15,7 @@
 namespace py = pybind11;
 
 struct cast_error_with_types : py::cast_error {
-    cast_error_with_types(const py::cast_error &e, std::string from,
-                          std::string to)
+    cast_error_with_types(const py::cast_error &e, std::string from, std::string to)
         : py::cast_error(e), from(std::move(from)), to(std::move(to)) {}
     std::string from;
     std::string to;
@@ -28,8 +27,7 @@ auto attr_setter(A T::*attr) {
         try {
             t.*attr = h.cast<A>();
         } catch (const py::cast_error &e) {
-            throw cast_error_with_types(e, py::str(py::type::handle_of(h)),
-                                        py::type_id<A>());
+            throw cast_error_with_types(e, py::str(py::type::handle_of(h)), py::type_id<A>());
         }
     };
 }
@@ -42,8 +40,7 @@ template <class T>
 class attr_setter_fun_t {
   public:
     template <class A>
-    attr_setter_fun_t(A T::*attr)
-        : set(attr_setter(attr)), get(attr_getter(attr)) {}
+    attr_setter_fun_t(A T::*attr) : set(attr_setter(attr)), get(attr_getter(attr)) {}
 
     std::function<void(T &, const py::handle &)> set;
     std::function<py::object(const T &)> get;
@@ -66,12 +63,10 @@ void kwargs_to_struct_helper(T &t, const py::kwargs &kwargs) {
         try {
             it->second.set(t, val);
         } catch (const cast_error_with_types &e) {
-            throw std::runtime_error("Error converting parameter '" + skey +
-                                     "' from " + e.from + " to '" + e.to +
-                                     "': " + e.what());
+            throw std::runtime_error("Error converting parameter '" + skey + "' from " + e.from +
+                                     " to '" + e.to + "': " + e.what());
         } catch (const std::runtime_error &e) {
-            throw std::runtime_error("Error setting parameter '" + skey +
-                                     "': " + e.what());
+            throw std::runtime_error("Error setting parameter '" + skey + "': " + e.what());
         }
     }
 }
@@ -103,9 +98,8 @@ py::dict struct_to_dict(const T &t) {
 
 template <class T>
 T var_kwargs_to_struct(const std::variant<T, py::dict> &p) {
-    return std::holds_alternative<T>(p)
-               ? std::get<T>(p)
-               : kwargs_to_struct<T>(std::get<py::dict>(p));
+    return std::holds_alternative<T>(p) ? std::get<T>(p)
+                                        : kwargs_to_struct<T>(std::get<py::dict>(p));
 }
 
 #include <quala/lbfgs.hpp>
@@ -144,4 +138,5 @@ inline const kwargs_to_struct_table_t<quala::BroydenGoodParams>
         {"min_div_abs", &quala::BroydenGoodParams::min_div_abs},
         {"force_pos_def", &quala::BroydenGoodParams::force_pos_def},
         {"restarted", &quala::BroydenGoodParams::restarted},
+        {"powell_damping_factor", &quala::BroydenGoodParams::powell_damping_factor},
     };

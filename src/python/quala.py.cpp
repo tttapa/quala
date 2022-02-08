@@ -46,8 +46,7 @@ PYBIND11_MODULE(QUALA_MODULE_NAME, m) {
 #endif
 
     py::class_<quala::LBFGSParams::CBFGSParams>(
-        m, "LBFGSParamsCBFGS",
-        "C++ documentation: :cpp:member:`quala::LBFGSParams::CBFGSParams `")
+        m, "LBFGSParamsCBFGS", "C++ documentation: :cpp:member:`quala::LBFGSParams::CBFGSParams `")
         .def(py::init())
         .def(py::init(&kwargs_to_struct<quala::LBFGSParams::CBFGSParams>))
         .def("to_dict", &struct_to_dict<quala::LBFGSParams::CBFGSParams>)
@@ -55,8 +54,8 @@ PYBIND11_MODULE(QUALA_MODULE_NAME, m) {
         .def_readwrite("ϵ", &quala::LBFGSParams::CBFGSParams::ϵ)
         .def("__bool__", &quala::LBFGSParams::CBFGSParams::operator bool);
 
-    py::class_<quala::LBFGSParams>(
-        m, "LBFGSParams", "C++ documentation: :cpp:class:`quala::LBFGSParams`")
+    py::class_<quala::LBFGSParams>(m, "LBFGSParams",
+                                   "C++ documentation: :cpp:class:`quala::LBFGSParams`")
         .def(py::init())
         .def(py::init(&kwargs_to_struct<quala::LBFGSParams>))
         .def("to_dict", &struct_to_dict<quala::LBFGSParams>)
@@ -66,8 +65,8 @@ PYBIND11_MODULE(QUALA_MODULE_NAME, m) {
         .def_readwrite("force_pos_def", &quala::LBFGSParams::force_pos_def)
         .def_readwrite("cbfgs", &quala::LBFGSParams::cbfgs);
 
-    auto lbfgs = py::class_<quala::LBFGS>(
-        m, "LBFGS", "C++ documentation: :cpp:class:`quala::LBFGS`");
+    auto lbfgs =
+        py::class_<quala::LBFGS>(m, "LBFGS", "C++ documentation: :cpp:class:`quala::LBFGS`");
     auto lbfgssign = py::enum_<quala::LBFGS::Sign>(
         lbfgs, "Sign", "C++ documentation :cpp:enum:`quala::LBFGS::Sign`");
     lbfgssign //
@@ -80,19 +79,17 @@ PYBIND11_MODULE(QUALA_MODULE_NAME, m) {
                  return {kwargs_to_struct<quala::LBFGS::Params>(params)};
              }),
              "params"_a)
-        .def(py::init<quala::LBFGS::Params, quala::length_t>(), "params"_a,
-             "n"_a)
+        .def(py::init<quala::LBFGS::Params, quala::length_t>(), "params"_a, "n"_a)
         .def(py::init([](py::dict params, quala::length_t n) -> quala::LBFGS {
                  return {kwargs_to_struct<quala::LBFGS::Params>(params), n};
              }),
              "params"_a, "n"_a)
-        .def_static("update_valid", quala::LBFGS::update_valid, "params"_a,
-                    "yᵀs"_a, "sᵀs"_a, "pᵀp"_a)
+        .def_static("update_valid", quala::LBFGS::update_valid, "params"_a, "yᵀs"_a, "sᵀs"_a,
+                    "pᵀp"_a)
         .def(
             "update",
-            [](quala::LBFGS &self, quala::crvec xk, quala::crvec xkp1,
-               quala::crvec pk, quala::crvec pkp1, quala::LBFGS::Sign sign,
-               bool forced) {
+            [](quala::LBFGS &self, quala::crvec xk, quala::crvec xkp1, quala::crvec pk,
+               quala::crvec pkp1, quala::LBFGS::Sign sign, bool forced) {
                 if (xk.size() != self.n())
                     throw std::invalid_argument("xk dimension mismatch");
                 if (xkp1.size() != self.n())
@@ -103,12 +100,12 @@ PYBIND11_MODULE(QUALA_MODULE_NAME, m) {
                     throw std::invalid_argument("pkp1 dimension mismatch");
                 return self.update(xk, xkp1, pk, pkp1, sign, forced);
             },
-            "xk"_a, "xkp1"_a, "pk"_a, "pkp1"_a,
-            "sign"_a = quala::LBFGS::Sign::Positive, "forced"_a = false)
+            "xk"_a, "xkp1"_a, "pk"_a, "pkp1"_a, "sign"_a = quala::LBFGS::Sign::Positive,
+            "forced"_a = false)
         .def(
             "update_sy",
-            [](quala::LBFGS &self, quala::crvec sk, quala::crvec yk,
-               quala::real_t pkp1Tpkp1, bool forced) {
+            [](quala::LBFGS &self, quala::crvec sk, quala::crvec yk, quala::real_t pkp1Tpkp1,
+               bool forced) {
                 if (sk.size() != self.n())
                     throw std::invalid_argument("sk dimension mismatch");
                 if (yk.size() != self.n())
@@ -127,56 +124,36 @@ PYBIND11_MODULE(QUALA_MODULE_NAME, m) {
         .def(
             "apply",
             [](quala::LBFGS &self, quala::rvec q, quala::real_t γ,
-               const std::vector<quala::vec::Index> &J) {
-                return self.apply(q, γ, J);
-            },
+               const std::vector<quala::vec::Index> &J) { return self.apply(q, γ, J); },
             "q"_a, "γ"_a, "J"_a)
         .def("reset", &quala::LBFGS::reset)
         .def("current_history", &quala::LBFGS::current_history)
         .def("resize", &quala::LBFGS::resize, "n"_a)
         .def("scale_y", &quala::LBFGS::scale_y, "factor"_a)
         .def_property_readonly("n", &quala::LBFGS::n)
-        .def("s",
-             [](quala::LBFGS &self, quala::index_t i) -> quala::rvec {
-                 return self.s(i);
-             })
-        .def("y",
-             [](quala::LBFGS &self, quala::index_t i) -> quala::rvec {
-                 return self.y(i);
-             })
-        .def("ρ",
-             [](quala::LBFGS &self, quala::index_t i) -> quala::real_t & {
-                 return self.ρ(i);
-             })
-        .def("α",
-             [](quala::LBFGS &self, quala::index_t i) -> quala::real_t & {
-                 return self.α(i);
-             })
+        .def("s", [](quala::LBFGS &self, quala::index_t i) -> quala::rvec { return self.s(i); })
+        .def("y", [](quala::LBFGS &self, quala::index_t i) -> quala::rvec { return self.y(i); })
+        .def("ρ", [](quala::LBFGS &self, quala::index_t i) -> quala::real_t & { return self.ρ(i); })
+        .def("α", [](quala::LBFGS &self, quala::index_t i) -> quala::real_t & { return self.α(i); })
         .def_property_readonly("params", &quala::LBFGS::get_params);
 
     py::class_<quala::AndersonAccelParams>(
-        m, "AndersonAccelParams",
-        "C++ documentation: :cpp:class:`quala::AndersonAccelParams`")
+        m, "AndersonAccelParams", "C++ documentation: :cpp:class:`quala::AndersonAccelParams`")
         .def(py::init())
         .def(py::init(&kwargs_to_struct<quala::AndersonAccelParams>))
         .def("to_dict", &struct_to_dict<quala::AndersonAccelParams>)
         .def_readwrite("memory", &quala::AndersonAccelParams::memory);
 
-    py::class_<quala::AndersonAccel>(
-        m, "AndersonAccel",
-        "C++ documentation: :cpp:class:`quala::AndersonAccel`")
+    py::class_<quala::AndersonAccel>(m, "AndersonAccel",
+                                     "C++ documentation: :cpp:class:`quala::AndersonAccel`")
         .def(py::init<quala::AndersonAccel::Params>(), "params"_a)
         .def(py::init([](py::dict params) -> quala::AndersonAccel {
-                 return {
-                     kwargs_to_struct<quala::AndersonAccel::Params>(params)};
+                 return {kwargs_to_struct<quala::AndersonAccel::Params>(params)};
              }),
              "params"_a)
-        .def(py::init<quala::AndersonAccel::Params, quala::length_t>(),
-             "params"_a, "n"_a)
-        .def(py::init([](py::dict params,
-                         quala::length_t n) -> quala::AndersonAccel {
-                 return {kwargs_to_struct<quala::AndersonAccel::Params>(params),
-                         n};
+        .def(py::init<quala::AndersonAccel::Params, quala::length_t>(), "params"_a, "n"_a)
+        .def(py::init([](py::dict params, quala::length_t n) -> quala::AndersonAccel {
+                 return {kwargs_to_struct<quala::AndersonAccel::Params>(params), n};
              }),
              "params"_a, "n"_a)
         .def("resize", &quala::AndersonAccel::resize, "n"_a)
@@ -192,8 +169,7 @@ PYBIND11_MODULE(QUALA_MODULE_NAME, m) {
             "g_0"_a, "r_0"_a)
         .def(
             "compute",
-            [](quala::AndersonAccel &self, quala::crvec g_k, quala::vec r_k,
-               quala::rvec x_k_aa) {
+            [](quala::AndersonAccel &self, quala::crvec g_k, quala::vec r_k, quala::rvec x_k_aa) {
                 if (g_k.size() != self.n())
                     throw std::invalid_argument("g_k dimension mismatch");
                 if (r_k.size() != self.n())
@@ -219,38 +195,34 @@ PYBIND11_MODULE(QUALA_MODULE_NAME, m) {
         .def("current_history", &quala::AndersonAccel::current_history)
         .def_property_readonly("params", &quala::AndersonAccel::get_params);
 
-    py::class_<quala::BroydenGoodParams>(
-        m, "BroydenGoodParams",
-        "C++ documentation: :cpp:class:`quala::BroydenGoodParams`")
+    py::class_<quala::BroydenGoodParams>(m, "BroydenGoodParams",
+                                         "C++ documentation: :cpp:class:`quala::BroydenGoodParams`")
         .def(py::init())
         .def(py::init(&kwargs_to_struct<quala::BroydenGoodParams>))
         .def("to_dict", &struct_to_dict<quala::BroydenGoodParams>)
         .def_readwrite("memory", &quala::BroydenGoodParams::memory)
         .def_readwrite("min_div_abs", &quala::BroydenGoodParams::min_div_abs)
-        .def_readwrite("force_pos_def",
-                       &quala::BroydenGoodParams::force_pos_def)
-        .def_readwrite("restarted", &quala::BroydenGoodParams::restarted);
+        .def_readwrite("force_pos_def", &quala::BroydenGoodParams::force_pos_def)
+        .def_readwrite("restarted", &quala::BroydenGoodParams::restarted)
+        .def_readwrite("powell_damping_factor", &quala::BroydenGoodParams::powell_damping_factor);
 
-    py::class_<quala::BroydenGood>(
-        m, "BroydenGood", "C++ documentation: :cpp:class:`quala::BroydenGood`")
+    py::class_<quala::BroydenGood>(m, "BroydenGood",
+                                   "C++ documentation: :cpp:class:`quala::BroydenGood`")
         .def(py::init<quala::BroydenGood::Params>(), "params"_a)
         .def(py::init([](py::dict params) -> quala::BroydenGood {
                  return {kwargs_to_struct<quala::BroydenGood::Params>(params)};
              }),
              "params"_a)
-        .def(py::init<quala::BroydenGood::Params, quala::length_t>(),
-             "params"_a, "n"_a)
-        .def(py::init([](py::dict params,
-                         quala::length_t n) -> quala::BroydenGood {
-                 return {kwargs_to_struct<quala::BroydenGood::Params>(params),
-                         n};
+        .def(py::init<quala::BroydenGood::Params, quala::length_t>(), "params"_a, "n"_a)
+        .def(py::init([](py::dict params, quala::length_t n) -> quala::BroydenGood {
+                 return {kwargs_to_struct<quala::BroydenGood::Params>(params), n};
              }),
              "params"_a, "n"_a)
         .def("resize", &quala::BroydenGood::resize, "n"_a)
         .def(
             "update",
-            [](quala::BroydenGood &self, quala::crvec xk, quala::crvec xkp1,
-               quala::crvec pk, quala::crvec pkp1, bool forced) {
+            [](quala::BroydenGood &self, quala::crvec xk, quala::crvec xkp1, quala::crvec pk,
+               quala::crvec pkp1, bool forced) {
                 if (xk.size() != self.n())
                     throw std::invalid_argument("xk dimension mismatch");
                 if (xkp1.size() != self.n())
@@ -264,8 +236,7 @@ PYBIND11_MODULE(QUALA_MODULE_NAME, m) {
             "xk"_a, "xkp1"_a, "pk"_a, "pkp1"_a, "forced"_a = false)
         .def(
             "update_sy",
-            [](quala::BroydenGood &self, quala::crvec sk, quala::crvec yk,
-               bool forced) {
+            [](quala::BroydenGood &self, quala::crvec sk, quala::crvec yk, bool forced) {
                 if (sk.size() != self.n())
                     throw std::invalid_argument("sk dimension mismatch");
                 if (yk.size() != self.n())
@@ -275,12 +246,12 @@ PYBIND11_MODULE(QUALA_MODULE_NAME, m) {
             "sk"_a, "yk"_a, "forced"_a = false)
         .def(
             "apply",
-            [](quala::BroydenGood &self, quala::rvec q) {
+            [](quala::BroydenGood &self, quala::rvec q, quala::real_t γ) {
                 if (q.size() != self.n())
                     throw std::invalid_argument("q dimension mismatch");
-                return self.apply(q);
+                return self.apply(q, γ);
             },
-            "q")
+            "q"_a, "γ"_a = -1)
         .def("reset", &quala::BroydenGood::reset)
         .def("current_history", &quala::BroydenGood::current_history)
         .def_property_readonly("params", &quala::BroydenGood::get_params);

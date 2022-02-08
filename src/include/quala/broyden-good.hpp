@@ -53,6 +53,8 @@ struct BroydenGoodParams {
     /// correct, because the s̃ vectors are not updated when the old history is
     /// overwritten.
     bool restarted = true;
+    /// Powell's trick, damping, prevents nonsingularity.
+    real_t powell_damping_factor = 0;
 };
 
 /**
@@ -95,8 +97,10 @@ class BroydenGood {
 
     /// Apply the inverse Jacobian approximation to the given vector q, i.e.
     /// @f$ q \leftarrow H_k q @f$.
-    /// Initial inverse Jacobian approximation is set to @f$ H_0 = I @f$.
-    bool apply(rvec q);
+    /// Initial inverse Hessian approximation is set to @f$ H_0 = \gamma I @f$.
+    /// The result is scaled by a factor @p γ. If @p γ is negative, the result
+    /// is scaled by @f$ \frac{s^\top y}{y^\top y} @f$.
+    bool apply(rvec q, real_t γ);
 
     /// Throw away the approximation and all previous vectors s and y.
     void reset();
@@ -151,6 +155,7 @@ class BroydenGood {
     index_t idx = 0;
     bool full   = false;
     Params params;
+    real_t latest_γ = NaN;
 };
 
 inline void BroydenGood::reset() {
@@ -187,9 +192,22 @@ bool BroydenGood::update_sy(const anymat<VecS> &sₖ, const anymat<VecY> &yₖ,
     if (!forced && a_sᵀHy < params.min_div_abs)
         return false;
 
+    // Compute damping
+    real_t damp = 1 / sᵀHy;
+    if (real_t θ̅ = params.powell_damping_factor) {
+        real_t γ     = sᵀHy / sₖ.squaredNorm();
+        real_t sgn_γ = γ >= 0 ? 1 : -1;
+        real_t γθ̅    = params.force_pos_def ? γ * θ̅ : sgn_γ * θ̅;
+        real_t a_γ   = params.force_pos_def ? γ : std::abs(γ);
+        real_t θ     = a_γ >= θ̅ ? 1 // no damping
+                                : (1 - γθ̅) / (1 - γ);
+        damp         = θ / (sₖ.squaredNorm() * (1 - θ + θ * γ));
+    }
+
     // Store the new vectors
     sto.s(idx) = sₖ;
-    sto.s̃(idx) = (1 / sᵀHy) * (sₖ - r);
+    sto.s̃(idx) = damp * (sₖ - r);
+    latest_γ = sₖ.dot(yₖ) / yₖ.squaredNorm();
 
     // Increment the index in the circular buffer
     idx = succ(idx);
@@ -198,10 +216,15 @@ bool BroydenGood::update_sy(const anymat<VecS> &sₖ, const anymat<VecY> &yₖ,
     return true;
 }
 
-inline bool BroydenGood::apply(rvec q) {
+inline bool BroydenGood::apply(rvec q, real_t γ) {
     // Only apply if we have previous vectors s and y
     if (idx == 0 && not full)
         return false;
+
+    if (γ < 0)
+        γ = latest_γ;
+    if (γ != 1)
+        q *= γ;
 
     // Compute q = q₍ₘ₋₁₎ = Hₖ q
     // q₍₋₁₎ = q
