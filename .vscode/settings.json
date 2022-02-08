@@ -1,6 +1,6 @@
 {
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
-    "clangd.semanticHighlighting": true,
+    "editor.semanticHighlighting.enabled": true,
     "files.associations": {
         "*.dox": "cpp",
         "*.ipp": "cpp",
@@ -32,7 +32,6 @@
         "ψₖᵀpₖ",
         "ψₖᵀrₖ"
     ],
-    "python.pythonPath": "py-venv/bin/python",
     "python.formatting.provider": "yapf",
     "editor.rulers": [
         80
@@ -53,7 +52,10 @@
         "LD_LIBRARY_PATH": "${workspaceFolder}/py-venv/lib"
     },
     "cmake.configureSettings": {
-        "WITH_PYTHON_BINDINGS": "ON"
+        "QUALA_WITH_PYTHON_BINDINGS": true
+    },
+    "cmake.configureEnvironment": {
+        "CMAKE_PREFIX_PATH": "${workspaceFolder}/py-venv"
     },
     "editor.unicodeHighlight.allowedCharacters": {
         "γ": true,

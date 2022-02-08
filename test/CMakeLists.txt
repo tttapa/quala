@@ -14,6 +14,7 @@ target_link_libraries(tests
         GTest::gmock
         quala::quala
 )
+add_executable(quala::tests ALIAS tests)
 
 # Add tests
 if (NOT CMAKE_CROSSCOMPILING)

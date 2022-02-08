@@ -39,8 +39,8 @@ PYBIND11_MODULE(QUALA_MODULE_NAME, m) {
 
     m.doc() = "Quala Quasi-Newton algorithms";
 
-#ifdef VERSION_INFO
-    m.attr("__version__") = MACRO_STRINGIFY(VERSION_INFO);
+#ifdef QUALA_VERSION_INFO
+    m.attr("__version__") = MACRO_STRINGIFY(QUALA_VERSION_INFO);
 #else
     m.attr("__version__") = "dev";
 #endif

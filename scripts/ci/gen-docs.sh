@@ -32,7 +32,7 @@ function run_doxygen_coverage {
     pushd ../..
     rm -rf docs/Coverage build
     mkdir -p docs/Coverage
-    cmake -Bbuild -S. -DCMAKE_BUILD_TYPE=Coverage -DWITH_PYTHON_BINDINGS=Off
+    cmake -Bbuild -S. -DQUALA_WITH_COVERAGE=On -DQUALA_WITH_PYTHON_BINDINGS=Off -DQUALA_WITH_EXAMPLES=Off -DQUALA_WITH_TESTS=On
     cmake --build build -t coverage ||:
     mkdir -p "$2/$dir"
     rm -rf "$2/$dir"

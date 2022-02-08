@@ -1,1 +1,0 @@
-from ._quala import *

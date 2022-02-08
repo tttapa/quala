@@ -9,7 +9,8 @@ interface.
 
 ## Installation
 
-The Python interface can be installed from PyPI using `pip`:
+The Python interface can be installed from [PyPI](https://pypi.org/project/quala)
+using `pip`:
 ```sh
 python3 -m pip install quala
 ```
