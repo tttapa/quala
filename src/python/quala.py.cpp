@@ -27,9 +27,6 @@
 
 namespace py = pybind11;
 
-#define STRINGIFY(x) #x
-#define MACRO_STRINGIFY(x) STRINGIFY(x)
-
 PYBIND11_MODULE(QUALA_MODULE_NAME, m) {
     using py::operator""_a;
 
@@ -40,7 +37,7 @@ PYBIND11_MODULE(QUALA_MODULE_NAME, m) {
     m.doc() = "Quala Quasi-Newton algorithms";
 
 #ifdef QUALA_VERSION_INFO
-    m.attr("__version__") = MACRO_STRINGIFY(QUALA_VERSION_INFO);
+    m.attr("__version__") = QUALA_VERSION_INFO;
 #else
     m.attr("__version__") = "dev";
 #endif

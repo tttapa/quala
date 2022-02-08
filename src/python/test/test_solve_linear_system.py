@@ -68,7 +68,7 @@ def test_broyden_good():
         print(f"x:    {x}")
         print(f"r:    {r}")
         q = r.copy()
-        broyden.apply(q)
+        broyden.apply(q, 1)
         x_new = x - q
         r_new = A @ x_new - b
         broyden.update(x, x_new, r, r_new)
