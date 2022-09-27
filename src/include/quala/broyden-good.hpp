@@ -55,6 +55,9 @@ struct BroydenGoodParams {
     bool restarted = true;
     /// Powell's trick, damping, prevents nonsingularity.
     real_t powell_damping_factor = 0;
+    /// Minimum automatic step size. If @f$ \frac{s^\top y}{y^\top y} @f$ is
+    /// smaller than this setting, use this as the step size instead.
+    real_t min_stepsize = 1e-10;
 };
 
 /**
@@ -208,6 +211,8 @@ bool BroydenGood::update_sy(const anymat<VecS> &sₖ, const anymat<VecY> &yₖ,
     sto.s(idx) = sₖ;
     sto.s̃(idx) = damp * (sₖ - r);
     latest_γ = sₖ.dot(yₖ) / yₖ.squaredNorm();
+    if (std::abs(latest_γ) < params.min_stepsize)
+        latest_γ = std::copysign(params.min_stepsize, latest_γ);
 
     // Increment the index in the circular buffer
     idx = succ(idx);

@@ -201,7 +201,8 @@ PYBIND11_MODULE(QUALA_MODULE_NAME, m) {
         .def_readwrite("min_div_abs", &quala::BroydenGoodParams::min_div_abs)
         .def_readwrite("force_pos_def", &quala::BroydenGoodParams::force_pos_def)
         .def_readwrite("restarted", &quala::BroydenGoodParams::restarted)
-        .def_readwrite("powell_damping_factor", &quala::BroydenGoodParams::powell_damping_factor);
+        .def_readwrite("powell_damping_factor", &quala::BroydenGoodParams::powell_damping_factor)
+        .def_readwrite("min_stepsize", &quala::BroydenGoodParams::min_stepsize);
 
     py::class_<quala::BroydenGood>(m, "BroydenGood",
                                    "C++ documentation: :cpp:class:`quala::BroydenGood`")
