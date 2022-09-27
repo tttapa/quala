@@ -14,11 +14,17 @@ struct AndersonAccelParams {
     length_t memory = 10;
 };
 
-/// Anderson Acceleration.
-///
-/// @todo   Condition estimation of the QR factorization.
-///
-/// @ingroup accelerators-grp
+/**
+ * Anderson Acceleration.
+ *
+ * Algorithm for accelerating fixed-point iterations for finding fixed points
+ * of a function @f$ g @f$, i.e. @f$ g(x^\star) = x^\star @f$, or equivalently,
+ * roots of the residual @f$ r(x) \triangleq g(x) - x @f$.
+ *
+ * @todo   Condition estimation of the QR factorization.
+ *
+ * @ingroup accelerators-grp
+ */
 class AndersonAccel {
   public:
     using Params = AndersonAccelParams;
