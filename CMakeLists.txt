@@ -6,28 +6,6 @@ include(cmake/GlobalCompilerWarnings.cmake)
 
 # ----
 
-# Source code
-add_subdirectory(src)
-
-# Unit tests
-option(QUALA_WITH_TESTS
-    "Compile the unit tests" On) 
-if (QUALA_WITH_TESTS)
-    find_package(GTest REQUIRED CONFIG)
-    include(GoogleTest)
-    enable_testing()
-    add_subdirectory(test)
-endif()
-
-# Examples
-option(QUALA_WITH_EXAMPLES
-    "Compile the examples" On)
-if (QUALA_WITH_EXAMPLES)
-    add_subdirectory(examples)
-endif()
-
-# ----
-
 # Add documentation targets
 add_custom_target(documentation-doxygen
     doxygen
@@ -78,3 +56,25 @@ set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
 SET(CPACK_GENERATOR "DEB;TGZ")
 SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "Pieter P")
 include(CPack)
+
+# ----
+
+# Source code
+add_subdirectory(src)
+
+# Unit tests
+option(QUALA_WITH_TESTS
+    "Compile the unit tests" On) 
+if (QUALA_WITH_TESTS)
+    find_package(GTest REQUIRED CONFIG)
+    include(GoogleTest)
+    enable_testing()
+    add_subdirectory(test)
+endif()
+
+# Examples
+option(QUALA_WITH_EXAMPLES
+    "Compile the examples" On)
+if (QUALA_WITH_EXAMPLES)
+    add_subdirectory(examples)
+endif()
