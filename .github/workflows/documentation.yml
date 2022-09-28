@@ -7,82 +7,40 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+    container: 
+      image: ghcr.io/tttapa/alpaqa-docs:py3.10
+      options: --user root
 
     steps:
     # Checks-out the repository under $GITHUB_WORKSPACE
     - uses: actions/checkout@v2
+    - run: git config --global --add safe.directory $GITHUB_WORKSPACE
 
-    # Cache the doxygen executable
-    - uses: actions/cache@v2
-      with:
-        path: |
-          /tmp/doxygen
-          /tmp/lcov
-        key: ${{ runner.os }}-doc-${{ hashFiles('scripts/ci/install-doxygen.sh') }}-${{ hashFiles('scripts/ci/install-lcov.sh') }}
-    
-    - name: Install Graphviz/Dot and LCOV Perl dependencies
-      run: sudo apt-get install graphviz libjson-perl libperlio-gzip-perl perl
-
-    - name: Install LCOV
-      run: |
-        ./scripts/ci/install-lcov.sh /tmp/lcov
-        echo "/tmp/lcov/bin" >> $GITHUB_PATH
-
-    # Download and build doxygen (if not cached already)
-    - name: Install Doxygen
-      run: |
-        ./scripts/ci/install-doxygen.sh /tmp/doxygen
-        echo "/tmp/doxygen/bin" >> $GITHUB_PATH
-
-    - name: Show Doxygen version
-      run: |
-        which doxygen
-        doxygen --version
-
-    # Install Python dependencies
-    - uses: actions/setup-python@v2
-      with:
-        python-version: '3.9.6'
-    - name: Cache Virtual Environment
-      id: cache-venv
-      uses: actions/cache@v2
-      with:
-        path: "/tmp/py-venv"
-        key: ${{ runner.os }}-${{ hashFiles('scripts/ci/install-dependencies.sh') }}-${{ hashFiles('scripts/install-sphinx.sh') }}-${{ hashFiles('requirements.txt') }}-${{ hashFiles('scripts/requirements-wheel.txt') }}-${{ hashFiles('scripts/requirements-docs.txt') }}-
-    - name: Install Python Dependencies 
-      if: steps.cache-venv.outputs.cache-hit != 'true'
-      run: |
-        python3 -m venv /tmp/py-venv
-        . /tmp/py-venv/bin/activate
-        python -m pip install -r requirements.txt -r scripts/requirements-wheel.txt -r scripts/requirements-docs.txt
-        bash scripts/install-sphinx.sh
-        bash scripts/ci/install-dependencies.sh
-      env:
-        CXXFLAGS: "-march=skylake -static-libstdc++ -static-libgcc"
-        LDFLAGS: "-static-libstdc++ -static-libgcc"
-        CFLAGS: "-march=skylake -static-libgcc"
-        FC: gfortran
-
-    # Create the `gh-pages` branch if it doesn't exist already, check it out, 
-    # and copy it to /tmp/staging.
+    # Create a copy of the repo in /tmp/staging.
+    # Create the `gh-pages` branch if it doesn't exist already, check it out.
     - name: Create staging area
       run: |
         rm -rf /tmp/staging
+        cp -ar $GITHUB_WORKSPACE/ /tmp/staging
+        git config --global --add safe.directory /tmp/staging
+        cd /tmp/staging
         git fetch origin gh-pages:gh-pages ||:
         git checkout gh-pages || \
         { git checkout --orphan gh-pages && git rm -rf . && git clean -fxd ; }
-        cp -ar $GITHUB_WORKSPACE/ /tmp/staging
-        git checkout ${GITHUB_REF##*/}
+
+    # Install Python dependencies for generating docs and tests
+    - name: Install Python package and dependencies 
+      run: |
+        python3 -m pip install -r doxygen/requirements.txt
+        python3 -m pip install '.[docs]'
+      shell: bash
 
     # Generate the documentation and save it in /tmp/staging
     - name: Generate documentation
       run: |
-        . /tmp/py-venv/bin/activate
-        ./scripts/ci/gen-docs.sh /tmp/staging
-      env:
-        CC: clang-10
-        CXX: clang++-10
+        ./doxygen/scripts/gen-docs.sh /tmp/staging
+        ./doxygen/scripts/gen-docs-index.sh /tmp/staging md
 
     # Commit the new documentation, squash the commits, and push it to GitHub
     - name: Commit and push documention
