@@ -1,9 +1,10 @@
-# Make sure that the Python and CMake versions match
 set(PY_FULL_VERSION ${PROJECT_VERSION}${PY_VERSION_SUFFIX})
-if (DEFINED VERIFY_VERSION)
-    if (NOT "${VERIFY_VERSION}" MATCHES "^${PY_FULL_VERSION}$")
+
+# Make sure that the Python and CMake versions match
+if (DEFINED PY_BUILD_CMAKE_PACKAGE_VERSION)
+    if (NOT "${PY_BUILD_CMAKE_PACKAGE_VERSION}" MATCHES "^${PY_FULL_VERSION}$")
         message(FATAL_ERROR "Version number does not match "
-                             "(${VERIFY_VERSION} - ${PY_FULL_VERSION}).")
+                             "(${PY_BUILD_CMAKE_PACKAGE_VERSION} - ${PY_FULL_VERSION}).")
     endif()
 endif()
 
