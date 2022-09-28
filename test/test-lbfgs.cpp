@@ -90,33 +90,33 @@ TEST(BFGS, matrix) {
 
         quala::vec dₖ = -Bₖ * rₖ;
         dₖ = -Bₖ.partialPivLu().solve(rₖ);
-        quala::vec xₖ₊₁ = xₖ + dₖ;
-        quala::vec rₖ₊₁ = A * xₖ₊₁ - b;
+        quala::vec xₙₑₓₜ = xₖ + dₖ;
+        quala::vec rₙₑₓₜ = A * xₙₑₓₜ - b;
 
-        quala::vec yₖ = rₖ₊₁ - rₖ;
-        quala::vec sₖ = xₖ₊₁ - xₖ;
-        quala::mat Bₖ₊₁(2, 2);
+        quala::vec yₖ = rₙₑₓₜ - rₖ;
+        quala::vec sₖ = xₙₑₓₜ - xₖ;
+        quala::mat Bₙₑₓₜ(2, 2);
 
         if (false) { // BFGS
-            Bₖ₊₁ = Bₖ - (Bₖ * sₖ) * (Bₖ * sₖ).transpose() / sₖ.dot(Bₖ * sₖ) +
+            Bₙₑₓₜ = Bₖ - (Bₖ * sₖ) * (Bₖ * sₖ).transpose() / sₖ.dot(Bₖ * sₖ) +
                    yₖ * yₖ.transpose() / yₖ.dot(sₖ);
         } else if (false) { // BFGS inverse
             quala::real_t ρ = 1 / sₖ.dot(yₖ);
             auto I          = quala::mat::Identity(2, 2);
-            Bₖ₊₁            = (I - ρ * sₖ * yₖ.transpose()) * Bₖ *
+            Bₙₑₓₜ            = (I - ρ * sₖ * yₖ.transpose()) * Bₖ *
                        (I - ρ * yₖ * sₖ.transpose()) +
                    ρ * sₖ * sₖ.transpose();
         } else if (true) { // Broyden
-            Bₖ₊₁ = Bₖ + ((yₖ - Bₖ * sₖ) * sₖ.transpose()) / sₖ.squaredNorm();
+            Bₙₑₓₜ = Bₖ + ((yₖ - Bₖ * sₖ) * sₖ.transpose()) / sₖ.squaredNorm();
         } else { // Broyden inverse
-            Bₖ₊₁ = Bₖ + ((sₖ - Bₖ * yₖ) / (sₖ.transpose() * Bₖ * yₖ)) *
+            Bₙₑₓₜ = Bₖ + ((sₖ - Bₖ * yₖ) / (sₖ.transpose() * Bₖ * yₖ)) *
                             sₖ.transpose() * Bₖ;
         }
         ++update_count;
 
-        rₖ = std::move(rₖ₊₁);
-        xₖ = std::move(xₖ₊₁);
-        Bₖ = std::move(Bₖ₊₁);
+        rₖ = std::move(rₙₑₓₜ);
+        xₖ = std::move(xₙₑₓₜ);
+        Bₖ = std::move(Bₙₑₓₜ);
     }
     std::cout << "\nfinal" << std::endl;
     std::cout << "x:    " << xₖ.transpose() << std::endl;

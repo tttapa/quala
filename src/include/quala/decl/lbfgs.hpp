@@ -92,11 +92,11 @@ class LBFGS {
     /// sₖ = xₖ₊₁ - xₖ and yₖ = pₖ₊₁ - pₖ.
     template <class VecS, class VecY>
     bool update_sy(const anymat<VecS> &s, const anymat<VecY> &y,
-                   real_t pₖ₊₁ᵀpₖ₊₁, bool forced = false);
+                   real_t pₙₑₓₜᵀpₙₑₓₜ, bool forced = false);
 
     /// Update the inverse Hessian approximation using the new vectors xₖ₊₁
     /// and pₖ₊₁.
-    bool update(crvec xₖ, crvec xₖ₊₁, crvec pₖ, crvec pₖ₊₁,
+    bool update(crvec xₖ, crvec xₙₑₓₜ, crvec pₖ, crvec pₙₑₓₜ,
                 Sign sign = Sign::Positive, bool forced = false);
 
     /// Apply the inverse Hessian approximation to the given vector q.

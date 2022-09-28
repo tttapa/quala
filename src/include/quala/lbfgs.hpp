@@ -32,12 +32,12 @@ inline bool LBFGS::update_valid(const LBFGSParams &params, real_t yᵀs,
 
 template <class VecS, class VecY>
 inline bool LBFGS::update_sy(const anymat<VecS> &s, const anymat<VecY> &y,
-                             real_t pₖ₊₁ᵀpₖ₊₁, bool forced) {
+                             real_t pₙₑₓₜᵀpₙₑₓₜ, bool forced) {
     real_t yᵀs = y.dot(s);
     real_t ρ   = 1 / yᵀs;
     if (not forced) {
         real_t sᵀs = s.squaredNorm();
-        if (not update_valid(params, yᵀs, sᵀs, pₖ₊₁ᵀpₖ₊₁))
+        if (not update_valid(params, yᵀs, sᵀs, pₙₑₓₜᵀpₙₑₓₜ))
             return false;
     }
 
@@ -53,12 +53,12 @@ inline bool LBFGS::update_sy(const anymat<VecS> &s, const anymat<VecY> &y,
     return true;
 }
 
-inline bool LBFGS::update(crvec xₖ, crvec xₖ₊₁, crvec pₖ, crvec pₖ₊₁, Sign sign,
+inline bool LBFGS::update(crvec xₖ, crvec xₙₑₓₜ, crvec pₖ, crvec pₙₑₓₜ, Sign sign,
                           bool forced) {
-    const auto s = xₖ₊₁ - xₖ;
-    const auto y = (sign == Sign::Positive) ? pₖ₊₁ - pₖ : pₖ - pₖ₊₁;
-    real_t pₖ₊₁ᵀpₖ₊₁ = params.cbfgs ? pₖ₊₁.squaredNorm() : 0;
-    return update_sy(s, y, pₖ₊₁ᵀpₖ₊₁, forced);
+    const auto s = xₙₑₓₜ - xₖ;
+    const auto y = (sign == Sign::Positive) ? pₙₑₓₜ - pₖ : pₖ - pₙₑₓₜ;
+    real_t pₙₑₓₜᵀpₙₑₓₜ = params.cbfgs ? pₙₑₓₜ.squaredNorm() : 0;
+    return update_sy(s, y, pₙₑₓₜᵀpₙₑₓₜ, forced);
 }
 
 inline bool LBFGS::apply(rvec q, real_t γ) {

@@ -95,7 +95,7 @@ class BroydenGood {
 
     /// Update the inverse Jacobian approximation using the new vectors xₖ₊₁
     /// and pₖ₊₁.
-    bool update(crvec xₖ, crvec xₖ₊₁, crvec pₖ, crvec pₖ₊₁,
+    bool update(crvec xₖ, crvec xₙₑₓₜ, crvec pₖ, crvec pₙₑₓₜ,
                 bool forced = false);
 
     /// Apply the inverse Jacobian approximation to the given vector q, i.e.
@@ -240,10 +240,10 @@ inline bool BroydenGood::apply(rvec q, real_t γ) {
     return true;
 }
 
-inline bool BroydenGood::update(crvec xₖ, crvec xₖ₊₁, crvec pₖ, crvec pₖ₊₁,
+inline bool BroydenGood::update(crvec xₖ, crvec xₙₑₓₜ, crvec pₖ, crvec pₙₑₓₜ,
                                 bool forced) {
-    const auto s = xₖ₊₁ - xₖ;
-    const auto y = pₖ₊₁ - pₖ;
+    const auto s = xₙₑₓₜ - xₖ;
+    const auto y = pₙₑₓₜ - pₖ;
     return update_sy(s, y, forced);
 }
 

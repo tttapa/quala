@@ -271,7 +271,7 @@ TEST(Anderson, matrix) {
     quala::LimitedMemoryQR qr(2, 2);
     quala::mat G(qr.n(), qr.m());
     quala::vec rₖ   = r(xₖ);
-    quala::vec rₖ₊₁ = rₖ;
+    quala::vec rₙₑₓₜ = rₖ;
     std::vector<quala::real_t> res;
     unsigned update_count = 0;
     for (size_t i = 0; i < 5; ++i) {
@@ -287,7 +287,7 @@ TEST(Anderson, matrix) {
 
         quala::vec γ_LS(qr.n()), xₖ_aa(qr.n());
         quala::vec gₖ = A * xₖ - b;
-        auto &rₖ₋₁    = rₖ₊₁;
+        auto &rₖ₋₁    = rₙₑₓₜ;
         if (i == 0) {
             G.col(0) = gₖ;
             xₖ_aa    = gₖ;
@@ -295,9 +295,9 @@ TEST(Anderson, matrix) {
             quala::minimize_update_anderson(qr, G, rₖ, rₖ₋₁, gₖ, γ_LS, xₖ_aa);
             ++update_count;
         }
-        rₖ₊₁ = A * xₖ_aa - b - xₖ_aa;
+        rₙₑₓₜ = A * xₖ_aa - b - xₖ_aa;
 
-        std::swap(rₖ, rₖ₊₁);
+        std::swap(rₖ, rₙₑₓₜ);
         xₖ = std::move(xₖ_aa);
     }
     std::cout << "\nfinal" << std::endl;
@@ -346,15 +346,15 @@ TEST(Anderson, matrix2) {
             res.push_back(r(xₖ).norm());
         }
 
-        quala::vec xₖ₊₁(2);
+        quala::vec xₙₑₓₜ(2);
         if (i == 0) {
             aa.initialize(g(xₖ), r(xₖ));
-            xₖ₊₁ = g(xₖ);
+            xₙₑₓₜ = g(xₖ);
         } else {
-            aa.compute(g(xₖ), r(xₖ), xₖ₊₁);
+            aa.compute(g(xₖ), r(xₖ), xₙₑₓₜ);
             ++update_count;
         }
-        xₖ = std::move(xₖ₊₁);
+        xₖ = std::move(xₙₑₓₜ);
     }
     std::cout << "\nfinal" << std::endl;
     std::cout << "x:    " << xₖ.transpose() << std::endl;
