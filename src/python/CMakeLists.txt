@@ -25,8 +25,10 @@ target_compile_definitions(_quala
     PRIVATE
         QUALA_MODULE_NAME=_quala
         QUALA_VERSION_INFO="${PY_FULL_VERSION}")
-if (NOT WIN32)
+if (CMAKE_SYSTEM_NAME MATCHES "Linux")
     target_link_options(_quala PRIVATE "LINKER:--exclude-libs,ALL")
+elseif (CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+    target_compile_options(_quala PRIVATE "/bigobj")
 endif()
 
 # Install the Python module
