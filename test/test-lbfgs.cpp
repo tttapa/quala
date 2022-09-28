@@ -29,12 +29,12 @@ TEST(LBFGS, quadratic) {
             std::cout << "x:    " << x.transpose() << std::endl;
             std::cout << "f(x): " << f(x) << std::endl;
 
-            quala::mat H⁻¹ = quala::mat::Identity(2, 2);
+            quala::mat H_inv = quala::mat::Identity(2, 2);
             if (i > 0) {
-                lbfgs.apply(H⁻¹.col(0), 1);
-                lbfgs.apply(H⁻¹.col(1), 1);
+                lbfgs.apply(H_inv.col(0), 1);
+                lbfgs.apply(H_inv.col(1), 1);
             }
-            std::cout << std::endl << "LB⁻¹ = \n" << H⁻¹ << std::endl;
+            std::cout << std::endl << "LB⁻¹ = \n" << H_inv << std::endl;
             std::cout << "B⁻¹  = \n" << B.inverse() << std::endl;
             std::cout << "   " << update_count << std::endl;
         }

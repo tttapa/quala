@@ -54,9 +54,9 @@ TEST(Anderson, minimize) {
 
     vec γ_LS(m);
     vec xₖ_aa(n);
-    mat G₀ = G.block(0, 0, n, m);
+    mat G0 = G.block(0, 0, n, m);
     // Call function under test
-    quala::minimize_update_anderson(qr, G₀, R.col(k), R.col(k - 1), G.col(k),
+    quala::minimize_update_anderson(qr, G0, R.col(k), R.col(k - 1), G.col(k),
                                     γ_LS, xₖ_aa);
 
     // Compute reference solution
@@ -87,11 +87,11 @@ TEST(Anderson, minimize) {
     EXPECT_THAT(print_wrap(xₖ_aa), EigenAlmostEqual(print_wrap(x_exp), ε));
 
     // Oldest column of G should have been overwritten by g₃
-    mat G₁(4, 3);
-    G₁.col(1) = G.col(1);
-    G₁.col(2) = G.col(2);
-    G₁.col(0) = G.col(3);
-    EXPECT_THAT(print_wrap(G₀), EigenAlmostEqual(print_wrap(G₁), ε));
+    mat G1(4, 3);
+    G1.col(1) = G.col(1);
+    G1.col(2) = G.col(2);
+    G1.col(0) = G.col(3);
+    EXPECT_THAT(print_wrap(G0), EigenAlmostEqual(print_wrap(G1), ε));
 
     mat QᵀQ = qr.get_Q().transpose() * qr.get_Q();
     EXPECT_THAT(print_wrap(qr.get_Q() * qr.get_R()),
@@ -108,7 +108,7 @@ TEST(Anderson, minimize) {
     ++k;
 
     // Call function under test
-    quala::minimize_update_anderson(qr, G₁, R.col(k), R.col(k - 1), G.col(k),
+    quala::minimize_update_anderson(qr, G1, R.col(k), R.col(k - 1), G.col(k),
                                     γ_LS, xₖ_aa);
 
     // Compute reference solution
@@ -136,11 +136,11 @@ TEST(Anderson, minimize) {
     EXPECT_THAT(print_wrap(xₖ_aa), EigenAlmostEqual(print_wrap(x_exp), ε));
 
     // Oldest column of G should have been overwritten by g₄
-    mat G₂(4, 3);
-    G₂.col(2) = G.col(2);
-    G₂.col(0) = G.col(3);
-    G₂.col(1) = G.col(4);
-    EXPECT_THAT(print_wrap(G₁), EigenAlmostEqual(print_wrap(G₂), ε));
+    mat G2(4, 3);
+    G2.col(2) = G.col(2);
+    G2.col(0) = G.col(3);
+    G2.col(1) = G.col(4);
+    EXPECT_THAT(print_wrap(G1), EigenAlmostEqual(print_wrap(G2), ε));
 
     QᵀQ = qr.get_Q().transpose() * qr.get_Q();
     EXPECT_THAT(print_wrap(qr.get_Q() * qr.get_R()),
@@ -157,7 +157,7 @@ TEST(Anderson, minimize) {
     ++k;
 
     // Call function under test
-    quala::minimize_update_anderson(qr, G₂, R.col(k), R.col(k - 1), G.col(k),
+    quala::minimize_update_anderson(qr, G2, R.col(k), R.col(k - 1), G.col(k),
                                     γ_LS, xₖ_aa);
 
     // Compute reference solution
@@ -185,11 +185,11 @@ TEST(Anderson, minimize) {
     EXPECT_THAT(print_wrap(xₖ_aa), EigenAlmostEqual(print_wrap(x_exp), ε));
 
     // Oldest column of G should have been overwritten by g₄
-    mat G₃(4, 3);
-    G₃.col(0) = G.col(3);
-    G₃.col(1) = G.col(4);
-    G₃.col(2) = G.col(5);
-    EXPECT_THAT(print_wrap(G₂), EigenAlmostEqual(print_wrap(G₃), ε));
+    mat G3(4, 3);
+    G3.col(0) = G.col(3);
+    G3.col(1) = G.col(4);
+    G3.col(2) = G.col(5);
+    EXPECT_THAT(print_wrap(G2), EigenAlmostEqual(print_wrap(G3), ε));
 
     QᵀQ = qr.get_Q().transpose() * qr.get_Q();
     EXPECT_THAT(print_wrap(qr.get_Q() * qr.get_R()),
@@ -206,7 +206,7 @@ TEST(Anderson, minimize) {
     ++k;
 
     // Call function under test
-    quala::minimize_update_anderson(qr, G₃, R.col(k), R.col(k - 1), G.col(k),
+    quala::minimize_update_anderson(qr, G3, R.col(k), R.col(k - 1), G.col(k),
                                     γ_LS, xₖ_aa);
 
     // Compute reference solution
@@ -234,11 +234,11 @@ TEST(Anderson, minimize) {
     EXPECT_THAT(print_wrap(xₖ_aa), EigenAlmostEqual(print_wrap(x_exp), ε));
 
     // Oldest column of G should have been overwritten by g₄
-    mat G₄(4, 3);
-    G₄.col(1) = G.col(4);
-    G₄.col(2) = G.col(5);
-    G₄.col(0) = G.col(6);
-    EXPECT_THAT(print_wrap(G₃), EigenAlmostEqual(print_wrap(G₄), ε));
+    mat G4(4, 3);
+    G4.col(1) = G.col(4);
+    G4.col(2) = G.col(5);
+    G4.col(0) = G.col(6);
+    EXPECT_THAT(print_wrap(G3), EigenAlmostEqual(print_wrap(G4), ε));
 
     QᵀQ = qr.get_Q().transpose() * qr.get_Q();
     EXPECT_THAT(print_wrap(qr.get_Q() * qr.get_R()),
@@ -287,12 +287,12 @@ TEST(Anderson, matrix) {
 
         quala::vec γ_LS(qr.n()), xₖ_aa(qr.n());
         quala::vec gₖ = A * xₖ - b;
-        auto &rₖ₋₁    = rₙₑₓₜ;
+        auto &rₗₐₛₜ    = rₙₑₓₜ;
         if (i == 0) {
             G.col(0) = gₖ;
             xₖ_aa    = gₖ;
         } else {
-            quala::minimize_update_anderson(qr, G, rₖ, rₖ₋₁, gₖ, γ_LS, xₖ_aa);
+            quala::minimize_update_anderson(qr, G, rₖ, rₗₐₛₜ, gₖ, γ_LS, xₖ_aa);
             ++update_count;
         }
         rₙₑₓₜ = A * xₖ_aa - b - xₖ_aa;

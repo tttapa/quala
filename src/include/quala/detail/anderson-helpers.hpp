@@ -28,12 +28,12 @@ namespace quala {
  * \end{aligned} @f]
  */
 inline void minimize_update_anderson(LimitedMemoryQR &qr, rmat G, crvec rₖ,
-                                     crvec rₖ₋₁, crvec gₖ, rvec γ_LS,
+                                     crvec rₗₐₛₜ, crvec gₖ, rvec γ_LS,
                                      rvec xₖ_aa) {
     // Update QR factorization for Anderson acceleration
     if (qr.num_columns() == qr.m()) // if the history buffer is full
         qr.remove_column();
-    qr.add_column(rₖ - rₖ₋₁);
+    qr.add_column(rₖ - rₗₐₛₜ);
 
     // Solve least squares problem Anderson acceleration
     // γ = argmin ‖ ΔR γ - rₖ ‖²

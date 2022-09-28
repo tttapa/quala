@@ -45,17 +45,17 @@ class AndersonAccel {
         length_t m_AA = std::min(n, params.memory); // TODO: support m > n?
         qr.resize(n, m_AA);
         G.resize(n, m_AA);
-        rₖ₋₁.resize(n);
+        rₗₐₛₜ.resize(n);
         γ_LS.resize(m_AA);
         initialized = false;
     }
 
     /// Call this function on the first iteration to initialize the accelerator.
-    void initialize(crvec g₀, vec r₀) {
-        assert(g₀.size() == vec::Index(n()));
-        assert(r₀.size() == vec::Index(n()));
-        G.col(0) = g₀;
-        rₖ₋₁     = std::move(r₀);
+    void initialize(crvec g_0, vec r_0) {
+        assert(g_0.size() == vec::Index(n()));
+        assert(r_0.size() == vec::Index(n()));
+        G.col(0) = g_0;
+        rₗₐₛₜ    = std::move(r_0);
         qr.reset();
         initialized = true;
     }
@@ -67,20 +67,20 @@ class AndersonAccel {
         if (!initialized)
             throw std::logic_error("AndersonAccel::compute() called before "
                                    "AndersonAccel::initialize()");
-        minimize_update_anderson(qr, G,        // inout
-                                 rₖ, rₖ₋₁, gₖ, // in
-                                 γ_LS, xₖ_aa); // out
-        rₖ₋₁ = rₖ;
+        minimize_update_anderson(qr, G,         // inout
+                                 rₖ, rₗₐₛₜ, gₖ, // in
+                                 γ_LS, xₖ_aa);  // out
+        rₗₐₛₜ = rₖ;
     }
     /// @copydoc compute(crvec, crvec, rvec)
     void compute(crvec gₖ, vec &&rₖ, rvec xₖ_aa) {
         if (!initialized)
             throw std::logic_error("AndersonAccel::compute() called before "
                                    "AndersonAccel::initialize()");
-        minimize_update_anderson(qr, G,        // inout
-                                 rₖ, rₖ₋₁, gₖ, // in
-                                 γ_LS, xₖ_aa); // out
-        rₖ₋₁ = std::move(rₖ);
+        minimize_update_anderson(qr, G,         // inout
+                                 rₖ, rₗₐₛₜ, gₖ, // in
+                                 γ_LS, xₖ_aa);  // out
+        rₗₐₛₜ = std::move(rₖ);
     }
 
     /// Reset the accelerator (but keep the last function value and residual, so
@@ -106,7 +106,7 @@ class AndersonAccel {
     Params params;
     LimitedMemoryQR qr;
     mat G;
-    vec rₖ₋₁;
+    vec rₗₐₛₜ;
     vec γ_LS;
     bool initialized = false;
 };
