@@ -16,11 +16,11 @@ python3 -m pip install quala
 ```
 
 Installation instructions for the C++ library can be found in the 
-[documentation](https://tttapa.github.io/quala/Doxygen/installation.html).
+[documentation](https://tttapa.github.io/quala/main/Doxygen/installation.html).
 
 ## Examples and documentation
 
-- [Python Documentation (Sphinx)](https://tttapa.github.io/quala/Sphinx/)
-- [C++ Documentation (Doxygen)](https://tttapa.github.io/quala/Doxygen/)
-- [Python Examples (Sphinx)](https://tttapa.github.io/quala/Sphinx/examples/)
-- [C++ Examples (Doxygen)](https://tttapa.github.io/quala/Doxygen/examples.html)
+- [Python Documentation (Sphinx)](https://tttapa.github.io/quala/main/Sphinx/)
+- [C++ Documentation (Doxygen)](https://tttapa.github.io/quala/main/Doxygen/)
+- [Python Examples (Sphinx)](https://tttapa.github.io/quala/main/Sphinx/examples/)
+- [C++ Examples (Doxygen)](https://tttapa.github.io/quala/main/Doxygen/examples.html)

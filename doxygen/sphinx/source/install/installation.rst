@@ -15,6 +15,6 @@ The preferred way to install the quala Python interface is using pip:
 From source
 -----------
 
-Building quala from source requires the installation of some C++ dependencies, 
-see `Installation (Doxygen) <../../Doxygen/installation.html>`_ for detailed
-instructions.
+Building quala from source requires the installation of some C++ dependencies,
+see `Installation (Doxygen) <../../main/Doxygen/installation.html>`_ for
+detailed instructions.
