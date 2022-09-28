@@ -1,118 +1,305 @@
-name: Python Wheel (Linux)
+name: Python Wheels
 
 on:
   push:
+    tags-ignore:
+      - '**'
+    branches:
+      - '**'
   release:
     types: ['released', 'prereleased']
 
 jobs:
-  build:
+  build-linux:
     runs-on: ubuntu-latest
-    container: tttapa/alpaqa-build-python-gcc:${{ matrix.python-version }}-11
+    container: 
+      image: ghcr.io/tttapa/alpaqa-python-build:py${{ matrix.python-version }}
+      options: --user root
     strategy:
       matrix:
-        python-version: ['3.7', '3.8', '3.9', '3.10']
-    
+        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11']
     steps:
-    - uses: actions/checkout@v1
-    - name: Cache Virtual Environment
-      id: cache-venv
-      uses: actions/cache@v2
+    - run: lscpu
+    - uses: actions/checkout@v2
       with:
-        path: "/tmp/py-venv"
-        key: ${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('scripts/ci/install-dependencies-wheel.sh') }}-${{ hashFiles('requirements.txt') }}-${{ hashFiles('scripts/requirements-wheel.txt') }}-${{ hashFiles('scripts/ci/install-patchelf.sh') }}-
-    - name: Install Python Dependencies 
-      if: steps.cache-venv.outputs.cache-hit != 'true'
+        submodules: recursive
+    - name: Install Python build tools
       run: |
-        python3 -m venv /tmp/py-venv
-        . /tmp/py-venv/bin/activate
-        python -m pip install -r requirements.txt -r scripts/requirements-wheel.txt
-        bash scripts/ci/install-dependencies-wheel.sh
-        bash scripts/ci/install-patchelf.sh
-      env:
-        CXXFLAGS: "-march=skylake -static-libstdc++ -static-libgcc"
-        LDFLAGS: "-static-libstdc++ -static-libgcc"
-        CFLAGS: "-march=skylake -static-libgcc"
-        FC: gfortran
+        python3 -m pip install build auditwheel patchelf
     - name: Build
       run: |
-        . /tmp/py-venv/bin/activate
-        python -m build
-        LD_LIBRARY_PATH=$VIRTUAL_ENV/lib \
-          auditwheel repair --plat manylinux_2_27_x86_64 \
-          dist/quala-*.whl
+        python3 -m build .
+        auditwheel repair --plat manylinux_2_17_$(uname -m) dist/*$(uname -m).whl
       env:
         CXXFLAGS: "-march=skylake -static-libstdc++ -static-libgcc"
         LDFLAGS: "-static-libstdc++ -static-libgcc"
         CFLAGS: "-march=skylake -static-libgcc"
-        FC: gfortran
     - name: Upload Wheel
       uses: actions/upload-artifact@v2
       with:
-        name: quala-whl-${{ matrix.python-version }}
-        path: wheelhouse/quala-*manylinux*.whl
+        name: quala-whl-${{ matrix.python-version }}-amd64
+        path: wheelhouse/quala-*.whl
     - name: Upload source
       uses: actions/upload-artifact@v2
       with:
         name: quala-src-${{ matrix.python-version }}
         path: dist/quala-*.tar.gz
 
-  test:
-    needs: build
+  test-linux:
+    needs: [build-linux]
     runs-on: ubuntu-latest
     container: python:${{ matrix.python-version }}-bullseye
     strategy:
       matrix:
         python-version: ['3.7', '3.8', '3.9', '3.10']
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
     - uses: actions/download-artifact@v2
       with:
-        name: quala-whl-${{ matrix.python-version }}
-        path: wheelhouse
-    - name: 'Install quala'
+        name: quala-whl-${{ matrix.python-version }}-amd64
+        path: dist
+    - name: Test
       run: |
-        python -m pip install --find-links=wheelhouse quala
-        python -m pip install pytest
-    - name: 'Run tests'
-      run: python -m pytest
+          python3 -m pip install pytest cmake ninja
+          python3 -m pip install dist/quala-*.whl
+          pytest -rP
+
+  build-windows:
+    runs-on: windows-2022
+    strategy:
+      matrix:
+        include:
+          - python-version: '3.7'
+            full-python-version: '3.7'
+          - python-version: '3.8'
+            full-python-version: '3.8'
+          - python-version: '3.9'
+            full-python-version: '3.9'
+          - python-version: '3.10'
+            full-python-version: '3.10'
+          - python-version: '3.11'
+            full-python-version: '3.11-dev'
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - uses: actions/setup-python@v2
+      name: Install Python
+      id: python
+      with: 
+        python-version: ${{ matrix.full-python-version }}
+    - name: Cache Virtual Environment
+      id: cache-venv
+      uses: actions/cache@v2
+      with:
+        path: py-venv
+        key: ${{ runner.os }}-${{ steps.python.outputs.python-version }}-${{ hashFiles('scripts/install-eigen.ps1', 'scripts/install-casadi-static.ps1') }}
+    - name: Install Python Dependencies 
+      if: steps.cache-venv.outputs.cache-hit != 'true'
+      shell: powershell
+      run: |
+        python -m venv py-venv
+        ./py-venv/Scripts/Activate.ps1
+        ./scripts/install-eigen.ps1
+        ./scripts/install-casadi-static.ps1
+        python -m pip install build
+      env:
+        CXXFLAGS: "/bigobj"
+        CFLAGS: "/bigobj"
+    - name: Build
+      shell: powershell
+      run: |
+        ./py-venv/Scripts/Activate.ps1
+        $env:CMAKE_PREFIX_PATH = $env:VIRTUAL_ENV + ";" + $env:CMAKE_PREFIX_PATH
+        python -m build . --wheel
+      env:
+        PYTHONUTF8: 1
+    - name: Upload
+      uses: actions/upload-artifact@v2
+      with:
+        name: quala-whl-${{ matrix.python-version }}-win
+        path: dist/quala-*.whl
+
+  test-windows:
+    needs: [build-windows]
+    runs-on: windows-2022
+    strategy:
+      matrix:
+        include:
+          - python-version: '3.7'
+            full-python-version: '3.7'
+          - python-version: '3.8'
+            full-python-version: '3.8'
+          - python-version: '3.9'
+            full-python-version: '3.9'
+          - python-version: '3.10'
+            full-python-version: '3.10'
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - uses: actions/setup-python@v2
+      name: Install Python
+      with: 
+        python-version: ${{ matrix.full-python-version }}
+    - uses: actions/download-artifact@v2
+      with:
+        name: quala-whl-${{ matrix.python-version }}-win
+        path: dist
+    - name: Test
+      shell: powershell
+      run: |
+        python -m pip install pytest cmake ninja
+        $whl = Resolve-Path dist/quala-*.whl
+        python -m pip install $whl
+        pytest -rP
+
+  build-macos:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        include:
+          - python-version: '3.7'
+            full-python-version: '3.7'
+          - python-version: '3.8'
+            full-python-version: '3.8'
+          - python-version: '3.9'
+            full-python-version: '3.9'
+          - python-version: '3.10'
+            full-python-version: '3.10'
+          - python-version: '3.11'
+            full-python-version: '3.11-dev'
+    steps:
+    - run: sysctl -a | grep machdep.cpu.brand_string
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - uses: actions/setup-python@v2
+      id: python
+      name: Install Python
+      with: 
+        python-version: ${{ matrix.full-python-version }}
+    - name: Cache Virtual Environment
+      id: cache-venv
+      uses: actions/cache@v2
+      with:
+        path: py-venv
+        key: ${{ runner.os }}-${{ steps.python.outputs.python-version }}-${{ hashFiles('scripts/install-eigen.sh', 'scripts/install-casadi-static.sh') }}-skylake
+    - name: Install Python Dependencies 
+      if: steps.cache-venv.outputs.cache-hit != 'true'
+      run: |
+        python -m venv py-venv
+        source ./py-venv/bin/activate
+        python -m pip install build ninja
+        CC="$(brew --prefix llvm@14)/bin/clang" \
+        CXX="$(brew --prefix llvm@14)/bin/clang++" \
+          ./scripts/install-eigen.sh
+        CC="$(brew --prefix llvm@14)/bin/clang" \
+        CXX="$(brew --prefix llvm@14)/bin/clang++" \
+          ./scripts/install-casadi-static.sh
+      env:
+        CXXFLAGS: "-march=sandybridge"
+        CFLAGS: "-march=sandybridge"
+    - name: Build
+      run: |
+        source ./py-venv/bin/activate
+        CMAKE_PREFIX_PATH="$VIRTUAL_ENV:$CMAKE_PREFIX_PATH" \
+        CC="$(brew --prefix llvm@14)/bin/clang" \
+        CXX="$(brew --prefix llvm@14)/bin/clang++" \
+            python -m build . --wheel
+      env:
+        CXXFLAGS: "-march=sandybridge"
+        CFLAGS: "-march=sandybridge"
+    - name: Upload
+      uses: actions/upload-artifact@v2
+      with:
+        name: quala-whl-${{ matrix.python-version }}-mac
+        path: dist/quala-*.whl
+
+  test-macos:
+    needs: [build-macos]
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        include:
+          - python-version: '3.7'
+            full-python-version: '3.7'
+          - python-version: '3.8'
+            full-python-version: '3.8'
+          - python-version: '3.9'
+            full-python-version: '3.9'
+          - python-version: '3.10'
+            full-python-version: '3.10'
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-python@v2
+      name: Install Python
+      with: 
+        python-version: ${{ matrix.full-python-version }}
+    - uses: actions/download-artifact@v2
+      with:
+        name: quala-whl-${{ matrix.python-version }}-mac
+        path: dist
+    - name: Test
+      run: |
+        python -m pip install pytest cmake ninja
+        python -m pip install dist/quala-*.whl
+        pytest -rP
 
   release:
     if: ${{ github.event.action == 'released' || github.event.action == 'prereleased' }}
-    needs: test
+    needs: [test-linux, test-windows, test-macos]
     runs-on: ubuntu-latest
-    container: python:${{ matrix.python-version }}-bullseye
+    container: python:${{ matrix.full-python-version }}-bullseye
     strategy:
       matrix:
-        python-version: ['3.7', '3.8', '3.9', '3.10']
+        include:
+          - python-version: '3.7'
+            full-python-version: '3.7'
+          - python-version: '3.8'
+            full-python-version: '3.8'
+          - python-version: '3.9'
+            full-python-version: '3.9'
+          - python-version: '3.10'
+            full-python-version: '3.10'
+          - python-version: '3.11'
+            full-python-version: '3.11-rc'
     steps:
     - uses: actions/checkout@v1
     - uses: actions/download-artifact@v2
       with:
-        name: quala-whl-${{ matrix.python-version }}
-        path: wheelhouse
-    
-    - name: 'Install quala'
-      run: pip install --find-links=wheelhouse quala
-    - name: 'Check quala version'
-      if: ${{ matrix.python-version != '3.7' }}
+        name: quala-whl-${{ matrix.python-version }}-amd64
+        path: dist
+    - uses: actions/download-artifact@v2
+      with:
+        name: quala-whl-${{ matrix.python-version }}-win
+        path: dist
+    - uses: actions/download-artifact@v2
+      with:
+        name: quala-whl-${{ matrix.python-version }}-mac
+        path: dist
+    - name: Install quala
+      run: python -m pip install --no-deps --no-index --find-links=dist quala
+    - name: Check quala version
       run: |
-        [ "${{ github.event.release.tag_name }}" == "$(python -c 'from importlib.metadata import version as v; print(v("quala"))')" ]
+        [ "${{ github.event.release.tag_name }}" == "$(python -c 'import quala as a; print(a.__version__)')" ]
       shell: bash
-    - name: 'Install Twine'
-      run: pip install twine
-    - name: 'Upload Wheel to PyPi'
-      run: python -m twine upload wheelhouse/quala-*.whl
+    - name: Install Twine
+      run: python -m pip install twine
+    - name: Upload Wheel to PyPI
+      run: python -m twine upload dist/quala-*.whl
       env:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.PyPI }}
     - uses: actions/download-artifact@v2
-      if: ${{ matrix.python-version == '3.9' }}
+      if: ${{ matrix.python-version == '3.10' }}
       with:
         name: quala-src-${{ matrix.python-version }}
         path: dist
-    - name: 'Upload source to PyPi'
-      if: ${{ matrix.python-version == '3.9' }}
+    - name: Upload source to PyPI
+      if: ${{ matrix.python-version == '3.10' }}
       run: python -m twine upload dist/quala-*.tar.gz
       env:
         TWINE_USERNAME: __token__
