@@ -3,4 +3,3 @@
  
 .. |pylib_name| replace:: ``quala``
 .. |cpp_name| replace:: ``quala``
-

@@ -48,8 +48,6 @@ include(cmake/Install.cmake)
 # Python bindings
 # ---------------
 
-option(QUALA_WITH_PYTHON_BINDINGS 
-    "Build the Python module" Off)
-if (QUALA_WITH_PYTHON_BINDINGS)
+if (QUALA_WITH_PYTHON)
     add_subdirectory(python)
 endif()

@@ -9,3 +9,4 @@ GENERATE_HTML          = NO
 GENERATE_XML           = YES
 XML_OUTPUT             = ../build/xml
 EXCLUDE                = ../src/quala
+INLINE_INHERITED_MEMB  = NO

@@ -29,6 +29,14 @@ dynamic = ["version", "description"]
 "Source" = "https://github.com/tttapa/quala"
 "Bug Tracker" = "https://github.com/tttapa/quala/issues"
 
+[project.optional-dependencies]
+docs = [
+    "sphinx~=5.1",
+    "matplotlib",
+    "breathe",
+    "furo",
+]
+
 [tool.py-build-cmake.module]
 directory = "python-src"
 
@@ -39,14 +47,25 @@ exclude = []
 [tool.py-build-cmake.cmake]
 build_type = "Release"
 source_path = "src" # Containing CMakeLists.txt
+config = []
+args = ["-Wdev"]
 build_args = ["-j"]
 install_components = ["python_modules"]
 env = {}
 
 [tool.py-build-cmake.cmake.options]
 "CMAKE_POSITION_INDEPENDENT_CODE:BOOL" = "On"
-"QUALA_WITH_PYTHON_BINDINGS:BOOL" = "On"
+"QUALA_WITH_PYTHON:BOOL" = "On"
 "QUALA_WITH_PY_STUBS:BOOL" = "On"
+
+[tool.py-build-cmake.linux.cmake]
+config = ["Debug", "Release"]
+generator = "Ninja Multi-Config"
+[tool.py-build-cmake.mac.cmake]
+config = ["Debug", "Release"]
+generator = "Ninja Multi-Config"
+[tool.py-build-cmake.windows.cmake]
+config = ["Release"]
 
 [tool.py-build-cmake.stubgen]
 args = ["-v"]

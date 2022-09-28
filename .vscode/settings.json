@@ -52,7 +52,8 @@
         "LD_LIBRARY_PATH": "${workspaceFolder}/py-venv/lib"
     },
     "cmake.configureSettings": {
-        "QUALA_WITH_PYTHON_BINDINGS": true
+        "QUALA_WITH_PYTHON": true,
+        "QUALA_WITH_COVERAGE": true,
     },
     "cmake.configureEnvironment": {
         "CMAKE_PREFIX_PATH": "${workspaceFolder}/py-venv"
