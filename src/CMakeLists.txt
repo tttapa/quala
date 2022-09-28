@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.17)
 project(quala VERSION 0.0.1 LANGUAGES CXX)
-set(PY_VERSION_SUFFIX "a0")
+set(PY_VERSION_SUFFIX "a1")
 
 # Compiler options
 include(cmake/GlobalCompilerOptions.cmake)
