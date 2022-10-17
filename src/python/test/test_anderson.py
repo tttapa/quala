@@ -16,7 +16,7 @@ Q, _ = la.qr(A)
 D = np.diag(rng.normal(scale=4, size=(n, )))
 A = Q.T @ D.T @ D @ Q
 q = rng.normal(scale=1, size=(n, ))
-print(f"{la.cond(A)=}")
+print(f"cond(A)={la.cond(A)}")
 x_ = cs.SX.sym('x', n)
 px = x_ + 0.2 * cs.sin(x_[::-1])
 f_ = 0.5 * (x_.T @ A @ px) + cs.dot(q, x_)
@@ -35,7 +35,7 @@ L = la.norm(D)**2
 def test_anderson():
     x = np.ones((n, 1))
     m = n - 2
-    print(f"{m=}")
+    print(f"m={m}")
     aa = qa.AndersonAccel({'memory': m}, n)
 
     Gk = np.zeros((n, 0))
@@ -70,7 +70,7 @@ def test_anderson():
         # Anderson update
         else:
             mk = min(i, m)
-            print(f"    {mk=}")
+            print(f"    mk={mk}")
 
             # quala implementation
             x_aa_quala = aa.compute(g, r)
@@ -114,10 +114,10 @@ def test_anderson():
             # Compare results
             rel_diff = lambda x, y: la.norm(x - y) / la.norm(x)
             x_aa_diff_quala.append(rel_diff(x_aa_py, x_aa_quala))
-            print(f"    {x_aa_diff_quala[-1]=}")
+            print(f"    py-quala: {x_aa_diff_quala[-1]}")
             assert x_aa_diff_quala[-1] < ε, f"Failed on iteration {i}"
             x_aa_diff_david.append(rel_diff(x_aa_py, x_aa_david))
-            print(f"    {x_aa_diff_david[-1]=}")
+            print(f"    py-david: {x_aa_diff_david[-1]}")
             assert x_aa_diff_david[-1] < ε, f"Failed on iteration {i}"
 
             # Next iterate
