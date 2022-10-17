@@ -1,10 +1,3 @@
-cmake_minimum_required(VERSION 3.17)
-project(quala VERSION 0.0.1 LANGUAGES CXX)
-set(PY_VERSION_SUFFIX "a1")
-
-# Compiler options
-include(cmake/GlobalCompilerOptions.cmake)
-
 # Eigen linear algebra library
 find_package(Eigen3 REQUIRED)
 
@@ -33,7 +26,9 @@ target_include_directories(quala-obj
         $<INSTALL_INTERFACE:include>
     PRIVATE
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>)
-target_link_libraries(quala-obj PUBLIC Eigen3::Eigen)
+target_link_libraries(quala-obj
+    PUBLIC Eigen3::Eigen
+    PRIVATE quala::warnings)
 
 add_library(quala)
 target_link_libraries(quala PUBLIC quala-obj)
@@ -43,7 +38,7 @@ set_target_properties(quala PROPERTIES EXPORT_NAME quala::quala)
 # Target installation
 # -------------------
 
-include(cmake/Install.cmake)
+include(${PROJECT_SOURCE_DIR}/cmake/Install.cmake)
 
 # Python bindings
 # ---------------

@@ -3,7 +3,7 @@ include(GNUInstallDirs)
 set(INSTALL_CMAKE_DIR "${CMAKE_INSTALL_LIBDIR}/cmake/quala")
 
 # Add the quala library to the "export-set", install the library files
-install(TARGETS quala-obj quala
+install(TARGETS quala-obj quala warnings
     EXPORT qualaTargets
     LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
         COMPONENT shlib
@@ -12,7 +12,7 @@ install(TARGETS quala-obj quala
 )
 
 # Install the header files
-install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/"
+install(DIRECTORY "${PROJECT_SOURCE_DIR}/src/include/"
     DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
         COMPONENT dev
     FILES_MATCHING PATTERN "*.h*"
@@ -28,7 +28,7 @@ install(EXPORT qualaTargets
 # Generate the config file that includes the exports
 include(CMakePackageConfigHelpers)
 configure_package_config_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Config.cmake.in"
+    "${PROJECT_SOURCE_DIR}/cmake/Config.cmake.in"
     "${PROJECT_BINARY_DIR}/qualaConfig.cmake"
     INSTALL_DESTINATION "${INSTALL_CMAKE_DIR}"
     NO_SET_AND_CHECK_MACRO

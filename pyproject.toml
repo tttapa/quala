@@ -36,17 +36,20 @@ docs = [
     "breathe",
     "furo",
 ]
+tests = [
+    "pytest",
+    "casadi",
+]
 
 [tool.py-build-cmake.module]
 directory = "python-src"
 
 [tool.py-build-cmake.sdist]
-include = ["src/CMakeLists.txt", "src/cmake", "src/include", "src/python", "src/src"]
+include = ["CMakeLists.txt", "cmake", "src"]
 exclude = []
 
 [tool.py-build-cmake.cmake]
 build_type = "Release"
-source_path = "src" # Containing CMakeLists.txt
 config = []
 args = ["-Wdev"]
 build_args = ["-j"]
@@ -57,6 +60,8 @@ env = {}
 "CMAKE_POSITION_INDEPENDENT_CODE:BOOL" = "On"
 "QUALA_WITH_PYTHON:BOOL" = "On"
 "QUALA_WITH_PY_STUBS:BOOL" = "On"
+"QUALA_WITH_TESTS:BOOL"= "Off"
+"QUALA_WITH_EXAMPLES:BOOL"= "Off"
 
 [tool.py-build-cmake.linux.cmake]
 config = ["Debug", "Release"]

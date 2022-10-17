@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.17)
-project(quala-dev LANGUAGES CXX)
+project(quala VERSION 0.0.1 LANGUAGES CXX)
+set(PY_VERSION_SUFFIX "a1")
 
 # Options
 option(QUALA_WITH_PYTHON
@@ -28,6 +29,7 @@ if (MSVC)
     set(CMAKE_CXX_FLAGS "/utf-8 /Dnot=! /D__PRETTY_FUNCTION__=__FUNCSIG__ ${CMAKE_CXX_FLAGS}")
 endif()
 set(CMAKE_DEBUG_POSTFIX "_d")
+add_compile_definitions($<$<CONFIG:Debug>:EIGEN_INITIALIZE_MATRICES_BY_NAN>)
 
 # Coverage
 if (QUALA_WITH_COVERAGE)

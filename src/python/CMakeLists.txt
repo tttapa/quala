@@ -13,18 +13,18 @@ include(cmake/QueryPythonForPybind11.cmake)
 find_pybind11_python_first()
 
 # Create Python module
-Python3_add_library(_quala MODULE quala.py.cpp)
+pybind11_add_module(_quala MODULE quala.py.cpp)
 target_link_libraries(_quala
     PRIVATE
         quala::quala-obj
-        pybind11::pybind11)
+        pybind11::pybind11
+        quala::warnings)
 set_target_properties(_quala PROPERTIES
-    DEBUG_POSTFIX ""
     CXX_VISIBILITY_PRESET hidden
     C_VISIBILITY_PRESET hidden)
 target_compile_definitions(_quala 
     PRIVATE
-        QUALA_MODULE_NAME=_quala
+        QUALA_MODULE_NAME=$<TARGET_FILE_BASE_NAME:_quala>
         QUALA_VERSION_INFO="${PY_FULL_VERSION}")
 if (CMAKE_SYSTEM_NAME MATCHES "Linux")
     target_link_options(_quala PRIVATE "LINKER:--exclude-libs,ALL")
