@@ -64,6 +64,7 @@ jobs:
       run: |
           python3 -m pip install pytest cmake ninja
           python3 -m pip install dist/quala-*.whl
+          python3 -m pip install 'quala[tests]' -f dist
           pytest -rP
 
   build-windows:
@@ -153,6 +154,7 @@ jobs:
         python -m pip install pytest cmake ninja
         $whl = Resolve-Path dist/quala-*.whl
         python -m pip install $whl
+        python -m pip install 'quala[tests]' -f dist
         pytest -rP
 
   build-macos:
@@ -242,6 +244,7 @@ jobs:
       run: |
         python -m pip install pytest cmake ninja
         python -m pip install dist/quala-*.whl
+        python -m pip install 'quala[tests]' -f dist
         pytest -rP
 
   release:
