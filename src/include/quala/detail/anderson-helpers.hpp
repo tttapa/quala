@@ -15,21 +15,44 @@ namespace quala {
  * iterate @f$ x_{k+1} @f$, and stores the current function value @f$ g_k @f$
  * in the matrix @f$ G @f$, which is used as a circular buffer.
  * @f[ \begin{aligned}
- * \mathcal{R}_k &= \begin{pmatrix} \Delta r_{k-m_k} & \dots & \Delta r_{k-1} \end{pmatrix} \in \mathbb{R}^{n\times m_k} \\
- * \Delta r_i &= r_{i+1} - r_i \\
- * r_i &= g_i - x_i \\
+ * \def\gammaLS{\gamma_\text{LS}}
+ * m_k &= \min \{k, m\} \\
  * g_i &= g(x_i) \\
- * \DeclareMathOperator*{\argmin}{argmin}
- * \gamma_\text{LS} &= \argmin_\gamma \left\| \mathcal{R}_k \gamma - r_k \right\|_2 \\
- * \alpha_i &= \begin{cases} \gamma_\text{LS}[0] & i = 0 \\
- *                           \gamma_\text{LS}[i] - \gamma_\text{LS}[i-1] & 0 < i < m_k \\
- *                           1 - \gamma_\text{LS}[m_k - 1] & i = m_k \end{cases} \\
- * x_{k+1} &= \sum_{i=0}^{m_k} \alpha_i\,g_i
+ * r_i &= r(x_i) g_i - x_i \\
+ * \Delta r_i &= r_i - r_{i-1} \\
+ * \mathcal{R}_k &= \begin{pmatrix} \Delta r_{k-m_k+1} & \dots & \Delta r_k \end{pmatrix} \in \R^{n\times m_k}
+ * \\
+ * \gammaLS &= \argmin_{\gamma \in \R^{m_k}}\; \norm{\mathcal{R}_k \gamma - r_k}_2 \\
+ * \alpha_i &= \begin{cases} \gammaLS[0] & i = 0 \\
+ * \gammaLS[i] - \gammaLS[i-1] & 0 \lt i \lt m_k \\
+ * 1 - \gammaLS[m_k - 1] & i = m_k \end{cases} \\
+ * \tilde G_k &= \begin{pmatrix} g_{k - m_k} & \dots & g_{k-1} \end{pmatrix} \\
+ * G_k &= \begin{pmatrix} g_{k - m_k} & \dots & g_{k} \end{pmatrix} \\
+ * &= \begin{pmatrix} \tilde G_k & g_{k} \end{pmatrix} \\
+ * x_{k+1} &= \sum_{i=0}^{m_k} \alpha_i\,g_{k - m_k + i} \\
+ * &= G_k \alpha \\
  * \end{aligned} @f]
  */
-inline void minimize_update_anderson(LimitedMemoryQR &qr, rmat G, crvec rₖ,
-                                     crvec rₗₐₛₜ, crvec gₖ, rvec γ_LS,
-                                     rvec xₖ_aa) {
+inline void minimize_update_anderson(
+    /// [inout] QR factorization of @f$ \mathcal{R}_k @f$
+    LimitedMemoryQR &qr,
+    /// [inout] Matrix of previous function values @f$ \tilde G_k @f$
+    ///         (stored as ring buffer with the same indices as `qr`)
+    rmat G̃,
+    /// [in]    Current residual @f$ r_k @f$
+    crvec rₖ,
+    /// [in]    Previous residual @f$ r_{k-1} @f$
+    crvec rₗₐₛₜ,
+    /// [in]    Current function value @f$ g_k @f$
+    crvec gₖ,
+    /// [in]    Minimum divisor when solving close to singular systems,
+    ///         scaled by the maximum eigenvalue of R
+    real_t min_div,
+    /// [out]   Solution to the least squares system
+    rvec γ_LS,
+    /// [out]   Next Anderson iterate
+    rvec xₖ_aa) {
+
     // Update QR factorization for Anderson acceleration
     if (qr.num_columns() == qr.m()) // if the history buffer is full
         qr.remove_column();
@@ -37,7 +60,7 @@ inline void minimize_update_anderson(LimitedMemoryQR &qr, rmat G, crvec rₖ,
 
     // Solve least squares problem Anderson acceleration
     // γ = argmin ‖ ΔR γ - rₖ ‖²
-    qr.solve_col(rₖ, γ_LS);
+    qr.solve_col_tol(rₖ, γ_LS, qr.get_max_eig() * min_div);
 
     // Iterate over columns of G, whose indices match the indices of the matrix
     // R in the QR factorization, stored as a circular buffer.
@@ -50,17 +73,17 @@ inline void minimize_update_anderson(LimitedMemoryQR &qr, rmat G, crvec rₖ,
     // αₙ = γₙ - γₙ₋₁      if 0 < n < mₖ
     // αₘ = 1 - γₘ₋₁       if n = mₖ
     real_t α = γ_LS(0);
-    xₖ_aa    = α * G.col((*g_it).circular);
+    xₖ_aa    = α * G̃.col((*g_it).circular);
     while (++g_it != g_end) {
         auto [i, g_idx] = *g_it; // [zero based index, circular index]
         α               = γ_LS(i) - γ_LS(i - 1);
-        xₖ_aa += α * G.col(g_idx);
+        xₖ_aa += α * G̃.col(g_idx);
     }
     α = 1 - γ_LS(qr.num_columns() - 1);
     xₖ_aa += α * gₖ;
 
     // Add the new column to G
-    G.col(qr.ring_tail()) = gₖ; // TODO: avoid copy, make G an array of vectors
+    G̃.col(qr.ring_tail()) = gₖ; // TODO: avoid copy, make G an array of vectors
 }
 
 } // namespace quala

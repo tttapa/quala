@@ -1,6 +1,8 @@
 #pragma once
 
 #include <quala/detail/anderson-helpers.hpp>
+
+#include <limits>
 #include <stdexcept>
 
 namespace quala {
@@ -12,6 +14,9 @@ struct AndersonAccelParams {
     /// If this number is greater than the problem dimension, the memory is set
     /// to the problem dimension (otherwise the system is underdetermined).
     length_t memory = 10;
+    /// Minimum divisor when solving close to singular systems,
+    /// scaled by the maximum eigenvalue of R.
+    real_t min_div = 1e2 * std::numeric_limits<real_t>::epsilon();
 };
 
 /**
@@ -67,9 +72,9 @@ class AndersonAccel {
         if (!initialized)
             throw std::logic_error("AndersonAccel::compute() called before "
                                    "AndersonAccel::initialize()");
-        minimize_update_anderson(qr, G,         // inout
-                                 rₖ, rₗₐₛₜ, gₖ, // in
-                                 γ_LS, xₖ_aa);  // out
+        minimize_update_anderson(qr, G,                         // inout
+                                 rₖ, rₗₐₛₜ, gₖ, params.min_div, // in
+                                 γ_LS, xₖ_aa);                  // out
         rₗₐₛₜ = rₖ;
     }
     /// @copydoc compute(crvec, crvec, rvec)
@@ -77,9 +82,9 @@ class AndersonAccel {
         if (!initialized)
             throw std::logic_error("AndersonAccel::compute() called before "
                                    "AndersonAccel::initialize()");
-        minimize_update_anderson(qr, G,         // inout
-                                 rₖ, rₗₐₛₜ, gₖ, // in
-                                 γ_LS, xₖ_aa);  // out
+        minimize_update_anderson(qr, G,                         // inout
+                                 rₖ, rₗₐₛₜ, gₖ, params.min_div, // in
+                                 γ_LS, xₖ_aa);                  // out
         rₗₐₛₜ = std::move(rₖ);
     }
 

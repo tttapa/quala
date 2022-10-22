@@ -32,7 +32,7 @@ class LimitedMemoryQR {
     /// Add the given column to the right.
     template <class VecV>
     void add_column(const VecV &v) {
-        assert(q_idx < m());
+        assert(num_columns() < m());
 
         auto q = Q.col(q_idx);
         auto r = R.col(r_idx_end);
@@ -67,6 +67,9 @@ class LimitedMemoryQR {
         // orthonormal columns)
         r(q_idx) = norm_q;
         q /= norm_q;
+        // Keep track of the minimum/maximum diagonal element of R
+        min_eig = std::min(min_eig, norm_q);
+        max_eig = std::max(max_eig, norm_q);
 
         // Increment indices, add a column to Q and R.
         ++q_idx;
@@ -75,7 +78,7 @@ class LimitedMemoryQR {
 
     /// Remove the leftmost column.
     void remove_column() {
-        assert(q_idx > 0);
+        assert(num_columns() > 0);
 
         // After removing the first colomn of the upper triangular matrix R,
         // it becomes upper Hessenberg. Givens rotations are used to make it
@@ -100,6 +103,9 @@ class LimitedMemoryQR {
                 R.col(cc).applyOnTheLeft(r, r + 1, G.adjoint());
             // Apply the inverse of the Givens rotation to Q.
             Q.block(0, 0, Q.rows(), q_idx).applyOnTheRight(r, r + 1, G);
+            // Keep track of the minimum/maximum diagonal element of R
+            min_eig = std::min(min_eig, R(r, c));
+            max_eig = std::max(max_eig, R(r, c));
             // Advance indices to next diagonal element of R.
             ++r;
             c = r_succ(c);
@@ -149,6 +155,53 @@ class LimitedMemoryQR {
             auto b = B.col(cB);
             auto x = X.col(cB);
             solve_col(b, x);
+        }
+    }
+
+    /// Solve the least squares problem Ax = b.
+    template <class VecB, class VecX>
+    void solve_col_tol(const VecB &b, VecX &x, real_t tol) const {
+        // Iterate over the diagonal of R, starting at the bottom right,
+        // this is standard back substitution
+        // (recall that R is stored in a circular buffer, so R.col(i) is
+        // not the mathematical i-th column)
+        auto rev_bgn = ring_reverse_iter().begin();
+        auto rev_end = ring_reverse_iter().end();
+        auto fwd_end = ring_iter().end();
+        for (auto it_d = rev_bgn; it_d != rev_end; ++it_d) {
+            // Row/column index of diagonal element of R
+            auto [rR, cR] = *it_d;
+            // Don't divide by very small diagonal elements
+            if (std::abs(R(rR, cR)) < tol) {
+                x(rR) = real_t{0};
+                continue;
+            }
+            // (r is the zero-based mathematical index, c is the index in
+            // the circular buffer)
+            x(rR) = Q.col(rR).transpose() * b; // Compute rhs Qᵀb
+            // In the current row of R, iterate over the elements to the
+            // right of the diagonal
+            // Iterating from left to right seems to give better results
+            for (auto it_c = it_d.forwardit; it_c != fwd_end; ++it_c) {
+                auto [rX2, cR2] = *it_c;
+                x(rR) -= R(rR, cR2) * x(rX2);
+            }
+            x(rR) /= R(rR, cR); // Divide by diagonal element
+        }
+    }
+
+    /// Solve the least squares problem AX = B.
+    /// Do not divide by elements that are smaller in absolute value than @p tol.
+    template <class MatB, class MatX>
+    void solve_tol(const MatB &B, MatX &X, real_t tol) const {
+        assert(B.cols() <= X.cols());
+        assert(B.rows() >= Q.rows());
+        assert(X.rows() >= Eigen::Index(num_columns()));
+        // Each column of the right hand side is solved as an individual system
+        for (Eigen::Index cB = 0; cB < B.cols(); ++cB) {
+            auto b = B.col(cB);
+            auto x = X.col(cB);
+            solve_col_tol(b, x, tol);
         }
     }
 
@@ -202,6 +255,8 @@ class LimitedMemoryQR {
     void scale_R(real_t scal) {
         for (auto [i, r_idx] : ring_iter())
             R.col(r_idx).topRows(i + 1) *= scal;
+        min_eig *= scal;
+        max_eig *= scal;
     }
 
     /// Get the number of MGS reorthogonalizations.
@@ -209,12 +264,19 @@ class LimitedMemoryQR {
     /// Reset the number of MGS reorthogonalizations.
     void clear_reorth_count() { reorth_count = 0; }
 
+    /// Get the minimum eigenvalue of R.
+    real_t get_min_eig() const { return min_eig; }
+    /// Get the maximum eigenvalue of R.
+    real_t get_max_eig() const { return max_eig; }
+
     /// Reset all indices, clearing the Q and R matrices.
     void reset() {
         q_idx        = 0;
         r_idx_start  = 0;
         r_idx_end    = 0;
         reorth_count = 0;
+        min_eig      = +inf;
+        max_eig      = -inf;
     }
 
     /// Re-allocate storage for a problem with a different size. Causes
@@ -258,6 +320,9 @@ class LimitedMemoryQR {
     index_t r_idx_end   = 0; ///< Index of the one-past-last column of R.
 
     unsigned long reorth_count = 0; ///< Number of MGS reorthogonalizations.
+
+    real_t min_eig = +inf; ///< Minimum eigenvalue of R.
+    real_t max_eig = -inf; ///< Maximum eigenvalue of R.
 
     /// Get the next index in the circular storage for R.
     index_t r_succ(index_t i) const { return i + 1 < m() ? i + 1 : 0; }

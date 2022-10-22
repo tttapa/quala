@@ -56,7 +56,7 @@ TEST(Anderson, minimize) {
     vec xₖ_aa(n);
     mat G0 = G.block(0, 0, n, m);
     // Call function under test
-    quala::minimize_update_anderson(qr, G0, R.col(k), R.col(k - 1), G.col(k),
+    quala::minimize_update_anderson(qr, G0, R.col(k), R.col(k - 1), G.col(k), 0,
                                     γ_LS, xₖ_aa);
 
     // Compute reference solution
@@ -108,7 +108,7 @@ TEST(Anderson, minimize) {
     ++k;
 
     // Call function under test
-    quala::minimize_update_anderson(qr, G1, R.col(k), R.col(k - 1), G.col(k),
+    quala::minimize_update_anderson(qr, G1, R.col(k), R.col(k - 1), G.col(k), 0,
                                     γ_LS, xₖ_aa);
 
     // Compute reference solution
@@ -157,7 +157,7 @@ TEST(Anderson, minimize) {
     ++k;
 
     // Call function under test
-    quala::minimize_update_anderson(qr, G2, R.col(k), R.col(k - 1), G.col(k),
+    quala::minimize_update_anderson(qr, G2, R.col(k), R.col(k - 1), G.col(k), 0,
                                     γ_LS, xₖ_aa);
 
     // Compute reference solution
@@ -206,7 +206,7 @@ TEST(Anderson, minimize) {
     ++k;
 
     // Call function under test
-    quala::minimize_update_anderson(qr, G3, R.col(k), R.col(k - 1), G.col(k),
+    quala::minimize_update_anderson(qr, G3, R.col(k), R.col(k - 1), G.col(k), 0,
                                     γ_LS, xₖ_aa);
 
     // Compute reference solution
@@ -270,7 +270,7 @@ TEST(Anderson, matrix) {
 
     quala::LimitedMemoryQR qr(2, 2);
     quala::mat G(qr.n(), qr.m());
-    quala::vec rₖ   = r(xₖ);
+    quala::vec rₖ    = r(xₖ);
     quala::vec rₙₑₓₜ = rₖ;
     std::vector<quala::real_t> res;
     unsigned update_count = 0;
@@ -287,12 +287,13 @@ TEST(Anderson, matrix) {
 
         quala::vec γ_LS(qr.n()), xₖ_aa(qr.n());
         quala::vec gₖ = A * xₖ - b;
-        auto &rₗₐₛₜ    = rₙₑₓₜ;
+        auto &rₗₐₛₜ   = rₙₑₓₜ;
         if (i == 0) {
             G.col(0) = gₖ;
             xₖ_aa    = gₖ;
         } else {
-            quala::minimize_update_anderson(qr, G, rₖ, rₗₐₛₜ, gₖ, γ_LS, xₖ_aa);
+            quala::minimize_update_anderson(qr, G, rₖ, rₗₐₛₜ, gₖ, 0, γ_LS,
+                                            xₖ_aa);
             ++update_count;
         }
         rₙₑₓₜ = A * xₖ_aa - b - xₖ_aa;

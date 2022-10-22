@@ -127,6 +127,7 @@ template <>
 inline const kwargs_to_struct_table_t<quala::AndersonAccelParams>
     kwargs_to_struct_table<quala::AndersonAccelParams>{
         {"memory", &quala::AndersonAccelParams::memory},
+        {"min_div", &quala::AndersonAccelParams::min_div},
     };
 
 #include <quala/broyden-good.hpp>
