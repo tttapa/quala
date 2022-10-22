@@ -60,7 +60,7 @@ inline void minimize_update_anderson(
 
     // Solve least squares problem Anderson acceleration
     // γ = argmin ‖ ΔR γ - rₖ ‖²
-    qr.solve_col_tol(rₖ, γ_LS, qr.get_max_eig() * min_div);
+    qr.solve_col(rₖ, γ_LS, qr.get_max_eig() * min_div);
 
     // Iterate over columns of G, whose indices match the indices of the matrix
     // R in the QR factorization, stored as a circular buffer.

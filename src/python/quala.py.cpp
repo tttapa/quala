@@ -60,24 +60,18 @@ PYBIND11_MODULE(QUALA_MODULE_NAME, m) {
         .def_property_readonly("history", &LimitedMemoryQR::history)
         .def("add_column", &LimitedMemoryQR::add_column<crvec>, "v"_a)
         .def("remove_column", &LimitedMemoryQR::remove_column)
-        .def("solve", &LimitedMemoryQR::solve<crmat, rmat>, "b"_a, "x"_a)
         .def(
             "solve",
-            [](const LimitedMemoryQR &qr, crmat b) -> mat {
-                mat x(qr.num_columns(), b.cols());
-                qr.solve(b, x);
-                return x;
-            },
-            "b"_a)
-        .def("solve_tol", &LimitedMemoryQR::solve_tol<crmat, rmat>, "b"_a, "x"_a, "tol"_a)
+            [](const LimitedMemoryQR &qr, crmat b, rmat x, real_t tol) { qr.solve(b, x, tol); },
+            "b"_a, "x"_a, "tol"_a = 0)
         .def(
-            "solve_tol",
+            "solve",
             [](const LimitedMemoryQR &qr, crmat b, real_t tol) -> mat {
                 mat x(qr.num_columns(), b.cols());
-                qr.solve_tol(b, x, tol);
+                qr.solve(b, x, tol);
                 return x;
             },
-            "b"_a, "tol"_a)
+            "b"_a, "tol"_a = 0)
         .def_property_readonly("R", &LimitedMemoryQR::get_R)
         .def_property_readonly("Q", &LimitedMemoryQR::get_Q)
         .def("reset", &LimitedMemoryQR::reset)

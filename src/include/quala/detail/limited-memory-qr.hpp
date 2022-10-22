@@ -118,49 +118,9 @@ class LimitedMemoryQR {
     }
 
     /// Solve the least squares problem Ax = b.
+    /// Do not divide by elements that are smaller in absolute value than @p tol.
     template <class VecB, class VecX>
-    void solve_col(const VecB &b, VecX &x) const {
-        // Iterate over the diagonal of R, starting at the bottom right,
-        // this is standard back substitution
-        // (recall that R is stored in a circular buffer, so R.col(i) is
-        // not the mathematical i-th column)
-        auto rev_bgn = ring_reverse_iter().begin();
-        auto rev_end = ring_reverse_iter().end();
-        auto fwd_end = ring_iter().end();
-        for (auto it_d = rev_bgn; it_d != rev_end; ++it_d) {
-            // Row/column index of diagonal element of R
-            auto [rR, cR] = *it_d;
-            // (r is the zero-based mathematical index, c is the index in
-            // the circular buffer)
-            x(rR) = Q.col(rR).transpose() * b; // Compute rhs Qᵀb
-            // In the current row of R, iterate over the elements to the
-            // right of the diagonal
-            // Iterating from left to right seems to give better results
-            for (auto it_c = it_d.forwardit; it_c != fwd_end; ++it_c) {
-                auto [rX2, cR2] = *it_c;
-                x(rR) -= R(rR, cR2) * x(rX2);
-            }
-            x(rR) /= R(rR, cR); // Divide by diagonal element
-        }
-    }
-
-    /// Solve the least squares problem AX = B.
-    template <class MatB, class MatX>
-    void solve(const MatB &B, MatX &X) const {
-        assert(B.cols() <= X.cols());
-        assert(B.rows() >= Q.rows());
-        assert(X.rows() >= Eigen::Index(num_columns()));
-        // Each column of the right hand side is solved as an individual system
-        for (Eigen::Index cB = 0; cB < B.cols(); ++cB) {
-            auto b = B.col(cB);
-            auto x = X.col(cB);
-            solve_col(b, x);
-        }
-    }
-
-    /// Solve the least squares problem Ax = b.
-    template <class VecB, class VecX>
-    void solve_col_tol(const VecB &b, VecX &x, real_t tol) const {
+    void solve_col(const VecB &b, VecX &x, real_t tol = 0) const {
         // Iterate over the diagonal of R, starting at the bottom right,
         // this is standard back substitution
         // (recall that R is stored in a circular buffer, so R.col(i) is
@@ -193,7 +153,7 @@ class LimitedMemoryQR {
     /// Solve the least squares problem AX = B.
     /// Do not divide by elements that are smaller in absolute value than @p tol.
     template <class MatB, class MatX>
-    void solve_tol(const MatB &B, MatX &X, real_t tol) const {
+    void solve(const MatB &B, MatX &X, real_t tol = 0) const {
         assert(B.cols() <= X.cols());
         assert(B.rows() >= Q.rows());
         assert(X.rows() >= Eigen::Index(num_columns()));
@@ -201,7 +161,7 @@ class LimitedMemoryQR {
         for (Eigen::Index cB = 0; cB < B.cols(); ++cB) {
             auto b = B.col(cB);
             auto x = X.col(cB);
-            solve_col_tol(b, x, tol);
+            solve_col(b, x, tol);
         }
     }
 
