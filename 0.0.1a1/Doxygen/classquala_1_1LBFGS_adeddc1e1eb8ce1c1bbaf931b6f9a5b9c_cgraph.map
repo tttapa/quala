@@ -1,0 +1,10 @@
+<map id="scale_y" name="scale_y">
+<area shape="rect" id="node1" title="Scale the stored y vectors by the given factor." alt="" coords="5,70,76,95"/>
+<area shape="rect" id="node2" href="$classquala_1_1LBFGS.html#a9cf7dcccbc3bc69a10833450ee79c623" title="Get the number of previous vectors s and y stored in the buffer." alt="" coords="124,17,191,42"/>
+<area shape="rect" id="node4" href="$classquala_1_1LBFGS.html#aebac2ec4461761a48a7284152a8217f8" title=" " alt="" coords="138,70,177,95"/>
+<area shape="rect" id="node7" href="$classquala_1_1LBFGS.html#acade3dc51f7ca788be9b91908b2e73ab" title=" " alt="" coords="138,119,177,145"/>
+<area shape="rect" id="node3" href="$structquala_1_1LBFGSStorage.html#a9cf7dcccbc3bc69a10833450ee79c623" title="Get the number of previous vectors s and y stored in the buffer." alt="" coords="247,5,405,45"/>
+<area shape="rect" id="node5" href="$structquala_1_1LBFGSStorage.html#aebac2ec4461761a48a7284152a8217f8" title=" " alt="" coords="239,70,413,95"/>
+<area shape="rect" id="node6" href="$structquala_1_1LBFGSStorage.html#a727afc7a58d2e44ae7add57e3fa77bc6" title="Get the size of the s and y vectors in the buffer." alt="" coords="461,95,636,121"/>
+<area shape="rect" id="node8" href="$structquala_1_1LBFGSStorage.html#acade3dc51f7ca788be9b91908b2e73ab" title=" " alt="" coords="239,119,413,145"/>
+</map>

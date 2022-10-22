@@ -1,0 +1,6 @@
+<map id="update_valid" name="update_valid">
+<area shape="rect" id="node1" title="Check if the new vectors s and y allow for a valid BFGS update that preserves the positive definitene..." alt="" coords="5,5,112,32"/>
+<area shape="rect" id="node2" href="$classquala_1_1LBFGS.html#ac7c2ee7d2562303f555dd1f4c3fca8cd" title=" " alt="" coords="160,5,199,32"/>
+<area shape="rect" id="node3" href="$structquala_1_1LBFGSStorage.html#ac7c2ee7d2562303f555dd1f4c3fca8cd" title=" " alt="" coords="247,5,421,32"/>
+<area shape="rect" id="node4" href="$structquala_1_1LBFGSStorage.html#a727afc7a58d2e44ae7add57e3fa77bc6" title="Get the size of the s and y vectors in the buffer." alt="" coords="469,5,644,32"/>
+</map>

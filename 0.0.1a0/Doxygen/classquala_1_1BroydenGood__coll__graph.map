@@ -1,0 +1,5 @@
+<map id="BroydenGood" name="BroydenGood">
+<area shape="rect" id="node1" title="Broyden&#39;s “Good” method for solving systems of nonlinear equations ." alt="" coords="79,263,224,619"/>
+<area shape="rect" id="node2" href="$structquala_1_1BroydenStorage.html" title="Layout:" alt="" coords="5,5,132,200"/>
+<area shape="rect" id="node3" href="$namespacequala.html#structquala_1_1BroydenGoodParams" title="Parameters for the BroydenGood class." alt="" coords="156,42,315,163"/>
+</map>

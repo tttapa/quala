@@ -1,0 +1,10 @@
+<map id="apply" name="apply">
+<area shape="rect" id="node1" title="Apply the inverse Jacobian approximation to the given vector q, i.e." alt="" coords="5,62,64,87"/>
+<area shape="rect" id="node2" href="$classquala_1_1BroydenGood.html#aa871b5290773b86e2e4919bbac258a04" title="Iterate over the indices in the history buffer, oldest first." alt="" coords="112,13,213,38"/>
+<area shape="rect" id="node5" href="$classquala_1_1BroydenGood.html#a9f073bfaf44b883546d7483e3d16b149" title=" " alt="" coords="143,62,182,87"/>
+<area shape="rect" id="node7" href="$classquala_1_1BroydenGood.html#a15e4a3db39457cabe764a7737d24e73f" title=" " alt="" coords="143,111,182,137"/>
+<area shape="rect" id="node3" href="$classquala_1_1BroydenGood.html#a9cf7dcccbc3bc69a10833450ee79c623" title="Get the number of previous vectors s and y stored in the buffer." alt="" coords="321,13,387,38"/>
+<area shape="rect" id="node4" href="$structquala_1_1BroydenStorage.html#a9cf7dcccbc3bc69a10833450ee79c623" title="Get the number of previous vectors s and s̃ stored in the buffer." alt="" coords="495,5,665,45"/>
+<area shape="rect" id="node6" href="$structquala_1_1BroydenStorage.html#a9f073bfaf44b883546d7483e3d16b149" title=" " alt="" coords="261,62,447,87"/>
+<area shape="rect" id="node8" href="$structquala_1_1BroydenStorage.html#a15e4a3db39457cabe764a7737d24e73f" title=" " alt="" coords="261,111,447,137"/>
+</map>

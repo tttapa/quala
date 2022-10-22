@@ -1,0 +1,13 @@
+<map id="compute" name="compute">
+<area shape="rect" id="node1" title="Compute the accelerated iterate , given the function value at the current iterate &#160;and the correspond..." alt="" coords="5,213,84,239"/>
+<area shape="rect" id="node2" href="$namespacequala.html#adfa7dfa28551cd76de954d1e5e58385c" title="Solve one step of Anderson acceleration to find a fixed point of a function g(x):" alt="" coords="132,205,311,247"/>
+<area shape="rect" id="node3" href="$classquala_1_1LimitedMemoryQR.html#a5e3077223e98c1e4e286e01503f220d5" title="Add the given column to the right." alt="" coords="359,75,547,116"/>
+<area shape="rect" id="node4" href="$classquala_1_1LimitedMemoryQR.html#ac397ae83f5f4dd3d5cf9926f26acfb2d" title=" " alt="" coords="1067,107,1276,134"/>
+<area shape="rect" id="node6" href="$classquala_1_1LimitedMemoryQR.html#a24829df3eaf3f15bd3c677781348b14d" title="Get the number of columns that are currently stored." alt="" coords="359,140,547,181"/>
+<area shape="rect" id="node7" href="$classquala_1_1LimitedMemoryQR.html#a436c4dbbf0476354ca67a104bc005e55" title="Remove the leftmost column." alt="" coords="359,205,547,247"/>
+<area shape="rect" id="node8" href="$classquala_1_1LimitedMemoryQR.html#a0bf0ad441ec87440e4525e75de00d053" title="Get iterators in the circular buffer." alt="" coords="831,291,1019,332"/>
+<area shape="rect" id="node9" href="$classquala_1_1LimitedMemoryQR.html#a8a153a1f58e5c5879095a4c3799b6f49" title="Get the tail index of the circular buffer (points to one past the most recent element)." alt="" coords="359,323,547,364"/>
+<area shape="rect" id="node10" href="$classquala_1_1LimitedMemoryQR.html#a7a60dfe0a5f68bc1efec69e406a2b619" title="Solve the least squares problem Ax = b." alt="" coords="359,388,547,429"/>
+<area shape="rect" id="node5" href="$classquala_1_1LimitedMemoryQR.html#a9f68bead8c70041aacb90dd175150dc4" title="Get the next index in the circular storage for R." alt="" coords="595,133,783,175"/>
+<area shape="rect" id="node11" href="$classquala_1_1LimitedMemoryQR.html#ae8160acf26958eb65aa5c0743dd2826d" title="Get reverse iterators in the circular buffer." alt="" coords="595,384,783,425"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="update" name="update">
+<area shape="rect" id="node1" title="Update the inverse Jacobian approximation using the new vectors xₖ₊₁ and pₖ₊₁." alt="" coords="5,107,72,133"/>
+<area shape="rect" id="node2" href="$classquala_1_1BroydenGood.html#a15e4a3db39457cabe764a7737d24e73f" title=" " alt="" coords="289,5,327,32"/>
+<area shape="rect" id="node4" href="$classquala_1_1BroydenGood.html#ad2320a49a7db3abb42d0c621a6a932bd" title="Update the inverse Jacobian approximation using the new vectors sₖ = xₖ₊₁ &#45; xₖ and yₖ = pₖ₊₁ &#45; pₖ." alt="" coords="120,132,209,159"/>
+<area shape="rect" id="node3" href="$structquala_1_1BroydenStorage.html#a15e4a3db39457cabe764a7737d24e73f" title=" " alt="" coords="407,31,592,57"/>
+<area shape="rect" id="node5" href="$classquala_1_1BroydenGood.html#aa871b5290773b86e2e4919bbac258a04" title="Iterate over the indices in the history buffer, oldest first." alt="" coords="257,107,359,133"/>
+<area shape="rect" id="node8" href="$classquala_1_1BroydenGood.html#a70926baed7362e4fcce66523bb8e2842" title="Get the next index in the circular buffer of previous s and y vectors." alt="" coords="283,157,333,184"/>
+<area shape="rect" id="node9" href="$structquala_1_1BroydenStorage.html#a9f073bfaf44b883546d7483e3d16b149" title=" " alt="" coords="407,219,592,245"/>
+<area shape="rect" id="node10" href="$classquala_1_1BroydenGood.html#a9f073bfaf44b883546d7483e3d16b149" title=" " alt="" coords="289,259,327,285"/>
+<area shape="rect" id="node11" href="$structquala_1_1BroydenStorage.html#a1f39e0321f095347878b8e231abaa2bb" title=" " alt="" coords="414,291,585,333"/>
+<area shape="rect" id="node6" href="$classquala_1_1BroydenGood.html#a9cf7dcccbc3bc69a10833450ee79c623" title="Get the number of previous vectors s and y stored in the buffer." alt="" coords="466,157,533,184"/>
+<area shape="rect" id="node7" href="$structquala_1_1BroydenStorage.html#a9cf7dcccbc3bc69a10833450ee79c623" title="Get the number of previous vectors s and s̃ stored in the buffer." alt="" coords="640,237,811,278"/>
+</map>

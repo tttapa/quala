@@ -1,0 +1,12 @@
+<map id="update_sy" name="update_sy">
+<area shape="rect" id="node1" title="Update the inverse Jacobian approximation using the new vectors sₖ = xₖ₊₁ &#45; xₖ and yₖ = pₖ₊₁ &#45; pₖ." alt="" coords="5,157,95,184"/>
+<area shape="rect" id="node2" href="$classquala_1_1BroydenGood.html#aa871b5290773b86e2e4919bbac258a04" title="Iterate over the indices in the history buffer, oldest first." alt="" coords="143,5,244,32"/>
+<area shape="rect" id="node5" href="$structquala_1_1BroydenStorage.html#a15e4a3db39457cabe764a7737d24e73f" title=" " alt="" coords="292,152,477,179"/>
+<area shape="rect" id="node6" href="$classquala_1_1BroydenGood.html#a15e4a3db39457cabe764a7737d24e73f" title=" " alt="" coords="174,157,213,184"/>
+<area shape="rect" id="node7" href="$classquala_1_1BroydenGood.html#a70926baed7362e4fcce66523bb8e2842" title="Get the next index in the circular buffer of previous s and y vectors." alt="" coords="168,56,219,83"/>
+<area shape="rect" id="node8" href="$structquala_1_1BroydenStorage.html#a9f073bfaf44b883546d7483e3d16b149" title=" " alt="" coords="292,213,477,240"/>
+<area shape="rect" id="node9" href="$classquala_1_1BroydenGood.html#a9f073bfaf44b883546d7483e3d16b149" title=" " alt="" coords="174,259,213,285"/>
+<area shape="rect" id="node10" href="$structquala_1_1BroydenStorage.html#a1f39e0321f095347878b8e231abaa2bb" title=" " alt="" coords="299,286,470,327"/>
+<area shape="rect" id="node3" href="$classquala_1_1BroydenGood.html#a9cf7dcccbc3bc69a10833450ee79c623" title="Get the number of previous vectors s and y stored in the buffer." alt="" coords="351,56,418,83"/>
+<area shape="rect" id="node4" href="$structquala_1_1BroydenStorage.html#a9cf7dcccbc3bc69a10833450ee79c623" title="Get the number of previous vectors s and s̃ stored in the buffer." alt="" coords="525,181,696,222"/>
+</map>

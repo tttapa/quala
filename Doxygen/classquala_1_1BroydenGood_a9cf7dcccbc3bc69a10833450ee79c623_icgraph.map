@@ -1,0 +1,12 @@
+<map id="history" name="history">
+<area shape="rect" id="node1" title="Get the number of previous vectors s and y stored in the buffer." alt="" coords="487,107,553,133"/>
+<area shape="rect" id="node2" href="$classquala_1_1BroydenGood.html#a3c6a2dbecc0d6f8cd90bef088c46b072" title="Get the number of previous s and y vectors currently stored in the buffer." alt="" coords="319,5,439,32"/>
+<area shape="rect" id="node4" href="$classquala_1_1BroydenGood.html#aa871b5290773b86e2e4919bbac258a04" title="Iterate over the indices in the history buffer, oldest first." alt="" coords="328,56,429,83"/>
+<area shape="rect" id="node8" href="$classquala_1_1BroydenGood.html#a0804b751cf2035a35f24762474f62cbf" title="Iterate over the indices in the history buffer, newest first." alt="" coords="329,107,428,133"/>
+<area shape="rect" id="node9" href="$classquala_1_1BroydenGood.html#a71f7f5e949a948d578ae6f145e4c4914" title="Get the previous index in the circular buffer of s and y vectors." alt="" coords="353,157,404,184"/>
+<area shape="rect" id="node10" href="$classquala_1_1BroydenGood.html#a70926baed7362e4fcce66523bb8e2842" title="Get the next index in the circular buffer of previous s and y vectors." alt="" coords="353,208,404,235"/>
+<area shape="rect" id="node3" href="$quala_8cpp.html#a12fb4e87da488d1fc7c6fa3e6a3adb90" title=" " alt="" coords="120,5,271,32"/>
+<area shape="rect" id="node5" href="$classquala_1_1BroydenGood.html#af3b5886c46c3f50fae33990afcc47f12" title="Apply the inverse Jacobian approximation to the given vector q, i.e." alt="" coords="166,56,225,83"/>
+<area shape="rect" id="node6" href="$classquala_1_1BroydenGood.html#ad2320a49a7db3abb42d0c621a6a932bd" title="Update the inverse Jacobian approximation using the new vectors sₖ = xₖ₊₁ &#45; xₖ and yₖ = pₖ₊₁ &#45; pₖ." alt="" coords="151,157,240,184"/>
+<area shape="rect" id="node7" href="$classquala_1_1BroydenGood.html#a1380d11b100437c5d8d8fc21be5ea7b6" title="Update the inverse Jacobian approximation using the new vectors xₖ₊₁ and pₖ₊₁." alt="" coords="5,157,72,184"/>
+</map>

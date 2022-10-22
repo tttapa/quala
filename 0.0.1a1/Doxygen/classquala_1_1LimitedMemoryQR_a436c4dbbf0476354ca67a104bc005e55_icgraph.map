@@ -1,0 +1,5 @@
+<map id="remove_column" name="remove_column">
+<area shape="rect" id="node1" title="Remove the leftmost column." alt="" coords="443,13,569,38"/>
+<area shape="rect" id="node2" href="$namespacequala.html#a6c177816e8d54a88f83d46bd040851e7" title="Solve one step of Anderson acceleration to find a fixed point of a function g(x):" alt="" coords="216,5,395,45"/>
+<area shape="rect" id="node3" href="$classquala_1_1AndersonAccel.html#a7cbecaa52700158ebe36c0d587791ed4" title="Compute the accelerated iterate , given the function value at the current iterate &#160;and the correspond..." alt="" coords="5,5,168,45"/>
+</map>

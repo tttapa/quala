@@ -1,0 +1,8 @@
+<map id="resize" name="resize">
+<area shape="rect" id="node1" title="Re&#45;allocate storage for a problem with a different size." alt="" coords="5,56,67,83"/>
+<area shape="rect" id="node2" href="$classquala_1_1LBFGS.html#a727afc7a58d2e44ae7add57e3fa77bc6" title="Get the size of the s and y vectors in the buffer." alt="" coords="175,5,213,32"/>
+<area shape="rect" id="node4" href="$classquala_1_1LBFGS.html#ad20897c5c8bd47f5d4005989bead0e55" title="Throw away the approximation and all previous vectors s and y." alt="" coords="167,56,221,83"/>
+<area shape="rect" id="node5" href="$structquala_1_1LBFGSStorage.html#a48072fa680a2364d8ce96eb84a5d5689" title="Re&#45;allocate storage for a problem with a different size." alt="" coords="115,107,273,149"/>
+<area shape="rect" id="node3" href="$structquala_1_1LBFGSStorage.html#a727afc7a58d2e44ae7add57e3fa77bc6" title="Get the size of the s and y vectors in the buffer." alt="" coords="321,31,496,57"/>
+<area shape="rect" id="node6" href="$structquala_1_1LBFGSStorage.html#a9cf7dcccbc3bc69a10833450ee79c623" title="Get the number of previous vectors s and y stored in the buffer." alt="" coords="329,107,488,149"/>
+</map>

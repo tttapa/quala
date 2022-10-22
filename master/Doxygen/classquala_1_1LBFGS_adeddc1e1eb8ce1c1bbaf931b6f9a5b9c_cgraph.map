@@ -1,0 +1,7 @@
+<map id="scale_y" name="scale_y">
+<area shape="rect" id="node1" title="Scale the stored y vectors by the given factor." alt="" coords="5,56,76,83"/>
+<area shape="rect" id="node2" href="$classquala_1_1LBFGS.html#a9cf7dcccbc3bc69a10833450ee79c623" title="Get the number of previous vectors s and y stored in the buffer." alt="" coords="124,5,191,32"/>
+<area shape="rect" id="node3" href="$classquala_1_1LBFGS.html#aebac2ec4461761a48a7284152a8217f8" title=" " alt="" coords="138,56,177,83"/>
+<area shape="rect" id="node5" href="$classquala_1_1LBFGS.html#acade3dc51f7ca788be9b91908b2e73ab" title=" " alt="" coords="138,107,177,133"/>
+<area shape="rect" id="node4" href="$classquala_1_1LBFGS.html#a727afc7a58d2e44ae7add57e3fa77bc6" title="Get the size of the s and y vectors in the buffer." alt="" coords="239,81,277,108"/>
+</map>

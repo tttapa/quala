@@ -1,0 +1,9 @@
+<map id="apply" name="apply">
+<area shape="rect" id="node1" title="Apply the inverse Hessian approximation to the given vector q, applying only the columns and rows of ..." alt="" coords="5,107,64,133"/>
+<area shape="rect" id="node2" href="$classquala_1_1LBFGS.html#a9cf7dcccbc3bc69a10833450ee79c623" title="Get the number of previous vectors s and y stored in the buffer." alt="" coords="112,5,179,32"/>
+<area shape="rect" id="node3" href="$classquala_1_1LBFGS.html#a15e4a3db39457cabe764a7737d24e73f" title=" " alt="" coords="126,56,165,83"/>
+<area shape="rect" id="node5" href="$classquala_1_1LBFGS.html#aebac2ec4461761a48a7284152a8217f8" title=" " alt="" coords="126,107,165,133"/>
+<area shape="rect" id="node6" href="$classquala_1_1LBFGS.html#ac7c2ee7d2562303f555dd1f4c3fca8cd" title=" " alt="" coords="126,157,165,184"/>
+<area shape="rect" id="node7" href="$classquala_1_1LBFGS.html#acade3dc51f7ca788be9b91908b2e73ab" title=" " alt="" coords="126,208,165,235"/>
+<area shape="rect" id="node4" href="$classquala_1_1LBFGS.html#a727afc7a58d2e44ae7add57e3fa77bc6" title="Get the size of the s and y vectors in the buffer." alt="" coords="227,132,265,159"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="resize" name="resize">
+<area shape="rect" id="node1" title="Re&#45;allocate storage for a problem with a different size." alt="" coords="5,31,67,56"/>
+<area shape="rect" id="node2" href="$structquala_1_1BroydenStorage.html#a9cf7dcccbc3bc69a10833450ee79c623" title="Get the number of previous vectors s and s̃ stored in the buffer." alt="" coords="115,5,181,31"/>
+<area shape="rect" id="node3" href="$structquala_1_1BroydenStorage.html#a727afc7a58d2e44ae7add57e3fa77bc6" title="Get the size of the s and s̃ vectors in the buffer." alt="" coords="129,55,167,80"/>
+</map>

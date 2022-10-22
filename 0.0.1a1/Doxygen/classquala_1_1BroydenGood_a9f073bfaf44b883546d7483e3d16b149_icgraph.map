@@ -1,0 +1,6 @@
+<map id="s̃" name="s̃">
+<area shape="rect" id="node1" title=" " alt="" coords="257,31,296,56"/>
+<area shape="rect" id="node2" href="$classquala_1_1BroydenGood.html#af3b5886c46c3f50fae33990afcc47f12" title="Apply the inverse Jacobian approximation to the given vector q, i.e." alt="" coords="135,5,194,31"/>
+<area shape="rect" id="node3" href="$classquala_1_1BroydenGood.html#ad2320a49a7db3abb42d0c621a6a932bd" title="Update the inverse Jacobian approximation using the new vectors sₖ = xₖ₊₁ &#45; xₖ and yₖ = pₖ₊₁ &#45; pₖ." alt="" coords="120,55,209,80"/>
+<area shape="rect" id="node4" href="$classquala_1_1BroydenGood.html#a306b71b9ba3fa871a4cad408f946b5a7" title="Update the inverse Jacobian approximation using the new vectors xₖ₊₁ and pₖ₊₁." alt="" coords="5,55,72,80"/>
+</map>

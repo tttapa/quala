@@ -1,0 +1,5 @@
+<map id="add_column" name="add_column">
+<area shape="rect" id="node1" title="Add the given column to the right." alt="" coords="443,13,544,39"/>
+<area shape="rect" id="node2" href="$namespacequala.html#adfa7dfa28551cd76de954d1e5e58385c" title="Solve one step of Anderson acceleration to find a fixed point of a function g(x):" alt="" coords="216,5,395,47"/>
+<area shape="rect" id="node3" href="$classquala_1_1AndersonAccel.html#a7cbecaa52700158ebe36c0d587791ed4" title="Compute the accelerated iterate , given the function value at the current iterate &#160;and the correspond..." alt="" coords="5,5,168,47"/>
+</map>

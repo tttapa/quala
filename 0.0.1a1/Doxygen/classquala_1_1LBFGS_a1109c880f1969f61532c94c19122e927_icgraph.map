@@ -1,0 +1,7 @@
+<map id="update_valid" name="update_valid">
+<area shape="rect" id="node1" title="Check if the new vectors s and y allow for a valid BFGS update that preserves the positive definitene..." alt="" coords="456,56,563,81"/>
+<area shape="rect" id="node2" href="$classquala_1_1LBFGS.html#a0e0ce3dda38d6f64657929adcf05e2c8" title="Apply the inverse Hessian approximation to the given vector q, applying only the columns and rows of ..." alt="" coords="334,5,393,31"/>
+<area shape="rect" id="node3" href="$quala_8py_8cpp.html#a12fb4e87da488d1fc7c6fa3e6a3adb90" title=" " alt="" coords="5,107,156,132"/>
+<area shape="rect" id="node4" href="$classquala_1_1LBFGS.html#af150290995e6bee28f5a0f057ed511c8" title="Update the inverse Hessian approximation using the new vectors sₖ = xₖ₊₁ &#45; xₖ and yₖ = pₖ₊₁ &#45; pₖ." alt="" coords="319,107,408,132"/>
+<area shape="rect" id="node5" href="$classquala_1_1LBFGS.html#ae34a8e5e432c990eb8af2f95bcbc04bd" title="Update the inverse Hessian approximation using the new vectors xₖ₊₁ and pₖ₊₁." alt="" coords="204,157,271,183"/>
+</map>

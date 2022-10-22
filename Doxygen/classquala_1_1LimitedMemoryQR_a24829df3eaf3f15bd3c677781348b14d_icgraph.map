@@ -1,0 +1,7 @@
+<map id="num_columns" name="num_columns">
+<area shape="rect" id="node1" title="Get the number of columns that are currently stored." alt="" coords="443,42,556,69"/>
+<area shape="rect" id="node2" href="$namespacequala.html#adfa7dfa28551cd76de954d1e5e58385c" title="Solve one step of Anderson acceleration to find a fixed point of a function g(x):" alt="" coords="216,5,395,47"/>
+<area shape="rect" id="node4" href="$classquala_1_1LimitedMemoryQR.html#a9ec3e86c6cbb239ba0642378b564af41" title="Solve the least squares problem AX = B." alt="" coords="277,71,334,98"/>
+<area shape="rect" id="node3" href="$classquala_1_1AndersonAccel.html#a7cbecaa52700158ebe36c0d587791ed4" title="Compute the accelerated iterate , given the function value at the current iterate &#160;and the correspond..." alt="" coords="5,5,168,47"/>
+<area shape="rect" id="node5" href="$classquala_1_1LimitedMemoryQR.html#a5f3732971788e558366a2b509a538206" title="Solve the least squares problem AX = B." alt="" coords="58,71,115,98"/>
+</map>

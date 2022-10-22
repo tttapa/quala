@@ -1,0 +1,9 @@
+<map id="y" name="y">
+<area shape="rect" id="node1" title=" " alt="" coords="617,31,656,57"/>
+<area shape="rect" id="node2" href="$classquala_1_1LBFGS.html#aa54be34168109d2e4995711cbd5f5ad8" title="Update the inverse Hessian approximation using the new vectors sₖ = xₖ₊₁ &#45; xₖ and yₖ = pₖ₊₁ &#45; pₖ." alt="" coords="215,5,397,32"/>
+<area shape="rect" id="node4" href="$classquala_1_1LBFGS.html#aebac2ec4461761a48a7284152a8217f8" title=" " alt="" coords="445,56,569,83"/>
+<area shape="rect" id="node3" href="$classquala_1_1LBFGS.html#aa32c5f2c6818c5d54b9fcd1c019a4e1d" title="Update the inverse Hessian approximation using the new vectors xₖ₊₁ and pₖ₊₁." alt="" coords="5,31,167,57"/>
+<area shape="rect" id="node5" href="$classquala_1_1LBFGS.html#af3b5886c46c3f50fae33990afcc47f12" title="Apply the inverse Hessian approximation to the given vector q." alt="" coords="230,107,382,133"/>
+<area shape="rect" id="node6" href="$classquala_1_1LBFGS.html#adeddc1e1eb8ce1c1bbaf931b6f9a5b9c" title="Scale the stored y vectors by the given factor." alt="" coords="223,157,389,184"/>
+<area shape="rect" id="node7" href="$quala_8cpp.html#a12fb4e87da488d1fc7c6fa3e6a3adb90" title=" " alt="" coords="11,157,161,184"/>
+</map>

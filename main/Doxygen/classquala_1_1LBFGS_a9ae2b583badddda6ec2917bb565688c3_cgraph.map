@@ -1,0 +1,17 @@
+<map id="apply" name="apply">
+<area shape="rect" id="node1" title="Apply the inverse Hessian approximation to the given vector q." alt="" coords="5,153,64,179"/>
+<area shape="rect" id="node2" href="$classquala_1_1LBFGS.html#ac7c2ee7d2562303f555dd1f4c3fca8cd" title=" " alt="" coords="143,55,182,80"/>
+<area shape="rect" id="node5" href="$classquala_1_1LBFGS.html#acade3dc51f7ca788be9b91908b2e73ab" title=" " alt="" coords="143,104,182,129"/>
+<area shape="rect" id="node7" href="$classquala_1_1LBFGS.html#aa871b5290773b86e2e4919bbac258a04" title="Iterate over the indices in the history buffer, oldest first." alt="" coords="112,301,213,327"/>
+<area shape="rect" id="node10" href="$classquala_1_1LBFGS.html#a0804b751cf2035a35f24762474f62cbf" title="Iterate over the indices in the history buffer, newest first." alt="" coords="113,203,212,228"/>
+<area shape="rect" id="node11" href="$classquala_1_1LBFGS.html#a71f7f5e949a948d578ae6f145e4c4914" title="Get the previous index in the circular buffer of s and y vectors." alt="" coords="137,252,188,277"/>
+<area shape="rect" id="node12" href="$classquala_1_1LBFGS.html#a15e4a3db39457cabe764a7737d24e73f" title=" " alt="" coords="143,153,182,179"/>
+<area shape="rect" id="node14" href="$classquala_1_1LBFGS.html#aebac2ec4461761a48a7284152a8217f8" title=" " alt="" coords="143,5,182,31"/>
+<area shape="rect" id="node3" href="$structquala_1_1LBFGSStorage.html#ac7c2ee7d2562303f555dd1f4c3fca8cd" title=" " alt="" coords="261,55,436,80"/>
+<area shape="rect" id="node4" href="$structquala_1_1LBFGSStorage.html#a727afc7a58d2e44ae7add57e3fa77bc6" title="Get the size of the s and y vectors in the buffer." alt="" coords="484,80,659,105"/>
+<area shape="rect" id="node6" href="$structquala_1_1LBFGSStorage.html#acade3dc51f7ca788be9b91908b2e73ab" title=" " alt="" coords="261,104,436,129"/>
+<area shape="rect" id="node8" href="$classquala_1_1LBFGS.html#a9cf7dcccbc3bc69a10833450ee79c623" title="Get the number of previous vectors s and y stored in the buffer." alt="" coords="315,252,382,277"/>
+<area shape="rect" id="node9" href="$structquala_1_1LBFGSStorage.html#a9cf7dcccbc3bc69a10833450ee79c623" title="Get the number of previous vectors s and y stored in the buffer." alt="" coords="492,245,651,285"/>
+<area shape="rect" id="node13" href="$structquala_1_1LBFGSStorage.html#a15e4a3db39457cabe764a7737d24e73f" title=" " alt="" coords="262,153,435,179"/>
+<area shape="rect" id="node15" href="$structquala_1_1LBFGSStorage.html#aebac2ec4461761a48a7284152a8217f8" title=" " alt="" coords="261,5,436,31"/>
+</map>

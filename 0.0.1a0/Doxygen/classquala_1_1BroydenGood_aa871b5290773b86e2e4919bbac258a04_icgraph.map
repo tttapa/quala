@@ -1,0 +1,6 @@
+<map id="foreach_fwd" name="foreach_fwd">
+<area shape="rect" id="node1" title="Iterate over the indices in the history buffer, oldest first." alt="" coords="257,31,359,57"/>
+<area shape="rect" id="node2" href="$classquala_1_1BroydenGood.html#a4b68ea86da3de0ae00aa1d865156833a" title="Apply the inverse Jacobian approximation to the given vector q, i.e." alt="" coords="135,5,194,32"/>
+<area shape="rect" id="node3" href="$classquala_1_1BroydenGood.html#ad2320a49a7db3abb42d0c621a6a932bd" title="Update the inverse Jacobian approximation using the new vectors sₖ = xₖ₊₁ &#45; xₖ and yₖ = pₖ₊₁ &#45; pₖ." alt="" coords="120,56,209,83"/>
+<area shape="rect" id="node4" href="$classquala_1_1BroydenGood.html#a1380d11b100437c5d8d8fc21be5ea7b6" title="Update the inverse Jacobian approximation using the new vectors xₖ₊₁ and pₖ₊₁." alt="" coords="5,56,72,83"/>
+</map>

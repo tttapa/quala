@@ -1,0 +1,9 @@
+<map id="reset" name="reset">
+<area shape="rect" id="node1" title="Reset all indices, clearing the Q and R matrices." alt="" coords="637,71,692,98"/>
+<area shape="rect" id="node2" href="$classquala_1_1AndersonAccel.html#ab55e2bb8c6d8912c0d55ff4dc2b3b4a2" title="Call this function on the first iteration to initialize the accelerator." alt="" coords="427,5,589,47"/>
+<area shape="rect" id="node3" href="$classquala_1_1AndersonAccel.html#ad20897c5c8bd47f5d4005989bead0e55" title="Reset the accelerator (but keep the last function value and residual, so calling initialize is not ne..." alt="" coords="216,60,379,101"/>
+<area shape="rect" id="node5" href="$classquala_1_1LimitedMemoryQR.html#ad15543203799d1dccb5a5e1c572e3f02" title="Re&#45;allocate storage for a problem with a different size." alt="" coords="477,126,539,153"/>
+<area shape="rect" id="node4" href="$quala_8cpp.html#a12fb4e87da488d1fc7c6fa3e6a3adb90" title=" " alt="" coords="11,71,162,98"/>
+<area shape="rect" id="node6" href="$classquala_1_1AndersonAccel.html#abfe51417fbebd259808f86d27f1d7ec5" title="Change the problem dimension." alt="" coords="216,125,379,167"/>
+<area shape="rect" id="node7" href="$classquala_1_1AndersonAccel.html#a1fcb04cfb2b1398b54d8242cc3b0fb34" title=" " alt="" coords="5,125,168,167"/>
+</map>

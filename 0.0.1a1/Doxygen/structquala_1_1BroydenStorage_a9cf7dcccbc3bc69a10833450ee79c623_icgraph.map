@@ -1,0 +1,17 @@
+<map id="history" name="history">
+<area shape="rect" id="node1" title="Get the number of previous vectors s and s̃ stored in the buffer." alt="" coords="816,165,883,190"/>
+<area shape="rect" id="node2" href="$classquala_1_1BroydenGood.html#a9cf7dcccbc3bc69a10833450ee79c623" title="Get the number of previous vectors s and y stored in the buffer." alt="" coords="613,157,768,197"/>
+<area shape="rect" id="node12" href="$structquala_1_1BroydenStorage.html#a48072fa680a2364d8ce96eb84a5d5689" title="Re&#45;allocate storage for a problem with a different size." alt="" coords="660,289,721,314"/>
+<area shape="rect" id="node15" href="$structquala_1_1BroydenStorage.html#a1f39e0321f095347878b8e231abaa2bb" title=" " alt="" coords="663,43,718,69"/>
+<area shape="rect" id="node3" href="$classquala_1_1BroydenGood.html#a3c6a2dbecc0d6f8cd90bef088c46b072" title="Get the number of previous s and y vectors currently stored in the buffer." alt="" coords="411,285,565,325"/>
+<area shape="rect" id="node5" href="$classquala_1_1BroydenGood.html#aa871b5290773b86e2e4919bbac258a04" title="Iterate over the indices in the history buffer, oldest first." alt="" coords="411,157,565,197"/>
+<area shape="rect" id="node9" href="$classquala_1_1BroydenGood.html#a0804b751cf2035a35f24762474f62cbf" title="Iterate over the indices in the history buffer, newest first." alt="" coords="411,221,565,261"/>
+<area shape="rect" id="node10" href="$classquala_1_1BroydenGood.html#a71f7f5e949a948d578ae6f145e4c4914" title="Get the previous index in the circular buffer of s and y vectors." alt="" coords="411,29,565,69"/>
+<area shape="rect" id="node11" href="$classquala_1_1BroydenGood.html#a70926baed7362e4fcce66523bb8e2842" title="Get the next index in the circular buffer of previous s and y vectors." alt="" coords="411,93,565,133"/>
+<area shape="rect" id="node4" href="$quala_8py_8cpp.html#a12fb4e87da488d1fc7c6fa3e6a3adb90" title=" " alt="" coords="210,295,361,321"/>
+<area shape="rect" id="node6" href="$classquala_1_1BroydenGood.html#af3b5886c46c3f50fae33990afcc47f12" title="Apply the inverse Jacobian approximation to the given vector q, i.e." alt="" coords="208,157,363,197"/>
+<area shape="rect" id="node7" href="$classquala_1_1BroydenGood.html#ad2320a49a7db3abb42d0c621a6a932bd" title="Update the inverse Jacobian approximation using the new vectors sₖ = xₖ₊₁ &#45; xₖ and yₖ = pₖ₊₁ &#45; pₖ." alt="" coords="208,93,363,133"/>
+<area shape="rect" id="node8" href="$classquala_1_1BroydenGood.html#a306b71b9ba3fa871a4cad408f946b5a7" title="Update the inverse Jacobian approximation using the new vectors xₖ₊₁ and pₖ₊₁." alt="" coords="5,93,160,133"/>
+<area shape="rect" id="node13" href="$classquala_1_1BroydenGood.html#abfe51417fbebd259808f86d27f1d7ec5" title="Re&#45;allocate storage for a problem with a different size." alt="" coords="411,349,565,389"/>
+<area shape="rect" id="node14" href="$classquala_1_1BroydenGood.html#af204bb3e018606122259767df4348cef" title=" " alt="" coords="208,349,363,389"/>
+</map>

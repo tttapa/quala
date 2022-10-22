@@ -1,0 +1,1082 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="#" /><link rel="search" title="Search" href="search.html" />
+
+    <link rel="shortcut icon" href="_static/quala_favicon.png"/><meta name="generator" content="sphinx-5.2.0+, furo 2022.09.15"/><title>Index - quala documentation</title>
+<link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=9ec31e2665bf879c1d47d93a8ec4893870ee1e45" />
+    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">quala  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="_static/quala_logo.svg" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">quala  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="install/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage/getting-started.html">Getting started</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/example_anderson.html">Minimal example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference/python-api.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/cpp-api.html">C++ API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution/how_to_contribute.html">How to contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          
+<section class="genindex-section">
+  <h1 id="index">Index</h1>
+  <div class="genindex-jumpbox"><a href="#_"><strong>_</strong></a> | <a href="#A"><strong>A</strong></a> | <a href="#B"><strong>B</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#F"><strong>F</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#N"><strong>N</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#Q"><strong>Q</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a> | <a href="#V"><strong>V</strong></a> | <a href="#Y"><strong>Y</strong></a> | <a href="#Α"><strong>Α</strong></a> | <a href="#Ρ"><strong>Ρ</strong></a> | <a href="#Ε"><strong>Ε</strong></a></div>
+</section>
+<section id="_" class="genindex-section">
+  <h2>_</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.AndersonAccel.__init__">__init__() (quala._quala.AndersonAccel method)</a>
+
+        <ul>
+          <li><a href="reference/python-api.html#quala._quala.AndersonAccelParams.__init__">(quala._quala.AndersonAccelParams method)</a>
+</li>
+          <li><a href="reference/python-api.html#quala._quala.BroydenGood.__init__">(quala._quala.BroydenGood method)</a>
+</li>
+          <li><a href="reference/python-api.html#quala._quala.BroydenGoodParams.__init__">(quala._quala.BroydenGoodParams method)</a>
+</li>
+          <li><a href="reference/python-api.html#quala._quala.LBFGS.__init__">(quala._quala.LBFGS method)</a>
+</li>
+          <li><a href="reference/python-api.html#quala._quala.LBFGS.Sign.__init__">(quala._quala.LBFGS.Sign method)</a>
+</li>
+          <li><a href="reference/python-api.html#quala._quala.LBFGSParams.__init__">(quala._quala.LBFGSParams method)</a>
+</li>
+          <li><a href="reference/python-api.html#quala._quala.LBFGSParamsCBFGS.__init__">(quala._quala.LBFGSParamsCBFGS method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="A" class="genindex-section">
+  <h2>A</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.AndersonAccel">AndersonAccel (class in quala._quala)</a>
+</li>
+        <li><a href="reference/python-api.html#quala._quala.AndersonAccelParams">AndersonAccelParams (class in quala._quala)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.BroydenGood.apply">apply() (quala._quala.BroydenGood method)</a>
+
+        <ul>
+          <li><a href="reference/python-api.html#quala._quala.LBFGS.apply">(quala._quala.LBFGS method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="B" class="genindex-section">
+  <h2>B</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.BroydenGood">BroydenGood (class in quala._quala)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.BroydenGoodParams">BroydenGoodParams (class in quala._quala)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="C" class="genindex-section">
+  <h2>C</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.LBFGSParams.cbfgs">cbfgs (quala._quala.LBFGSParams property)</a>
+</li>
+        <li><a href="reference/python-api.html#quala._quala.AndersonAccel.compute">compute() (quala._quala.AndersonAccel method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.AndersonAccel.current_history">current_history() (quala._quala.AndersonAccel method)</a>
+
+        <ul>
+          <li><a href="reference/python-api.html#quala._quala.BroydenGood.current_history">(quala._quala.BroydenGood method)</a>
+</li>
+          <li><a href="reference/python-api.html#quala._quala.LBFGS.current_history">(quala._quala.LBFGS method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="F" class="genindex-section">
+  <h2>F</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.BroydenGoodParams.force_pos_def">force_pos_def (quala._quala.BroydenGoodParams property)</a>
+
+        <ul>
+          <li><a href="reference/python-api.html#quala._quala.LBFGSParams.force_pos_def">(quala._quala.LBFGSParams property)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="I" class="genindex-section">
+  <h2>I</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.AndersonAccel.initialize">initialize() (quala._quala.AndersonAccel method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="L" class="genindex-section">
+  <h2>L</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.LBFGS">LBFGS (class in quala._quala)</a>
+</li>
+        <li><a href="reference/python-api.html#quala._quala.LBFGS.Sign">LBFGS.Sign (class in quala._quala)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.LBFGSParams">LBFGSParams (class in quala._quala)</a>
+</li>
+        <li><a href="reference/python-api.html#quala._quala.LBFGSParamsCBFGS">LBFGSParamsCBFGS (class in quala._quala)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="M" class="genindex-section">
+  <h2>M</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.AndersonAccelParams.memory">memory (quala._quala.AndersonAccelParams property)</a>
+
+        <ul>
+          <li><a href="reference/python-api.html#quala._quala.BroydenGoodParams.memory">(quala._quala.BroydenGoodParams property)</a>
+</li>
+          <li><a href="reference/python-api.html#quala._quala.LBFGSParams.memory">(quala._quala.LBFGSParams property)</a>
+</li>
+        </ul></li>
+        <li><a href="reference/python-api.html#quala._quala.LBFGSParams.min_abs_s">min_abs_s (quala._quala.LBFGSParams property)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.BroydenGoodParams.min_div_abs">min_div_abs (quala._quala.BroydenGoodParams property)</a>
+</li>
+        <li><a href="reference/python-api.html#quala._quala.LBFGSParams.min_div_fac">min_div_fac (quala._quala.LBFGSParams property)</a>
+</li>
+        <li><a href="reference/python-api.html#quala._quala.BroydenGoodParams.min_stepsize">min_stepsize (quala._quala.BroydenGoodParams property)</a>
+</li>
+        <li>
+    module
+
+        <ul>
+          <li><a href="reference/python-api.html#module-quala._quala">quala._quala</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="N" class="genindex-section">
+  <h2>N</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.LBFGS.n">n (quala._quala.LBFGS property)</a>
+</li>
+        <li><a href="reference/python-api.html#quala._quala.LBFGS.Sign.name">name (quala._quala.LBFGS.Sign property)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.LBFGS.Negative">Negative (quala._quala.LBFGS attribute)</a>
+
+        <ul>
+          <li><a href="reference/python-api.html#quala._quala.LBFGS.Sign.Negative">(quala._quala.LBFGS.Sign attribute)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="P" class="genindex-section">
+  <h2>P</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.AndersonAccel.params">params (quala._quala.AndersonAccel property)</a>
+
+        <ul>
+          <li><a href="reference/python-api.html#quala._quala.BroydenGood.params">(quala._quala.BroydenGood property)</a>
+</li>
+          <li><a href="reference/python-api.html#quala._quala.LBFGS.params">(quala._quala.LBFGS property)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.LBFGS.Positive">Positive (quala._quala.LBFGS attribute)</a>
+
+        <ul>
+          <li><a href="reference/python-api.html#quala._quala.LBFGS.Sign.Positive">(quala._quala.LBFGS.Sign attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="reference/python-api.html#quala._quala.BroydenGoodParams.powell_damping_factor">powell_damping_factor (quala._quala.BroydenGoodParams property)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="Q" class="genindex-section">
+  <h2>Q</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/cpp-api.html#_CPPv45quala">quala (C++ type)</a>
+</li>
+        <li>
+    quala._quala
+
+        <ul>
+          <li><a href="reference/python-api.html#module-quala._quala">module</a>
+</li>
+        </ul></li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13AndersonAccelE">quala::AndersonAccel (C++ class)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13AndersonAccel13AndersonAccelE6Params">quala::AndersonAccel::AndersonAccel (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4N5quala13AndersonAccel13AndersonAccelE6Params8length_t">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13AndersonAccel7computeE5crvec5crvec4rvec">quala::AndersonAccel::compute (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4N5quala13AndersonAccel7computeE5crvecRR3vec4rvec">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala13AndersonAccel15current_historyEv">quala::AndersonAccel::current_history (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala13AndersonAccel10get_paramsEv">quala::AndersonAccel::get_params (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala13AndersonAccel7historyEv">quala::AndersonAccel::history (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13AndersonAccel10initializeE5crvec3vec">quala::AndersonAccel::initialize (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala13AndersonAccel1nEv">quala::AndersonAccel::n (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13AndersonAccel6ParamsE">quala::AndersonAccel::Params (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13AndersonAccel5resetEv">quala::AndersonAccel::reset (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13AndersonAccel6resizeE8length_t">quala::AndersonAccel::resize (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala19AndersonAccelParamsE">quala::AndersonAccelParams (C++ struct)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala19AndersonAccelParams6memoryE">quala::AndersonAccelParams::memory (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I0EN5quala6anymatE">quala::anymat (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala11BroydenGoodE">quala::BroydenGood (C++ class)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala11BroydenGood5applyE4rvec6real_t">quala::BroydenGood::apply (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala11BroydenGood11BroydenGoodE6Params">quala::BroydenGood::BroydenGood (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4N5quala11BroydenGood11BroydenGoodE6Params8length_t">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala11BroydenGood15current_historyEv">quala::BroydenGood::current_history (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I0ENK5quala11BroydenGood11foreach_fwdEvRK1F">quala::BroydenGood::foreach_fwd (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I0ENK5quala11BroydenGood11foreach_revEvRK1F">quala::BroydenGood::foreach_rev (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala11BroydenGood10get_paramsEv">quala::BroydenGood::get_params (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala11BroydenGood7historyEv">quala::BroydenGood::history (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala11BroydenGood1nEv">quala::BroydenGood::n (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala11BroydenGood6ParamsE">quala::BroydenGood::Params (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala11BroydenGood4predE7index_t">quala::BroydenGood::pred (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala11BroydenGood5resetEv">quala::BroydenGood::reset (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala11BroydenGood6resizeE8length_t">quala::BroydenGood::resize (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala11BroydenGood1sE7index_t">quala::BroydenGood::s (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4NK5quala11BroydenGood1sE7index_t">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala11BroydenGood4succE7index_t">quala::BroydenGood::succ (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala11BroydenGood6updateE5crvec5crvec5crvec5crvecb">quala::BroydenGood::update (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I00EN5quala11BroydenGood9update_syEbRK6anymatI4VecSERK6anymatI4VecYEb">quala::BroydenGood::update_sy (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala17BroydenGoodParamsE">quala::BroydenGoodParams (C++ struct)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala17BroydenGoodParams13force_pos_defE">quala::BroydenGoodParams::force_pos_def (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala17BroydenGoodParams6memoryE">quala::BroydenGoodParams::memory (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala17BroydenGoodParams11min_div_absE">quala::BroydenGoodParams::min_div_abs (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala17BroydenGoodParams12min_stepsizeE">quala::BroydenGoodParams::min_stepsize (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala17BroydenGoodParams21powell_damping_factorE">quala::BroydenGoodParams::powell_damping_factor (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala17BroydenGoodParams9restartedE">quala::BroydenGoodParams::restarted (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala14BroydenStorageE">quala::BroydenStorage (C++ struct)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala14BroydenStorage7historyEv">quala::BroydenStorage::history (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala14BroydenStorage1nEv">quala::BroydenStorage::n (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala14BroydenStorage6resizeE8length_t8length_t">quala::BroydenStorage::resize (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala14BroydenStorage1sE7index_t">quala::BroydenStorage::s (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4NK5quala14BroydenStorage1sE7index_t">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala14BroydenStorage3stoE">quala::BroydenStorage::sto (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala14BroydenStorage9storage_tE">quala::BroydenStorage::storage_t (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala14BroydenStorage4workEv">quala::BroydenStorage::work (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4NK5quala14BroydenStorage4workEv">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I0EN5quala21CircularIndexIteratorE">quala::CircularIndexIterator (C++ struct)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala21CircularIndexIterator21CircularIndexIteratorE7Indices5Index">quala::CircularIndexIterator::CircularIndexIterator (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4N5quala21CircularIndexIterator21CircularIndexIteratorEv">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala21CircularIndexIterator15difference_typeE">quala::CircularIndexIterator::difference_type (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala21CircularIndexIterator1iE">quala::CircularIndexIterator::i (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala21CircularIndexIterator5IndexE">quala::CircularIndexIterator::Index (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala21CircularIndexIterator7IndicesE">quala::CircularIndexIterator::Indices (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala21CircularIndexIterator17iterator_categoryE">quala::CircularIndexIterator::iterator_category (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala21CircularIndexIterator3maxE">quala::CircularIndexIterator::max (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I0EN5quala21CircularIndexIteratorneEb21CircularIndexIteratorI6IndexTE21CircularIndexIteratorI6IndexTE">quala::CircularIndexIterator::operator!= (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala21CircularIndexIteratormlEv">quala::CircularIndexIterator::operator* (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala21CircularIndexIteratorppEi">quala::CircularIndexIterator::operator++ (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4N5quala21CircularIndexIteratorppEv">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala21CircularIndexIteratormmEi">quala::CircularIndexIterator::operator-- (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4N5quala21CircularIndexIteratormmEv">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I0EN5quala21CircularIndexIteratoreqEb21CircularIndexIteratorI6IndexTE21CircularIndexIteratorI6IndexTE">quala::CircularIndexIterator::operator== (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala21CircularIndexIterator7pointerE">quala::CircularIndexIterator::pointer (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala21CircularIndexIterator9referenceE">quala::CircularIndexIterator::reference (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala21CircularIndexIterator10value_typeE">quala::CircularIndexIterator::value_type (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I0EN5quala15CircularIndicesE">quala::CircularIndices (C++ struct)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala15CircularIndices8circularE">quala::CircularIndices::circular (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala15CircularIndices15CircularIndicesE5Index5Index">quala::CircularIndices::CircularIndices (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala15CircularIndices5IndexE">quala::CircularIndices::Index (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I0EN5quala15CircularIndicesneEb15CircularIndicesI6IndexTE15CircularIndicesI6IndexTE">quala::CircularIndices::operator!= (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I0EN5quala15CircularIndiceseqEb15CircularIndicesI6IndexTE15CircularIndicesI6IndexTE">quala::CircularIndices::operator== (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala15CircularIndices9zerobasedE">quala::CircularIndices::zerobased (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I0EN5quala13CircularRangeE">quala::CircularRange (C++ class)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala13CircularRange5beginEv">quala::CircularRange::begin (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala13CircularRange6cbeginEv">quala::CircularRange::cbegin (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala13CircularRange4cendEv">quala::CircularRange::cend (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13CircularRange13CircularRangeE5Index5Index5Index5Index">quala::CircularRange::CircularRange (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13CircularRange14const_iteratorE">quala::CircularRange::const_iterator (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13CircularRange22const_reverse_iteratorE">quala::CircularRange::const_reverse_iterator (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala13CircularRange7crbeginEv">quala::CircularRange::crbegin (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala13CircularRange5crendEv">quala::CircularRange::crend (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala13CircularRange3endEv">quala::CircularRange::end (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13CircularRange5IndexE">quala::CircularRange::Index (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13CircularRange7IndicesE">quala::CircularRange::Indices (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13CircularRange8iteratorE">quala::CircularRange::iterator (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala13CircularRange6rbeginEv">quala::CircularRange::rbegin (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala13CircularRange4rendEv">quala::CircularRange::rend (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13CircularRange16reverse_iteratorE">quala::CircularRange::reverse_iterator (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala7cridvecE">quala::cridvec (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala5crmatE">quala::crmat (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala5crvecE">quala::crvec (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala5idvecE">quala::idvec (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala7index_tE">quala::index_t (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala3infE">quala::inf (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala5LBFGSE">quala::LBFGS (C++ class)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I0EN5quala5LBFGS5applyEb4rvec6real_tRK8IndexVec">quala::LBFGS::apply (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4N5quala5LBFGS5applyE4rvec6real_t">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala5LBFGS15current_historyEv">quala::LBFGS::current_history (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I0ENK5quala5LBFGS11foreach_fwdEvRK1F">quala::LBFGS::foreach_fwd (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I0ENK5quala5LBFGS11foreach_revEvRK1F">quala::LBFGS::foreach_rev (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala5LBFGS10get_paramsEv">quala::LBFGS::get_params (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala5LBFGS7historyEv">quala::LBFGS::history (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala5LBFGS5LBFGSE6Params">quala::LBFGS::LBFGS (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4N5quala5LBFGS5LBFGSE6Params8length_t">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala5LBFGS1nEv">quala::LBFGS::n (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala5LBFGS6ParamsE">quala::LBFGS::Params (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala5LBFGS4predE7index_t">quala::LBFGS::pred (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala5LBFGS5resetEv">quala::LBFGS::reset (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala5LBFGS6resizeE8length_t">quala::LBFGS::resize (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala5LBFGS1sE7index_t">quala::LBFGS::s (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4NK5quala5LBFGS1sE7index_t">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala5LBFGS7scale_yE6real_t">quala::LBFGS::scale_y (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala5LBFGS4SignE">quala::LBFGS::Sign (C++ enum)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala5LBFGS4Sign8NegativeE">quala::LBFGS::Sign::Negative (C++ enumerator)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala5LBFGS4Sign8PositiveE">quala::LBFGS::Sign::Positive (C++ enumerator)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala5LBFGS4succE7index_t">quala::LBFGS::succ (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala5LBFGS6updateE5crvec5crvec5crvec5crvec4Signb">quala::LBFGS::update (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I00EN5quala5LBFGS9update_syEbRK6anymatI4VecSERK6anymatI4VecYE6real_tb">quala::LBFGS::update_sy (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala5LBFGS12update_validERK11LBFGSParams6real_t6real_t6real_t">quala::LBFGS::update_valid (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala5LBFGS1yE7index_t">quala::LBFGS::y (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4NK5quala5LBFGS1yE7index_t">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala5LBFGS1αE7index_t">quala::LBFGS::α (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4NK5quala5LBFGS1αE7index_t">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala5LBFGS1ρE7index_t">quala::LBFGS::ρ (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4NK5quala5LBFGS1ρE7index_t">[1]</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala11LBFGSParamsE">quala::LBFGSParams (C++ struct)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala11LBFGSParams5cbfgsE">quala::LBFGSParams::cbfgs (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala11LBFGSParams11CBFGSParamsE">quala::LBFGSParams::CBFGSParams (C++ struct)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala11LBFGSParams11CBFGSParamscvbEv">quala::LBFGSParams::CBFGSParams::operator bool (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala11LBFGSParams11CBFGSParams1αE">quala::LBFGSParams::CBFGSParams::α (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala11LBFGSParams11CBFGSParams1ϵE">quala::LBFGSParams::CBFGSParams::ϵ (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala11LBFGSParams13force_pos_defE">quala::LBFGSParams::force_pos_def (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala11LBFGSParams6memoryE">quala::LBFGSParams::memory (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala11LBFGSParams9min_abs_sE">quala::LBFGSParams::min_abs_s (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala11LBFGSParams11min_div_facE">quala::LBFGSParams::min_div_fac (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala12LBFGSStorageE">quala::LBFGSStorage (C++ struct)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala12LBFGSStorage7historyEv">quala::LBFGSStorage::history (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala12LBFGSStorage1nEv">quala::LBFGSStorage::n (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala12LBFGSStorage6resizeE8length_t8length_t">quala::LBFGSStorage::resize (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala12LBFGSStorage1sE7index_t">quala::LBFGSStorage::s (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4NK5quala12LBFGSStorage1sE7index_t">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala12LBFGSStorage3stoE">quala::LBFGSStorage::sto (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala12LBFGSStorage9storage_tE">quala::LBFGSStorage::storage_t (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala12LBFGSStorage1yE7index_t">quala::LBFGSStorage::y (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4NK5quala12LBFGSStorage1yE7index_t">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala12LBFGSStorage1αE7index_t">quala::LBFGSStorage::α (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4NK5quala12LBFGSStorage1αE7index_t">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala12LBFGSStorage1ρE7index_t">quala::LBFGSStorage::ρ (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4NK5quala12LBFGSStorage1ρE7index_t">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala8length_tE">quala::length_t (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala15LimitedMemoryQRE">quala::LimitedMemoryQR (C++ class)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I0EN5quala15LimitedMemoryQR10add_columnEvRK4VecV">quala::LimitedMemoryQR::add_column (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala15LimitedMemoryQR18clear_reorth_countEv">quala::LimitedMemoryQR::clear_reorth_count (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala15LimitedMemoryQR15current_historyEv">quala::LimitedMemoryQR::current_history (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala15LimitedMemoryQR10get_full_REv">quala::LimitedMemoryQR::get_full_R (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala15LimitedMemoryQR5get_QEv">quala::LimitedMemoryQR::get_Q (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala15LimitedMemoryQR5get_REv">quala::LimitedMemoryQR::get_R (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala15LimitedMemoryQR9get_raw_QEv">quala::LimitedMemoryQR::get_raw_Q (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala15LimitedMemoryQR9get_raw_REv">quala::LimitedMemoryQR::get_raw_R (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala15LimitedMemoryQR16get_reorth_countEv">quala::LimitedMemoryQR::get_reorth_count (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala15LimitedMemoryQR7historyEv">quala::LimitedMemoryQR::history (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala15LimitedMemoryQR15LimitedMemoryQRE8length_t8length_t">quala::LimitedMemoryQR::LimitedMemoryQR (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4N5quala15LimitedMemoryQR15LimitedMemoryQREv">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala15LimitedMemoryQR1mEv">quala::LimitedMemoryQR::m (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala15LimitedMemoryQR1nEv">quala::LimitedMemoryQR::n (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala15LimitedMemoryQR11num_columnsEv">quala::LimitedMemoryQR::num_columns (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala15LimitedMemoryQR13remove_columnEv">quala::LimitedMemoryQR::remove_column (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala15LimitedMemoryQR5resetEv">quala::LimitedMemoryQR::reset (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala15LimitedMemoryQR6resizeE8length_t8length_t">quala::LimitedMemoryQR::resize (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala15LimitedMemoryQR9ring_headEv">quala::LimitedMemoryQR::ring_head (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala15LimitedMemoryQR9ring_iterEv">quala::LimitedMemoryQR::ring_iter (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala15LimitedMemoryQR9ring_nextE7index_t">quala::LimitedMemoryQR::ring_next (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala15LimitedMemoryQR9ring_prevE7index_t">quala::LimitedMemoryQR::ring_prev (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala15LimitedMemoryQR17ring_reverse_iterEv">quala::LimitedMemoryQR::ring_reverse_iter (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala15LimitedMemoryQR9ring_tailEv">quala::LimitedMemoryQR::ring_tail (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala15LimitedMemoryQR7scale_RE6real_t">quala::LimitedMemoryQR::scale_R (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala15LimitedMemoryQR4sizeEv">quala::LimitedMemoryQR::size (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I00ENK5quala15LimitedMemoryQR5solveEvRK4MatBR4MatX">quala::LimitedMemoryQR::solve (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4I0EN5quala15LimitedMemoryQR5solveE11solve_ret_tI7DerivedERKN5Eigen9DenseBaseI7DerivedEE">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I00ENK5quala15LimitedMemoryQR9solve_colEvRK4VecBR4VecX">quala::LimitedMemoryQR::solve_col (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I0EN5quala15LimitedMemoryQR11solve_ret_tE">quala::LimitedMemoryQR::solve_ret_t (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala3matE">quala::mat (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I0EN5quala10MaxHistoryE">quala::MaxHistory (C++ class)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala10MaxHistory3addE1T">quala::MaxHistory::add (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala10MaxHistory3maxEv">quala::MaxHistory::max (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala10MaxHistory10MaxHistoryE6size_t">quala::MaxHistory::MaxHistory (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala24minimize_update_andersonER15LimitedMemoryQR4rmat5crvec5crvec5crvec4rvec4rvec">quala::minimize_update_anderson (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala3NaNE">quala::NaN (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala6real_tE">quala::real_t (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala7realmatE">quala::realmat (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala7realvecE">quala::realvec (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I0EN5quala28ReverseCircularIndexIteratorE">quala::ReverseCircularIndexIterator (C++ struct)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala28ReverseCircularIndexIterator15difference_typeE">quala::ReverseCircularIndexIterator::difference_type (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala28ReverseCircularIndexIterator9forwarditE">quala::ReverseCircularIndexIterator::forwardit (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala28ReverseCircularIndexIterator15ForwardIteratorE">quala::ReverseCircularIndexIterator::ForwardIterator (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala28ReverseCircularIndexIterator5IndexE">quala::ReverseCircularIndexIterator::Index (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala28ReverseCircularIndexIterator7IndicesE">quala::ReverseCircularIndexIterator::Indices (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala28ReverseCircularIndexIterator17iterator_categoryE">quala::ReverseCircularIndexIterator::iterator_category (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I0EN5quala28ReverseCircularIndexIteratorneEb28ReverseCircularIndexIteratorI6IndexTE28ReverseCircularIndexIteratorI6IndexTE">quala::ReverseCircularIndexIterator::operator!= (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala28ReverseCircularIndexIteratormlEv">quala::ReverseCircularIndexIterator::operator* (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala28ReverseCircularIndexIteratorppEi">quala::ReverseCircularIndexIterator::operator++ (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4N5quala28ReverseCircularIndexIteratorppEv">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala28ReverseCircularIndexIteratormmEi">quala::ReverseCircularIndexIterator::operator-- (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4N5quala28ReverseCircularIndexIteratormmEv">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I0EN5quala28ReverseCircularIndexIteratoreqEb28ReverseCircularIndexIteratorI6IndexTE28ReverseCircularIndexIteratorI6IndexTE">quala::ReverseCircularIndexIterator::operator== (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala28ReverseCircularIndexIterator7pointerE">quala::ReverseCircularIndexIterator::pointer (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala28ReverseCircularIndexIterator9referenceE">quala::ReverseCircularIndexIterator::reference (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala28ReverseCircularIndexIterator28ReverseCircularIndexIteratorE15ForwardIterator">quala::ReverseCircularIndexIterator::ReverseCircularIndexIterator (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4N5quala28ReverseCircularIndexIterator28ReverseCircularIndexIteratorE7Indices5Index">[1]</a>, <a href="reference/cpp-api.html#_CPPv4N5quala28ReverseCircularIndexIterator28ReverseCircularIndexIteratorEv">[2]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala28ReverseCircularIndexIterator10value_typeE">quala::ReverseCircularIndexIterator::value_type (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I0EN5quala20ReverseCircularRangeE">quala::ReverseCircularRange (C++ class)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala20ReverseCircularRange5beginEv">quala::ReverseCircularRange::begin (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala20ReverseCircularRange6cbeginEv">quala::ReverseCircularRange::cbegin (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala20ReverseCircularRange4cendEv">quala::ReverseCircularRange::cend (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala20ReverseCircularRange14const_iteratorE">quala::ReverseCircularRange::const_iterator (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala20ReverseCircularRange22const_reverse_iteratorE">quala::ReverseCircularRange::const_reverse_iterator (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala20ReverseCircularRange7crbeginEv">quala::ReverseCircularRange::crbegin (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala20ReverseCircularRange5crendEv">quala::ReverseCircularRange::crend (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala20ReverseCircularRange3endEv">quala::ReverseCircularRange::end (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala20ReverseCircularRange12ForwardRangeE">quala::ReverseCircularRange::ForwardRange (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala20ReverseCircularRange5IndexE">quala::ReverseCircularRange::Index (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala20ReverseCircularRange7IndicesE">quala::ReverseCircularRange::Indices (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala20ReverseCircularRange8iteratorE">quala::ReverseCircularRange::iterator (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala20ReverseCircularRange6rbeginEv">quala::ReverseCircularRange::rbegin (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala20ReverseCircularRange4rendEv">quala::ReverseCircularRange::rend (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala20ReverseCircularRange16reverse_iteratorE">quala::ReverseCircularRange::reverse_iterator (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala20ReverseCircularRange20ReverseCircularRangeE5Index5Index5Index5Index">quala::ReverseCircularRange::ReverseCircularRange (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4N5quala20ReverseCircularRange20ReverseCircularRangeERK12ForwardRange">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala6ridvecE">quala::ridvec (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala4rmatE">quala::rmat (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala4rvecE">quala::rvec (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala3vecE">quala::vec (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13vec_allocatorE">quala::vec_allocator (C++ class)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13vec_allocator5allocEv">quala::vec_allocator::alloc (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13vec_allocator10alloc_raiiEv">quala::vec_allocator::alloc_raii (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13vec_allocator18alloc_raii_wrapperE">quala::vec_allocator::alloc_raii_wrapper (C++ struct)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13vec_allocator18alloc_raii_wrapper5allocE">quala::vec_allocator::alloc_raii_wrapper::alloc (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13vec_allocator18alloc_raii_wrapper18alloc_raii_wrapperEP6real_tN5Eigen5IndexEP13vec_allocator">quala::vec_allocator::alloc_raii_wrapper::alloc_raii_wrapper (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4N5quala13vec_allocator18alloc_raii_wrapper18alloc_raii_wrapperERK18alloc_raii_wrapper">[1]</a>, <a href="reference/cpp-api.html#_CPPv4N5quala13vec_allocator18alloc_raii_wrapper18alloc_raii_wrapperERR18alloc_raii_wrapper">[2]</a>, <a href="reference/cpp-api.html#_CPPv4N5quala13vec_allocator18alloc_raii_wrapper18alloc_raii_wrapperERR4mvecP13vec_allocator">[3]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13vec_allocator18alloc_raii_wrapper4mvecE">quala::vec_allocator::alloc_raii_wrapper::mvec (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala13vec_allocator18alloc_raii_wrappercv5crvecEv">quala::vec_allocator::alloc_raii_wrapper::operator crvec (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13vec_allocator18alloc_raii_wrappercv4rvecEv">quala::vec_allocator::alloc_raii_wrapper::operator rvec (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13vec_allocator18alloc_raii_wrapperaSE5crvec">quala::vec_allocator::alloc_raii_wrapper::operator= (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4N5quala13vec_allocator18alloc_raii_wrapperaSERK18alloc_raii_wrapper">[1]</a>, <a href="reference/cpp-api.html#_CPPv4N5quala13vec_allocator18alloc_raii_wrapperaSERR18alloc_raii_wrapper">[2]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13vec_allocator18alloc_raii_wrapper1vE">quala::vec_allocator::alloc_raii_wrapper::v (C++ member)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13vec_allocator18alloc_raii_wrapperD0Ev">quala::vec_allocator::alloc_raii_wrapper::~alloc_raii_wrapper (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4IDpEN5quala13vec_allocator4freeEv4rvecDpRR4Vecs">quala::vec_allocator::free (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4N5quala13vec_allocator4freeE4rvec">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala13vec_allocator9highwaterEv">quala::vec_allocator::highwater (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13vec_allocatoraSERK13vec_allocator">quala::vec_allocator::operator= (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4N5quala13vec_allocatoraSERR13vec_allocator">[1]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala13vec_allocator4sizeEv">quala::vec_allocator::size (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala13vec_allocator10used_spaceEv">quala::vec_allocator::used_space (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala13vec_allocator13vec_allocatorE6size_tN5Eigen5IndexE">quala::vec_allocator::vec_allocator (C++ function)</a>, <a href="reference/cpp-api.html#_CPPv4N5quala13vec_allocator13vec_allocatorERK13vec_allocator">[1]</a>, <a href="reference/cpp-api.html#_CPPv4N5quala13vec_allocator13vec_allocatorERR13vec_allocator">[2]</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4NK5quala13vec_allocator11vector_sizeEv">quala::vec_allocator::vector_size (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4N5quala8vec_utilE">quala::vec_util (C++ type)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I0EN5quala8vec_util6norm_1E6real_tRK3Vec">quala::vec_util::norm_1 (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I0EN5quala8vec_util8norm_infE6real_tRK3Vec">quala::vec_util::norm_inf (C++ function)</a>
+</li>
+        <li><a href="reference/cpp-api.html#_CPPv4I00EN5quala8vec_util21norm_squared_weightedEDaRR1VRR1M">quala::vec_util::norm_squared_weighted (C++ function)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="R" class="genindex-section">
+  <h2>R</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.AndersonAccel.reset">reset() (quala._quala.AndersonAccel method)</a>
+
+        <ul>
+          <li><a href="reference/python-api.html#quala._quala.BroydenGood.reset">(quala._quala.BroydenGood method)</a>
+</li>
+          <li><a href="reference/python-api.html#quala._quala.LBFGS.reset">(quala._quala.LBFGS method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.AndersonAccel.resize">resize() (quala._quala.AndersonAccel method)</a>
+
+        <ul>
+          <li><a href="reference/python-api.html#quala._quala.BroydenGood.resize">(quala._quala.BroydenGood method)</a>
+</li>
+          <li><a href="reference/python-api.html#quala._quala.LBFGS.resize">(quala._quala.LBFGS method)</a>
+</li>
+        </ul></li>
+        <li><a href="reference/python-api.html#quala._quala.BroydenGoodParams.restarted">restarted (quala._quala.BroydenGoodParams property)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="S" class="genindex-section">
+  <h2>S</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.LBFGS.s">s() (quala._quala.LBFGS method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.LBFGS.scale_y">scale_y() (quala._quala.LBFGS method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="T" class="genindex-section">
+  <h2>T</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.AndersonAccelParams.to_dict">to_dict() (quala._quala.AndersonAccelParams method)</a>
+
+        <ul>
+          <li><a href="reference/python-api.html#quala._quala.BroydenGoodParams.to_dict">(quala._quala.BroydenGoodParams method)</a>
+</li>
+          <li><a href="reference/python-api.html#quala._quala.LBFGSParams.to_dict">(quala._quala.LBFGSParams method)</a>
+</li>
+          <li><a href="reference/python-api.html#quala._quala.LBFGSParamsCBFGS.to_dict">(quala._quala.LBFGSParamsCBFGS method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="U" class="genindex-section">
+  <h2>U</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.BroydenGood.update">update() (quala._quala.BroydenGood method)</a>
+
+        <ul>
+          <li><a href="reference/python-api.html#quala._quala.LBFGS.update">(quala._quala.LBFGS method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.BroydenGood.update_sy">update_sy() (quala._quala.BroydenGood method)</a>
+
+        <ul>
+          <li><a href="reference/python-api.html#quala._quala.LBFGS.update_sy">(quala._quala.LBFGS method)</a>
+</li>
+        </ul></li>
+        <li><a href="reference/python-api.html#quala._quala.LBFGS.update_valid">update_valid() (quala._quala.LBFGS static method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="V" class="genindex-section">
+  <h2>V</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.LBFGS.Sign.value">value (quala._quala.LBFGS.Sign property)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="Y" class="genindex-section">
+  <h2>Y</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.LBFGS.y">y() (quala._quala.LBFGS method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="Α" class="genindex-section">
+  <h2>Α</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.LBFGSParamsCBFGS.">α (quala._quala.LBFGSParamsCBFGS property)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#quala._quala.LBFGS.">α() (quala._quala.LBFGS method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="Ρ" class="genindex-section">
+  <h2>Ρ</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#id0">ρ() (quala._quala.LBFGS method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="Ε" class="genindex-section">
+  <h2>Ε</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="reference/python-api.html#id11">ϵ (quala._quala.LBFGSParamsCBFGS property)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2021, Pieter Pas
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    </body>
+</html>

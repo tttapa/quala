@@ -1,0 +1,6 @@
+<map id="LBFGS" name="LBFGS">
+<area shape="rect" id="node1" title="Limited memory Broyden–Fletcher–Goldfarb–Shanno (L&#45;BFGS) algorithm." alt="" coords="41,447,186,905"/>
+<area shape="rect" id="node2" href="$structquala_1_1LBFGSStorage.html" title="Layout:" alt="" coords="5,160,120,384"/>
+<area shape="rect" id="node3" href="$namespacequala.html#structquala_1_1LBFGSParams" title="Parameters for the LBFGS class." alt="" coords="144,211,272,333"/>
+<area shape="rect" id="node4" href="$structquala_1_1LBFGSParams_1_1CBFGSParams.html" title="Cautious BFGS update." alt="" coords="141,5,275,97"/>
+</map>

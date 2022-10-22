@@ -1,0 +1,11 @@
+<map id="n" name="n">
+<area shape="rect" id="node1" title=" " alt="" coords="653,81,692,108"/>
+<area shape="rect" id="node2" href="$classquala_1_1LimitedMemoryQR.html#a32367fb2ecbdf71d6071bddc4dc3ce5d" title="Get the matrix Q such that Q times R is the original matrix." alt="" coords="486,5,546,32"/>
+<area shape="rect" id="node3" href="$classquala_1_1AndersonAccel.html#a727afc7a58d2e44ae7add57e3fa77bc6" title="Get the problem dimension." alt="" coords="427,56,605,83"/>
+<area shape="rect" id="node8" href="$classquala_1_1LimitedMemoryQR.html#ad15543203799d1dccb5a5e1c572e3f02" title="Re&#45;allocate storage for a problem with a different size." alt="" coords="485,107,547,133"/>
+<area shape="rect" id="node9" href="$classquala_1_1LimitedMemoryQR.html#a00483d13e65f3ad72dd440a5d4e7a03e" title=" " alt="" coords="492,157,540,184"/>
+<area shape="rect" id="node4" href="$classquala_1_1AndersonAccel.html#a1fcb04cfb2b1398b54d8242cc3b0fb34" title=" " alt="" coords="5,15,168,57"/>
+<area shape="rect" id="node5" href="$classquala_1_1AndersonAccel.html#ab55e2bb8c6d8912c0d55ff4dc2b3b4a2" title="Call this function on the first iteration to initialize the accelerator." alt="" coords="216,41,379,82"/>
+<area shape="rect" id="node6" href="$classquala_1_1AndersonAccel.html#abfe51417fbebd259808f86d27f1d7ec5" title="Change the problem dimension." alt="" coords="216,106,379,147"/>
+<area shape="rect" id="node7" href="$quala_8cpp.html#a12fb4e87da488d1fc7c6fa3e6a3adb90" title=" " alt="" coords="11,113,162,140"/>
+</map>

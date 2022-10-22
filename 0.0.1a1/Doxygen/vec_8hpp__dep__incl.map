@@ -1,0 +1,13 @@
+<map id="vec.hpp" name="vec.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="135,5,208,31"/>
+<area shape="rect" id="node2" href="$alloc_8hpp.html" title=" " alt="" coords="13,79,95,104"/>
+<area shape="rect" id="node3" href="$broyden-good_8hpp.html" title=" " alt="" coords="5,152,145,177"/>
+<area shape="rect" id="node6" href="$decl_2lbfgs_8hpp.html" title=" " alt="" coords="170,79,253,104"/>
+<area shape="rect" id="node9" href="$limited-memory-qr_8hpp.html" title=" " alt="" coords="281,79,454,104"/>
+<area shape="rect" id="node4" href="$kwargs-to-struct_8hpp.html" title="This file defines mappings from Python dicts (kwargs) to simple parameter structs." alt="" coords="51,299,209,324"/>
+<area shape="rect" id="node5" href="$quala_8py_8cpp.html" title="This file defines all Python bindings." alt="" coords="79,372,181,397"/>
+<area shape="rect" id="node7" href="$lbfgs_8hpp.html" title=" " alt="" coords="170,152,253,177"/>
+<area shape="rect" id="node8" href="$lbfgs_8cpp.html" title=" " alt="" coords="168,225,249,251"/>
+<area shape="rect" id="node10" href="$anderson-helpers_8hpp.html" title=" " alt="" coords="287,152,450,177"/>
+<area shape="rect" id="node11" href="$anderson-acceleration_8hpp.html" title=" " alt="" coords="274,225,469,251"/>
+</map>

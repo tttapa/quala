@@ -1,0 +1,4 @@
+<map id="update_sy" name="update_sy">
+<area shape="rect" id="node1" title="Update the inverse Jacobian approximation using the new vectors sₖ = xₖ₊₁ &#45; xₖ and yₖ = pₖ₊₁ &#45; pₖ." alt="" coords="120,5,209,32"/>
+<area shape="rect" id="node2" href="$classquala_1_1BroydenGood.html#a1380d11b100437c5d8d8fc21be5ea7b6" title="Update the inverse Jacobian approximation using the new vectors xₖ₊₁ and pₖ₊₁." alt="" coords="5,5,72,32"/>
+</map>
